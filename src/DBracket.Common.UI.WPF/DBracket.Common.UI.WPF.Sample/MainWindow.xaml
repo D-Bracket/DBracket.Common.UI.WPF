@@ -4,9 +4,31 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DBracket.Common.UI.WPF.Sample"
+        xmlns:paths="clr-namespace:DBracket.Common.UI.WPF.Sample.PathExamples"
+        
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="800" Width="800">
+    <Grid Background="LightGreen">
+        <paths:ChartTest/>
+        <!--<Path Fill="Black"
+              Stroke="Black">
+            <Path.Data>
+                <PathGeometry>
+                    <PathGeometry.Figures>
+                        <PathFigureCollection>
+                            <PathFigure StartPoint="50,50">
+                                <PathFigure.Segments>
+                                    <PolyLineSegment Points="50,100"/>
+                                    <PolyLineSegment Points="100,100"/>
+                                    <PolyLineSegment Points="100,50"/>
+                                </PathFigure.Segments>
+    
+                            </PathFigure>
+                        </PathFigureCollection>
+                    </PathGeometry.Figures>
+                </PathGeometry>
 
+            </Path.Data>
+        </Path>-->
     </Grid>
 </Window>

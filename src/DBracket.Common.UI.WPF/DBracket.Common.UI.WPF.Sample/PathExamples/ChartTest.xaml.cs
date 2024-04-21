@@ -1,4 +1,8 @@
-﻿using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -10,17 +14,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DBracket.Common.UI.WPF.Sample
+namespace DBracket.Common.UI.WPF.Sample.PathExamples
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaktionslogik für ChartTest.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ChartTest : UserControl
     {
-        public MainWindow()
+        public ChartTest()
         {
             InitializeComponent();
 
+
+       
         }
     }
 }

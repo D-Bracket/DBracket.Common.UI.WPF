@@ -1,0 +1,203 @@
+﻿<UserControl x:Class="DBracket.Common.UI.WPF.Sample.PathExamples.ChartTest"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:PresentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options" 
+             xmlns:local="clr-namespace:DBracket.Common.UI.WPF.Sample.PathExamples"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <!--<Storyboard x:Name="RectangleAnimation">
+            <DoubleAnimation Duration="0:0:0.4"
+                             To="120"
+                             Storyboard.TargetProperty="Height"/>
+        </Storyboard>-->
+        
+        <Style TargetType="Rectangle"
+               x:Key="Rec">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard Name="RectangleAnimation">
+                            <Storyboard>
+                                <DoubleAnimation To="120" Duration="0:0:0.4"
+                                                Storyboard.TargetProperty="Height" />
+                                <DoubleAnimation To="310" Duration="0:0:0.4"
+                                                 Storyboard.TargetProperty="(Canvas.Top)" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard Name="RectangleLeaveAnimation">
+                            <Storyboard>
+                                <DoubleAnimation To="30" Duration="0:0:0.4"
+                                                Storyboard.TargetProperty="Height" />
+                                <DoubleAnimation To="400" Duration="0:0:0.4"
+                                             Storyboard.TargetProperty="(Canvas.Top)" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!--<Style TargetType="Path"
+               x:Key="PathStyle">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard Name="RectangleAnimation">
+                            <Storyboard>
+                                <PointAnimation To="0,-50" Duration="0:0:0.4"
+                                            Storyboard.TargetName="StartPoint"
+                                            Storyboard.TargetProperty="Points" />
+                                <PointAnimation To="50,-50" Duration="0:0:0.4"
+                                            Storyboard.TargetName="Test3"
+                                            Storyboard.TargetProperty="Points" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard Name="RectangleLeaveAnimation">
+                            <Storyboard>
+                                <PointAnimation To="0,0" Duration="0:0:0.4"
+                                            Storyboard.TargetName="StartPoint"
+                                            Storyboard.TargetProperty="Points" />
+                                <PointAnimation To="50,0" Duration="0:0:0.4"
+                                      Storyboard.TargetName="Test3"
+                                      Storyboard.TargetProperty="Points" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>-->
+    </UserControl.Resources>
+
+    <Canvas>
+        <Rectangle Width="50"
+                   Height="30"
+                   x:Name="Test"
+                   Canvas.Left="300"
+                   Canvas.Top="400"
+                   
+                   Style="{StaticResource Rec}"
+                   Fill="Crimson"
+                   Stroke="Black">
+        </Rectangle>
+
+        <Button Canvas.Left="400"
+                Canvas.Top="400">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <ControlTemplate.Resources>
+                        <Duration x:Key="AnimationDuration">0:0:0.2</Duration>
+                    </ControlTemplate.Resources>
+                    <Border Background="Transparent">
+                        <Path Fill="Crimson"
+                              Stroke="White">
+                            <Path.Data>
+
+                                <PathGeometry>
+                                    <PathFigure x:Name="StartPoint" StartPoint="0,0">
+                                        <LineSegment x:Name="Test1" Point="0,50" />
+                                        <LineSegment x:Name="Test2" Point="50,50" />
+                                        <LineSegment x:Name="Test3" Point="50,0" />
+                                    </PathFigure>
+                                </PathGeometry>
+                                <!--<PathGeometry>
+                                    <PathGeometry.Figures>
+                                        <PathFigureCollection>
+                                            <PathFigure x:Name="StartPoint" StartPoint="0,0">
+                                                <PathFigure.Segments>
+                                                    <PolyLineSegment x:Name="Test1" Points="0,50"/>
+                                                    <PolyLineSegment x:Name="Test2" Points="50,50"/>
+                                                    <PolyLineSegment x:Name="Test3" Points="50,0"/>
+                                                </PathFigure.Segments>
+                                            </PathFigure>
+                                        </PathFigureCollection>
+                                    </PathGeometry.Figures>
+                                </PathGeometry>-->
+                            </Path.Data>
+                        </Path>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard Name="RectangleAnimation">
+                                    <Storyboard>
+                                        <PointAnimation To="0,-50" Duration="0:0:0.4"
+                                            Storyboard.TargetName="StartPoint"
+                                            Storyboard.TargetProperty="StartPoint" />
+                                        <PointAnimation To="50,-50" Duration="0:0:0.4"
+                                            Storyboard.TargetName="Test3"
+                                            Storyboard.TargetProperty="Point" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard Name="RectangleLeaveAnimation">
+                                    <Storyboard>
+                                        <PointAnimation To="0,0" Duration="0:0:0.4"
+                                            Storyboard.TargetName="StartPoint"
+                                            Storyboard.TargetProperty="StartPoint" />
+                                        <PointAnimation To="50,0" Duration="0:0:0.4"
+                                      Storyboard.TargetName="Test3"
+                                      Storyboard.TargetProperty="Point" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <!--<Path Fill="Crimson"
+             Stroke="White"
+             Canvas.Left="400"
+             Canvas.Top="400">
+            <Path.Data>
+                <PathGeometry>
+                    <PathGeometry.Figures>
+                        <PathFigureCollection>
+                            <PathFigure x:Name="StartPoint" StartPoint="0,0">
+                                <PathFigure.Segments>
+                                    <PolyLineSegment x:Name="Test1" Points="0,50"/>
+                                    <PolyLineSegment x:Name="Test2" Points="50,50"/>
+                                    <PolyLineSegment x:Name="Test3" Points="50,0"/>
+                                </PathFigure.Segments>
+                            </PathFigure>
+                        </PathFigureCollection>
+                    </PathGeometry.Figures>
+                </PathGeometry>
+            </Path.Data>
+        </Path>-->
+
+        <!--<Path Fill="Crimson"
+              Style="{StaticResource PathStyle}"
+              Stroke="White"
+              Canvas.Left="400"
+              Canvas.Top="400">
+            <Path.Data>
+                <PathGeometry>
+                    <PathGeometry.Figures>
+                        <PathFigureCollection>
+                            <PathFigure x:Name="StartPoint" StartPoint="0,0">
+                                <PathFigure.Segments>
+                                    <PolyLineSegment x:Name="Test1" Points="0,50"/>
+                                    <PolyLineSegment x:Name="Test2" Points="50,50"/>
+                                    <PolyLineSegment x:Name="Test3" Points="50,0"/>
+                                </PathFigure.Segments>
+
+                            </PathFigure>
+                        </PathFigureCollection>
+                    </PathGeometry.Figures>
+                </PathGeometry>
+            </Path.Data>
+        </Path>-->
+    </Canvas>
+</UserControl>
