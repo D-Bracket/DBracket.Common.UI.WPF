@@ -20,7 +20,22 @@ namespace DBracket.Common.UI.WPF.Sample
         public MainWindow()
         {
             InitializeComponent();
+            Task.Run(() =>
+            {
+                Test();
+            });
+        }
 
+        private void Test()
+        {
+            var rnd = new Random();
+            Task.Delay(1000).Wait();
+            while (true)
+            {
+                //Application.Current.Dispatcher.Invoke(() => ColumnChart.DataPoint = new Charts.Data.ChartDataPoint(300));
+                Application.Current.Dispatcher.Invoke(() => ColumnChart.DataPoint = new Charts.Data.ChartDataPoint(rnd.NextDouble() * 300));
+                Task.Delay(1000).Wait();
+            }
         }
     }
 }

@@ -4,6 +4,11 @@
              xmlns:local="clr-namespace:DBracket.Common.UI.WPF.Sample"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/DBracket.Common.UI.WPF;component/DBracket.WPF.Styles.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/DBracket.Common.UI.WPF.Charts;component/DBracket.WPF.Charts.Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
