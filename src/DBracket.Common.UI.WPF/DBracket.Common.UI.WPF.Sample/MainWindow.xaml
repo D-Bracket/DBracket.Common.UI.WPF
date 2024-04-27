@@ -13,12 +13,27 @@
         Width="1200">
 
     <Grid Background="#1C1B1F">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        
+        <!--Width="799"
+Height="400"-->
         <charts:ColumnChart Style="{StaticResource DBracket.WPF.Styles.Charts.ColumnChart}"
-                            Margin="20,20,0,0"
-                            Width="799"
-                            Height="400"
-                            HorizontalAlignment="Left"
+                            Grid.Column="1"
+                            Grid.Row="1"
+  
+                            HorizontalAlignment="Stretch"
                             x:Name="ColumnChart"/>
     </Grid>
 </Window>

@@ -24,18 +24,45 @@ namespace DBracket.Common.UI.WPF.Charts.Controls
             //    UpdateChart();
             //});
 
-            HorizontalGrid.Add("s");
-            HorizontalGrid.Add("s");
-            HorizontalGrid.Add("s");
-            HorizontalGrid.Add("s");
-            HorizontalGrid.Add("s");
-            HorizontalGrid.Add("s");
-            HorizontalGrid.Add("s");
+            SizeChanged += HandleSizeChanged;
+
+            //HorizontalGrid.Add("s");
+            //HorizontalGrid.Add("s");
+            //HorizontalGrid.Add("s");
+            //HorizontalGrid.Add("s");
+            //HorizontalGrid.Add("s");
+            //HorizontalGrid.Add("s");
+            //HorizontalGrid.Add("s");
+        }
+
+        private void HandleSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (e.NewSize.Width != e.PreviousSize.Width)
+            {
+                // Handle Width Changed
+            }
+
+            if (e.NewSize.Height != e.PreviousSize.Height)
+            {
+                // Handle Height Changed
+                var height =  e.NewSize.Height -20;
+                var t = 0.0;
+                int lines = (int)height / 50;
+                HorizontalGrid.Clear();
+                for (int i = 0; i < lines; i++)
+                {
+                    HorizontalGrid.Add("s");
+                }
+
+            }
         }
         #endregion
 
-
-
+        //protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
+        //{
+        //    base.OnRenderSizeChanged(sizeInfo);
+        //    var width = Width;
+        //}
         #region "--------------------------------- Methods ---------------------------------"
         #region "----------------------------- Public Methods ------------------------------"
 
