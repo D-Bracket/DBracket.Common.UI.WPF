@@ -1,0 +1,110 @@
+﻿<UserControl x:Class="DBracket.Common.UI.WPF.Dialogs.Control.DialogHost"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:DBracket.Common.UI.WPF.Dialogs.Control"
+             xmlns:converter="clr-namespace:DBracket.Common.UI.WPF.Converter"
+             mc:Ignorable="d"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+
+            </ResourceDictionary.MergedDictionaries>
+
+            <converter:BoolToVisibilityConverter x:Key="BoolToVisConv" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="TopBar"
+              Background="Black"
+              Opacity="0.4" />
+
+        <Grid Grid.Row="1"
+              d:Height="100"
+              Background="{x:Null}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid x:Name="PART_HorizontalLine_Left"
+                  Background="Black"
+                  Opacity="0.4" />
+
+            <ContentPresenter x:Name="DialogPresenter"
+                              Grid.Column="1" />
+
+            <Grid x:Name="PART_HorizontalLine_Right"
+                  Grid.Column="2"
+                  Background="Black"
+                  Opacity="0.4" />
+        </Grid>
+
+        <Grid x:Name="ButtomBar"
+              Grid.Row="2"
+              Background="Black"
+              Opacity="0.4" />
+        
+        
+        <!--Error Popup-->
+        <Border BorderBrush="White"
+                Visibility="{Binding ViewModel.ShowErrorMessage, Converter={StaticResource BoolToVisConv}}"
+                BorderThickness="0"
+                Grid.Row="2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Margin="0,0,0,50"
+                Width="600"
+                Height="150"
+                Background="Crimson">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="8" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="8" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="550" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock d:Text="Error Title"
+                           Text="{Binding ViewModel.ErrorTitle}"
+                           TextWrapping="Wrap"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Margin="10,0,0,0"
+                           Grid.Column="1"
+                           Grid.Row="1" />
+
+                <TextBlock d:Text="Error Text"
+                           Text="{Binding ViewModel.ErrorText}"
+                           TextWrapping="Wrap"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Margin="10,0,0,0"
+                           Grid.Column="1"
+                           Grid.Row="3"
+                           Foreground="White"
+                           FontSize="16" />
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

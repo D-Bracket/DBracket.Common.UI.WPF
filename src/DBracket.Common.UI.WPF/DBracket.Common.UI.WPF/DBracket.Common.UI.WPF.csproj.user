@@ -2,7 +2,27 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Compile Update="Dialogs\Control\DialogContainer.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\Control\DialogHost.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Colors\ColorCollection.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Colors\ResourcesColors.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="DBracket.WPF.Styles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\Control\DialogContainer.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\Control\DialogHost.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Styles\Icon.Styles.xaml">

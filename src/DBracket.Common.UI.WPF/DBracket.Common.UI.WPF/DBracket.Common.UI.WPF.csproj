@@ -16,4 +16,9 @@
 		<UseWPF>true</UseWPF>
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
+	
+	<ItemGroup>
+	  <Folder Include="Dialogs\ViewModels\" />
+	  <Folder Include="Dialogs\Views\" />
+	</ItemGroup>
 </Project>
