@@ -1,7 +1,6 @@
-﻿using DBracket.Common.UI.WPF.Charts.Data;
+﻿using DBracket.Common.UI.WPF.Charts.Controls.Components;
+using DBracket.Common.UI.WPF.Charts.Data;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Printing.IndexedProperties;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
@@ -45,7 +44,7 @@ namespace DBracket.Common.UI.WPF.Charts.Controls
             if (e.NewSize.Height != e.PreviousSize.Height)
             {
                 // Handle Height Changed
-                var height =  e.NewSize.Height -20;
+                var height = e.NewSize.Height - 20;
                 var t = 0.0;
                 int lines = (int)height / 50;
                 HorizontalGrid.Clear();
@@ -73,8 +72,8 @@ namespace DBracket.Common.UI.WPF.Charts.Controls
         {
             //while (true)
             //{
-            Point1 = new Point(-DataPoint.Value, 0);
-            Point2 = new Point(-DataPoint.Value, 50);
+            Point1 = new System.Windows.Point(-DataPoint.Value, 0);
+            Point2 = new System.Windows.Point(-DataPoint.Value, 50);
             //    Task.Delay(100).Wait();
             //}
         }
@@ -84,11 +83,53 @@ namespace DBracket.Common.UI.WPF.Charts.Controls
         private async static void UpdatePoints(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var chart = d as ColumnChart;
+            if (chart is null)
+                return;
+
+            chart.DataPoints.CollectionChanged += (s, e) =>
+            {
+                var pointCollection = s as ObservableCollection<ChartDataPoint>;
+                if (pointCollection is null)
+                    return;
+
+                foreach (var point in pointCollection)
+                {
+                    //point.PropertyChanged += (s, e) =>
+                    //{
+                    PointAnimation animation = new PointAnimation(new System.Windows.Point(0, -chart.DataPoints[0].Value), new TimeSpan(0, 0, 0, 0, 400));
+                        chart.BeginAnimation(Point1Property, animation);
+                    PointAnimation animation2 = new PointAnimation(new System.Windows.Point(50, -chart.DataPoints[0].Value), new TimeSpan(0, 0, 0, 0, 400));
+                        chart.BeginAnimation(Point2Property, animation2);
+
+
+                    //};
+                }
+
+            };
+            //if (chart is not null)
+            //{
+            //    PointAnimation animation = new PointAnimation(new Point(0, -chart.DataPoints[0].Value), new TimeSpan(0, 0, 0, 0, 400));
+            //    chart.BeginAnimation(Point1Property, animation);
+            //    PointAnimation animation2 = new PointAnimation(new Point(50, -chart.DataPoints[0].Value), new TimeSpan(0, 0, 0, 0, 400));
+            //    chart.BeginAnimation(Point2Property, animation2);
+            //}
+            //if (chart is not null)
+            //{
+            //    PointAnimation animation = new PointAnimation(new Point(0, -chart.DataPoint.Value), new TimeSpan(0, 0, 0, 0, 400));
+            //    chart.BeginAnimation(Point1Property, animation);
+            //    PointAnimation animation2 = new PointAnimation(new Point(50, -chart.DataPoint.Value), new TimeSpan(0, 0, 0, 0, 400));
+            //    chart.BeginAnimation(Point2Property, animation2);
+            //}
+        }
+
+        private async static void UpdatePoint(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var chart = d as ColumnChart;
             if (chart is not null)
             {
-                PointAnimation animation = new PointAnimation(new Point(0, -chart.DataPoint.Value), new TimeSpan(0, 0, 0, 0, 400));
+                PointAnimation animation = new PointAnimation(new System.Windows.Point(0, -chart.DataPoint.Value), new TimeSpan(0, 0, 0, 0, 400));
                 chart.BeginAnimation(Point1Property, animation);
-                PointAnimation animation2 = new PointAnimation(new Point(50, -chart.DataPoint.Value), new TimeSpan(0, 0, 0, 0, 400));
+                PointAnimation animation2 = new PointAnimation(new System.Windows.Point(50, -chart.DataPoint.Value), new TimeSpan(0, 0, 0, 0, 400));
                 chart.BeginAnimation(Point2Property, animation2);
 
 
@@ -135,6 +176,43 @@ namespace DBracket.Common.UI.WPF.Charts.Controls
 
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
+        public ObservableCollection<ChartDataPoint> DataPoints
+        {
+            get => (ObservableCollection<ChartDataPoint>)GetValue(DataPointsProperty);
+            set => SetValue(DataPointsProperty, value);
+        }
+        /// <summary>DataPoint DependencyProperty</summary>
+        public static readonly DependencyProperty DataPointsProperty = DependencyProperty.Register(
+            "DataPoints", typeof(ObservableCollection<ChartDataPoint>), typeof(ColumnChart), new FrameworkPropertyMetadata(new ObservableCollection<ChartDataPoint>(), UpdatePoints));
+
+        public ObservableCollection<Column> Columns
+        {
+            get => (ObservableCollection<Column>)GetValue(ColumnsProperty);
+            set => SetValue(ColumnsProperty, value);
+        }
+        /// <summary>DataPoint DependencyProperty</summary>
+        public static readonly DependencyProperty ColumnsProperty = DependencyProperty.Register(
+            "Columns", typeof(ObservableCollection<Column>), typeof(ColumnChart), new FrameworkPropertyMetadata(new ObservableCollection<Column>()));
+
+
+
+
+
+
+        public AxisTest YAxis
+        {
+            get => (AxisTest)GetValue(YAxisProperty);
+            set => SetValue(YAxisProperty, value);
+        }
+        /// <summary>DataPoint DependencyProperty</summary>
+        public static readonly DependencyProperty YAxisProperty = DependencyProperty.Register(
+            "YAxis", typeof(AxisTest), typeof(ColumnChart), new FrameworkPropertyMetadata(null));
+
+
+
+
+
+
         public ObservableCollection<string> HorizontalGrid
         {
             get => (ObservableCollection<string>)GetValue(HorizontalGridProperty);
@@ -151,27 +229,27 @@ namespace DBracket.Common.UI.WPF.Charts.Controls
         }
         /// <summary>DataPoint DependencyProperty</summary>
         public static readonly DependencyProperty DataPointProperty = DependencyProperty.Register(
-            "DataPoint", typeof(ChartDataPoint), typeof(ColumnChart), new FrameworkPropertyMetadata(null, UpdatePoints));
+            "DataPoint", typeof(ChartDataPoint), typeof(ColumnChart), new FrameworkPropertyMetadata(null, UpdatePoint));
 
 
 
-        public Point Point1
+        public System.Windows.Point Point1
         {
-            get => (Point)GetValue(Point1Property);
+            get => (System.Windows.Point)GetValue(Point1Property);
             set => SetValue(Point1Property, value);
         }
         /// <summary>DataPoint DependencyProperty</summary>
         public static readonly DependencyProperty Point1Property = DependencyProperty.Register(
-            "Point1", typeof(Point), typeof(ColumnChart), new FrameworkPropertyMetadata(new Point()));
+            "Point1", typeof(System.Windows.Point), typeof(ColumnChart), new FrameworkPropertyMetadata(new System.Windows.Point()));
 
-        public Point Point2
+        public System.Windows.Point Point2
         {
-            get => (Point)GetValue(Point2Property);
+            get => (System.Windows.Point)GetValue(Point2Property);
             set => SetValue(Point2Property, value);
         }
         /// <summary>DataPoint DependencyProperty</summary>
         public static readonly DependencyProperty Point2Property = DependencyProperty.Register(
-            "Point2", typeof(Point), typeof(ColumnChart), new FrameworkPropertyMetadata(new Point(50, 0)));
+            "Point2", typeof(System.Windows.Point), typeof(ColumnChart), new FrameworkPropertyMetadata(new System.Windows.Point(50, 0)));
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"

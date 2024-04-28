@@ -20,10 +20,10 @@ namespace DBracket.Common.UI.WPF.Sample
         public MainWindow()
         {
             InitializeComponent();
-            Task.Run(() =>
-            {
-                Test();
-            });
+            //Task.Run(() =>
+            //{
+            //    Test();
+            //});
         }
 
         private void Test()

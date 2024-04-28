@@ -5,35 +5,61 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DBracket.Common.UI.WPF.Sample"
         xmlns:paths="clr-namespace:DBracket.Common.UI.WPF.Sample.PathExamples"
+        xmlns:commonHelpers="clr-namespace:DBracket.Common.UI.WPF.Helpers;assembly=DBracket.Common.UI.WPF"
         xmlns:charts="clr-namespace:DBracket.Common.UI.WPF.Charts.Controls;assembly=DBracket.Common.UI.WPF.Charts"
+        xmlns:chartComponents="clr-namespace:DBracket.Common.UI.WPF.Charts.Controls.Components;assembly=DBracket.Common.UI.WPF.Charts"
+        xmlns:vms="clr-namespace:DBracket.Common.UI.WPF.Sample.PathExamples.ViewModel"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="MainWindow"
-        Height="800" 
-        Width="1200">
+        Height="800"
+        Width="1200"
+        d:DataContext="{d:DesignInstance IsDesignTimeCreatable=False, Type={x:Type vms:MainViewModel}}">
+
+    <Window.DataContext>
+        <vms:MainViewModel />
+    </Window.DataContext>
 
     <Grid Background="#1C1B1F">
+        <Grid.Resources>
+            <commonHelpers:BindingProxy x:Key="BindingProxy"
+                                        DataSource="{Binding}" />
+        </Grid.Resources>
+
+
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="20" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="20" />
         </Grid.RowDefinitions>
-        
+
+        <!--<DataGrid>
+            <DataGrid.Columns>
+                <DataGridTextColumn/>
+            </DataGrid.Columns>
+        </DataGrid>-->
+
         <!--Width="799"
 Height="400"-->
         <charts:ColumnChart Style="{StaticResource DBracket.WPF.Styles.Charts.ColumnChart}"
                             Grid.Column="1"
                             Grid.Row="1"
-  
                             HorizontalAlignment="Stretch"
-                            x:Name="ColumnChart"/>
+                            x:Name="ColumnChart"
+                            DataPoints="{Binding Columns}">
+            <charts:ColumnChart.Columns>
+                <chartComponents:Column Value="5" />
+                <chartComponents:Column Value="{Binding Source={StaticResource BindingProxy}, Path=DataSource.Value, UpdateSourceTrigger=PropertyChanged}" />
+            </charts:ColumnChart.Columns>
+
+        </charts:ColumnChart>
     </Grid>
 </Window>

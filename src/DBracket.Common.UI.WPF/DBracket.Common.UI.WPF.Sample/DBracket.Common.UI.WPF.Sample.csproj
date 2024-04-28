@@ -9,10 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="PathExamples\ViewModel\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\DBracket.Common.UI.WPF.Charts\DBracket.Common.UI.WPF.Charts.csproj" />
     <ProjectReference Include="..\DBracket.Common.UI.WPF\DBracket.Common.UI.WPF.csproj" />
   </ItemGroup>
