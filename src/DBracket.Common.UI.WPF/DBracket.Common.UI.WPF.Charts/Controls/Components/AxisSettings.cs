@@ -1,7 +1,4 @@
-﻿using DBracket.Common.UI.WPF.Bases;
-using DBracket.Common.UI.WPF.Charts.Data;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
 
 namespace DBracket.Common.UI.WPF.Charts.Controls.Components
 {

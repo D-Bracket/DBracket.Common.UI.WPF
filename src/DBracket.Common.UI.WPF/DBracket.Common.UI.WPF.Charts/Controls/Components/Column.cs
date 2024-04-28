@@ -53,6 +53,20 @@ namespace DBracket.Common.UI.WPF.Charts.Controls.Components
 
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
+
+        public int ColumnNr
+        {
+            get => (int)GetValue(ColumnNrProperty);
+            internal set => SetValue(ColumnNrProperty, value);
+        }
+        /// <summary>DataPoint DependencyProperty</summary>
+        public static readonly DependencyProperty ColumnNrProperty =
+            DependencyProperty.Register(
+                "ColumnNr",
+                typeof(int),
+                typeof(Column),
+                new FrameworkPropertyMetadata(0));
+
         public double Value
         {
             get => (double)GetValue(ValueProperty);
@@ -84,24 +98,18 @@ namespace DBracket.Common.UI.WPF.Charts.Controls.Components
                 new FrameworkPropertyMetadata(
                     new ObservableCollection<Point> { new Point(100, 0), new Point(100, 0), new Point(150, 0), new Point(150, 0) }));
 
-        //public PointCollection Points { get => _points; set { _points = value; OnMySelfChanged(); } }
-        //private PointCollection _points = new();
-        //public string Header
-        //{
-        //    get => (string)GetValue(HeaderProperty);
-        //    set => SetValue(HeaderProperty, value);
-        //}
-
-
-
-
-        ///// <summary>DataPoint DependencyProperty</summary>
-        //public static readonly DependencyProperty HeaderProperty =
-        //    DependencyProperty.Register(
-        //        "Header",
-        //        typeof(string),
-        //        typeof(AxisTest),
-        //        new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.Inherits));
+        public string Header
+        {
+            get => (string)GetValue(HeaderProperty);
+            set => SetValue(HeaderProperty, value);
+        }
+        /// <summary>DataPoint DependencyProperty</summary>
+        public static readonly DependencyProperty HeaderProperty =
+            DependencyProperty.Register(
+                "Header",
+                typeof(string),
+                typeof(AxisTest),
+                new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.Inherits));
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"

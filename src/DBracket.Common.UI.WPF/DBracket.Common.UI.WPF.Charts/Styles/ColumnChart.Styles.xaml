@@ -117,26 +117,7 @@
                        Fill="#49454F"/>-->
 
 
-                    <Path Fill="#4A7BF8"
-                          Stroke="#4A7BF8"
-                          Canvas.Left="100"
-                          Canvas.Top="369">
-                        <Path.Data>
-
-                            <PathGeometry>
-                                <PathFigure x:Name="StartPoint"
-                                            StartPoint="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Point1}">
-                                    <LineSegment x:Name="Test1"
-                                                 Point="0,0" />
-                                    <LineSegment x:Name="Test2"
-                                                 Point="50,0" />
-                                    <LineSegment x:Name="Test3"
-                                                 Point="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Point2}" />
-                                </PathFigure>
-                            </PathGeometry>
-                        </Path.Data>
-                    </Path>
-
+   
 
                     <Path Fill="#4A7BF8"
                           Stroke="#4A7BF8"

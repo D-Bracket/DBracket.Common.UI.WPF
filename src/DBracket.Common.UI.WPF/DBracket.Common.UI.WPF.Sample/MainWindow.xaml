@@ -41,20 +41,11 @@
             <RowDefinition Height="20" />
         </Grid.RowDefinitions>
 
-        <!--<DataGrid>
-            <DataGrid.Columns>
-                <DataGridTextColumn/>
-            </DataGrid.Columns>
-        </DataGrid>-->
-
-        <!--Width="799"
-Height="400"-->
         <charts:ColumnChart Style="{StaticResource DBracket.WPF.Styles.Charts.ColumnChart}"
                             Grid.Column="1"
                             Grid.Row="1"
                             HorizontalAlignment="Stretch"
-                            x:Name="ColumnChart"
-                            DataPoints="{Binding Columns}">
+                            x:Name="ColumnChart">
             <charts:ColumnChart.Columns>
                 <chartComponents:Column Value="5" />
                 <chartComponents:Column Value="{Binding Source={StaticResource BindingProxy}, Path=DataSource.Value, UpdateSourceTrigger=PropertyChanged}" />

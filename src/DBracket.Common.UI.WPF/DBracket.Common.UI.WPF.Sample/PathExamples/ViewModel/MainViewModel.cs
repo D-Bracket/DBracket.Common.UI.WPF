@@ -1,7 +1,4 @@
 ﻿using DBracket.Common.UI.WPF.Bases;
-using DBracket.Common.UI.WPF.Charts.Data;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Windows;
 
 namespace DBracket.Common.UI.WPF.Sample.PathExamples.ViewModel
@@ -18,17 +15,10 @@ namespace DBracket.Common.UI.WPF.Sample.PathExamples.ViewModel
         #region "------------------------------ Constructor --------------------------------"
         public MainViewModel()
         {
-            Columns.Add(new ChartDataPoint(0));
-            this.PropertyChanged += HandleTest;
             Task.Run(() =>
             {
                 Test();
             });
-        }
-
-        private void HandleTest(object? sender, PropertyChangedEventArgs e)
-        {
-
         }
         #endregion
 
@@ -46,15 +36,16 @@ namespace DBracket.Common.UI.WPF.Sample.PathExamples.ViewModel
             Task.Delay(1000).Wait();
             while (true)
             {
-                for (int i = 0; i < Columns.Count; i++)
+                Application.Current.Dispatcher.Invoke(() =>
                 {
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        var newValue = rnd.NextDouble() * 300;
-                        Columns[i] = new Charts.Data.ChartDataPoint(newValue);
-                        Value = newValue;
-                    });
-                }
+                    var newValue = rnd.NextDouble() * 300;
+                    Value = newValue;
+                });
+
+                //for (int i = 0; i < Columns.Count; i++)
+                //{
+
+                //}
                 Task.Delay(1000).Wait();
             }
         }
@@ -75,9 +66,6 @@ namespace DBracket.Common.UI.WPF.Sample.PathExamples.ViewModel
 
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
-        public ObservableCollection<ChartDataPoint> Columns { get => _columns; set { _columns = value; OnMySelfChanged(); } }
-        private ObservableCollection<ChartDataPoint> _columns = new();
-
         public double Value { get => _value; set { _value = value; OnMySelfChanged(); } }
         private double _value;
         #endregion
