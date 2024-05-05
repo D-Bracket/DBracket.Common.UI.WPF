@@ -1,11 +1,9 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
-namespace DBracket.Common.UI.WPF.Sample
+namespace DBracket.Common.UI.WPF.Controls
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    public class Flyout : ContentControl
     {
         #region "----------------------------- Private Fields ------------------------------"
 
@@ -14,10 +12,7 @@ namespace DBracket.Common.UI.WPF.Sample
 
 
         #region "------------------------------ Constructor --------------------------------"
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+
         #endregion
 
 
@@ -39,7 +34,21 @@ namespace DBracket.Common.UI.WPF.Sample
 
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
-
+        public bool IsOpened
+        {
+            get => (bool)GetValue(IsOpenedProperty);
+            set => SetValue(IsOpenedProperty, value);
+        }
+        public static readonly DependencyProperty IsOpenedProperty = DependencyProperty.Register(
+            "IsOpened", typeof(bool), typeof(Flyout), new FrameworkPropertyMetadata(null));        
+        
+        public Dock Dock
+        {
+            get => (Dock)GetValue(DockProperty);
+            set => SetValue(DockProperty, value);
+        }
+        public static readonly DependencyProperty DockProperty = DependencyProperty.Register(
+            "Dock", typeof(Dock), typeof(Flyout), new FrameworkPropertyMetadata(Dock.Left));
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"

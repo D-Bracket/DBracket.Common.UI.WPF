@@ -19,9 +19,12 @@
     <Compile Update="PathExamples\Example3.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\ThemeExamples\ThemeSettingsView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="MainWindow.xaml">
+    <Page Update="Views\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="PathExamples\ChartTest.xaml">
@@ -34,6 +37,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="PathExamples\Example3.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ThemeExamples\ThemeSettingsView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

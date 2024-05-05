@@ -1,4 +1,5 @@
 ﻿using DBracket.Common.UI.WPF.Bases;
+using DBracket.Common.UI.WPF.Themes;
 using System.Windows;
 
 namespace DBracket.Common.UI.WPF.Sample.PathExamples.ViewModel
@@ -15,6 +16,7 @@ namespace DBracket.Common.UI.WPF.Sample.PathExamples.ViewModel
         #region "------------------------------ Constructor --------------------------------"
         public MainViewModel()
         {
+            var t = new ThemeController();
             Task.Run(() =>
             {
                 Test();
@@ -36,6 +38,9 @@ namespace DBracket.Common.UI.WPF.Sample.PathExamples.ViewModel
             Task.Delay(1000).Wait();
             while (true)
             {
+                if (Application.Current is null)
+                    break;
+
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     var newValue = rnd.NextDouble() * 300;
@@ -58,7 +63,16 @@ namespace DBracket.Common.UI.WPF.Sample.PathExamples.ViewModel
         #region "----------------------------- Command Handling ----------------------------"
         public override void ExecuteCommands(object? command)
         {
+            switch (command)
+            {
+                case "OpenFlyout":
+                    IsFlyoutOpened = true;
+                    break;
 
+                case "CloseFlyout":
+                    IsFlyoutOpened = false;
+                    break;
+            }
         }
         #endregion
         #endregion
@@ -68,6 +82,9 @@ namespace DBracket.Common.UI.WPF.Sample.PathExamples.ViewModel
         #region "------------------------------- Properties --------------------------------"
         public double Value { get => _value; set { _value = value; OnMySelfChanged(); } }
         private double _value;
+
+        public bool IsFlyoutOpened { get => _isFlyoutOpened; set { _isFlyoutOpened = value; OnMySelfChanged(); } }
+        private bool _isFlyoutOpened;
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"

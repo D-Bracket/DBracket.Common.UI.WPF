@@ -1,13 +1,11 @@
-﻿using DBracket.Common.UI.WPF.Sample.Views;
-using DBracket.Common.UI.WPF.Themes;
-using System.Windows;
+﻿using System.Windows;
 
-namespace DBracket.Common.UI.WPF.Sample
+namespace DBracket.Common.UI.WPF.Sample.Views
 {
     /// <summary>
-    /// Interaction logic for App.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class MainWindow : Window
     {
         #region "----------------------------- Private Fields ------------------------------"
 
@@ -16,24 +14,17 @@ namespace DBracket.Common.UI.WPF.Sample
 
 
         #region "------------------------------ Constructor --------------------------------"
-
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
         #endregion
 
 
 
         #region "--------------------------------- Methods ---------------------------------"
         #region "----------------------------- Public Methods ------------------------------"
-        private void Application_Startup(object sender, StartupEventArgs e)
-        {
-            //var themeController = ThemesTest.GetInstance();
-            //themeController.AddTheme("DBracket.Common.UI.WPF;component/Colors/ResourcesColors.xaml", "Red");
-            //themeController.AddTheme("DBracket.Common.UI.WPF;component/Styles/Icon.Styles.xaml", "Blue");
 
-            //themeController.Initialize();
-
-            var window = new MainWindow();
-            window.Show();
-        }
         #endregion
 
         #region "----------------------------- Private Methods -----------------------------"

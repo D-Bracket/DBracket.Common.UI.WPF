@@ -1,13 +1,8 @@
-﻿using DBracket.Common.UI.WPF.Sample.Views;
-using DBracket.Common.UI.WPF.Themes;
-using System.Windows;
+﻿using DBracket.Common.UI.WPF.Bases;
 
-namespace DBracket.Common.UI.WPF.Sample
+namespace DBracket.Common.UI.WPF.Sample.ViewModels
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+    public class MainViewModel : ViewModelBase
     {
         #region "----------------------------- Private Fields ------------------------------"
 
@@ -23,17 +18,7 @@ namespace DBracket.Common.UI.WPF.Sample
 
         #region "--------------------------------- Methods ---------------------------------"
         #region "----------------------------- Public Methods ------------------------------"
-        private void Application_Startup(object sender, StartupEventArgs e)
-        {
-            //var themeController = ThemesTest.GetInstance();
-            //themeController.AddTheme("DBracket.Common.UI.WPF;component/Colors/ResourcesColors.xaml", "Red");
-            //themeController.AddTheme("DBracket.Common.UI.WPF;component/Styles/Icon.Styles.xaml", "Blue");
 
-            //themeController.Initialize();
-
-            var window = new MainWindow();
-            window.Show();
-        }
         #endregion
 
         #region "----------------------------- Private Methods -----------------------------"
@@ -42,6 +27,13 @@ namespace DBracket.Common.UI.WPF.Sample
 
         #region "------------------------------ Event Handling -----------------------------"
 
+        #endregion
+
+        #region "----------------------------- Command Handling ----------------------------"
+        public override void ExecuteCommands(object? command)
+        {
+            
+        }
         #endregion
         #endregion
 
@@ -52,6 +44,10 @@ namespace DBracket.Common.UI.WPF.Sample
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"
+
+        #endregion
+
+        #region "-------------------------------- Commands ---------------------------------"
 
         #endregion
         #endregion

@@ -13,4 +13,8 @@
     <ProjectReference Include="..\DBracket.Common.UI.WPF\DBracket.Common.UI.WPF.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Themes\" />
+  </ItemGroup>
+
 </Project>

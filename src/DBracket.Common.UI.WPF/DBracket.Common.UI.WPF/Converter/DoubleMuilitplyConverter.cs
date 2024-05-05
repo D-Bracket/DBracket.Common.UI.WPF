@@ -1,13 +1,14 @@
-﻿using DBracket.Common.UI.WPF.Sample.Views;
-using DBracket.Common.UI.WPF.Themes;
-using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Data;
 
-namespace DBracket.Common.UI.WPF.Sample
+namespace DBracket.Common.UI.WPF.Converter
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+    public class DoubleMuilitplyConverter : IValueConverter
     {
         #region "----------------------------- Private Fields ------------------------------"
 
@@ -23,16 +24,21 @@ namespace DBracket.Common.UI.WPF.Sample
 
         #region "--------------------------------- Methods ---------------------------------"
         #region "----------------------------- Public Methods ------------------------------"
-        private void Application_Startup(object sender, StartupEventArgs e)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            //var themeController = ThemesTest.GetInstance();
-            //themeController.AddTheme("DBracket.Common.UI.WPF;component/Colors/ResourcesColors.xaml", "Red");
-            //themeController.AddTheme("DBracket.Common.UI.WPF;component/Styles/Icon.Styles.xaml", "Blue");
+            if (value is not double doubleValue)
+                throw new Exception("Value needs to be a double");
+            if (parameter is not string)
+                throw new Exception();
 
-            //themeController.Initialize();
+            var multiplier = double.Parse(parameter.ToString(), CultureInfo.InvariantCulture);
 
-            var window = new MainWindow();
-            window.Show();
+            return doubleValue * multiplier;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
         #endregion
 
@@ -55,5 +61,6 @@ namespace DBracket.Common.UI.WPF.Sample
 
         #endregion
         #endregion
+
     }
 }

@@ -25,6 +25,9 @@
     <Page Update="Dialogs\Control\DialogHost.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Styles\Flyout.Styles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Styles\Icon.Styles.xaml">
       <SubType>Designer</SubType>
     </Page>
