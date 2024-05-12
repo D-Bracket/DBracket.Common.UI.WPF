@@ -6,15 +6,19 @@
 		<Company></Company>
 		<Copyright>MIT License 2020-2024</Copyright>
 		<Product></Product>
-		<Description></Description>
+		<Description>Pakage with basic UI Functions for WPF</Description>
+		<PackageProjectUrl>https://github.com/D-Bracket/DBracket.Common.UI.WPF/tree/main</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/D-Bracket/DBracket.Common.UI.WPF/tree/main</RepositoryUrl>
 	</PropertyGroup>
 	
+	<!--Project Settings-->
 	<PropertyGroup>
 		<TargetFramework>net8.0-windows</TargetFramework>
 		<Nullable>enable</Nullable>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<UseWPF>true</UseWPF>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	</PropertyGroup>
 	
 	<ItemGroup>

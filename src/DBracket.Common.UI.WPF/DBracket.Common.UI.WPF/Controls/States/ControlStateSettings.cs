@@ -1,9 +1,9 @@
-﻿using DBracket.Common.UI.WPF.Bases;
-using System.Collections.ObjectModel;
+﻿using System.Windows;
+using System.Windows.Media;
 
-namespace DBracket.Common.UI.WPF.Sample.ViewModels
+namespace DBracket.Common.UI.WPF.Controls.States
 {
-    public class MainViewModel : ViewModelBase
+    public class ControlStateSettings : DependencyObject
     {
         #region "----------------------------- Private Fields ------------------------------"
 
@@ -12,10 +12,7 @@ namespace DBracket.Common.UI.WPF.Sample.ViewModels
 
 
         #region "------------------------------ Constructor --------------------------------"
-        public MainViewModel()
-        {
-            Items.Add(new object());
-        }
+
         #endregion
 
 
@@ -32,27 +29,22 @@ namespace DBracket.Common.UI.WPF.Sample.ViewModels
         #region "------------------------------ Event Handling -----------------------------"
 
         #endregion
+        #endregion
 
-        #region "----------------------------- Command Handling ----------------------------"
-        public override void ExecuteCommands(object? command)
-        {
-            
-        }
-        #endregion
-        #endregion
 
 
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
-        public ObservableCollection<object> Items { get => _items; set { _items = value; OnMySelfChanged(); } }
-        private ObservableCollection<object> _items = new();
+        public Brush Background
+        {
+            get => (Brush)GetValue(BackgroundProperty);
+            set => SetValue(BackgroundProperty, value);
+        }
+        public static readonly DependencyProperty BackgroundProperty = DependencyProperty.Register(
+            "Background", typeof(Brush), typeof(ControlState), new FrameworkPropertyMetadata(new SolidColorBrush(Colors.White)));
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"
-
-        #endregion
-
-        #region "-------------------------------- Commands ---------------------------------"
 
         #endregion
         #endregion

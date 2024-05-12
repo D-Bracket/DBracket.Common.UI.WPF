@@ -1,9 +1,13 @@
 ﻿using DBracket.Common.UI.WPF.Bases;
-using System.Collections.ObjectModel;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace DBracket.Common.UI.WPF.Sample.ViewModels
+namespace DBracket.Common.UI.WPF.Sample.PathExamples.ViewModel
 {
-    public class MainViewModel : ViewModelBase
+    public class ImageContainer : PropertyChangedBase
     {
         #region "----------------------------- Private Fields ------------------------------"
 
@@ -12,9 +16,10 @@ namespace DBracket.Common.UI.WPF.Sample.ViewModels
 
 
         #region "------------------------------ Constructor --------------------------------"
-        public MainViewModel()
+        public ImageContainer(string imagePath)
         {
-            Items.Add(new object());
+            ImagePath = imagePath;
+            Source = new Uri(imagePath);
         }
         #endregion
 
@@ -32,27 +37,20 @@ namespace DBracket.Common.UI.WPF.Sample.ViewModels
         #region "------------------------------ Event Handling -----------------------------"
 
         #endregion
-
-        #region "----------------------------- Command Handling ----------------------------"
-        public override void ExecuteCommands(object? command)
-        {
-            
-        }
-        #endregion
         #endregion
 
 
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
-        public ObservableCollection<object> Items { get => _items; set { _items = value; OnMySelfChanged(); } }
-        private ObservableCollection<object> _items = new();
+        public Uri Source { get => _source; set { _source = value; OnMySelfChanged(); } }
+        private Uri _source;
+
+        public string ImagePath { get => _imagePath; set { _imagePath = value; OnMySelfChanged(); } }
+        private string _imagePath;
+
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"
-
-        #endregion
-
-        #region "-------------------------------- Commands ---------------------------------"
 
         #endregion
         #endregion

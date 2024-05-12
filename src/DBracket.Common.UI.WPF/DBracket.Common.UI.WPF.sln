@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBracket.Common.UI.WPF", "D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBracket.Common.UI.WPF.Sample", "DBracket.Common.UI.WPF.Sample\DBracket.Common.UI.WPF.Sample.csproj", "{B96BC00A-2108-49EB-A739-F2DC083C4376}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBracket.Common.UI.WPF.Charts", "DBracket.Common.UI.WPF.Charts\DBracket.Common.UI.WPF.Charts.csproj", "{D291254E-B919-48BE-92C7-B687BA679C92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBracket.Common.UI.WPF.Charts", "DBracket.Common.UI.WPF.Charts\DBracket.Common.UI.WPF.Charts.csproj", "{D291254E-B919-48BE-92C7-B687BA679C92}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

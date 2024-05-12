@@ -1,6 +1,10 @@
 ﻿using DBracket.Common.UI.WPF.Bases;
+using DBracket.Common.UI.WPF.Commands;
 using DBracket.Common.UI.WPF.Themes;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Windows;
+using System.Windows.Input;
 
 namespace DBracket.Common.UI.WPF.Sample.PathExamples.ViewModel
 {
@@ -54,6 +58,19 @@ namespace DBracket.Common.UI.WPF.Sample.PathExamples.ViewModel
                 Task.Delay(1000).Wait();
             }
         }
+
+        private void LoadImages()
+        {
+            var directory = $@"\\DBracketNAS\Svens Dokumente\Medien\XXX\#Random Images\Neuer Ordner (2)";
+            var files = Directory.GetFiles(directory);
+            var tmp = new ObservableCollection<ImageContainer>();
+            foreach (var file in files)
+            {
+                tmp.Add(new ImageContainer(file));
+            }
+
+            Items = tmp;
+        }
         #endregion
 
         #region "------------------------------ Event Handling -----------------------------"
@@ -72,7 +89,16 @@ namespace DBracket.Common.UI.WPF.Sample.PathExamples.ViewModel
                 case "CloseFlyout":
                     IsFlyoutOpened = false;
                     break;
+
+                case "Test":
+                    LoadImages();
+                    break;
             }
+        }
+
+        private void ExecuteMenuCommand(object? obj)
+        {
+            var t = obj.ToString();
         }
         #endregion
         #endregion
@@ -85,6 +111,9 @@ namespace DBracket.Common.UI.WPF.Sample.PathExamples.ViewModel
 
         public bool IsFlyoutOpened { get => _isFlyoutOpened; set { _isFlyoutOpened = value; OnMySelfChanged(); } }
         private bool _isFlyoutOpened;
+
+        public ObservableCollection<ImageContainer> Items { get => _items; set { _items = value; OnMySelfChanged(); } }
+        private ObservableCollection<ImageContainer> _items = new();
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"
@@ -92,7 +121,8 @@ namespace DBracket.Common.UI.WPF.Sample.PathExamples.ViewModel
         #endregion
 
         #region "-------------------------------- Commands ---------------------------------"
-
+        /// <summary>Commands from the UI</summary>
+        public ICommand MenuCommand => new RelayCommand(ExecuteMenuCommand);
         #endregion
         #endregion
     }

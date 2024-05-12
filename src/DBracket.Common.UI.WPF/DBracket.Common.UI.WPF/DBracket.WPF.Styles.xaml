@@ -4,5 +4,6 @@
         <ResourceDictionary Source="pack://application:,,,/DBracket.Common.UI.WPF;component/Colors/ResourcesColors.xaml" />
         <ResourceDictionary Source="pack://application:,,,/DBracket.Common.UI.WPF;component/Styles/Icon.Styles.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/DBracket.Common.UI.WPF;component/Styles/Flyout.Styles.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/DBracket.Common.UI.WPF;component/Styles/Button.Styles.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

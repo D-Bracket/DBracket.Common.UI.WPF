@@ -1,9 +1,14 @@
-﻿using DBracket.Common.UI.WPF.Bases;
-using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Media;
 
-namespace DBracket.Common.UI.WPF.Sample.ViewModels
+namespace DBracket.Common.UI.WPF.Utils
 {
-    public class MainViewModel : ViewModelBase
+    public class VisualTreeUtils
     {
         #region "----------------------------- Private Fields ------------------------------"
 
@@ -12,17 +17,27 @@ namespace DBracket.Common.UI.WPF.Sample.ViewModels
 
 
         #region "------------------------------ Constructor --------------------------------"
-        public MainViewModel()
-        {
-            Items.Add(new object());
-        }
+
         #endregion
 
 
 
         #region "--------------------------------- Methods ---------------------------------"
         #region "----------------------------- Public Methods ------------------------------"
-
+        public static DependencyObject? FindParent(DependencyObject child, string ancestorType)
+        {
+            DependencyObject parent = child;
+            var type = string.Empty;
+            do
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+                if (parent is null)
+                    break;
+                type = parent.GetType().Name;
+            }
+            while(type != ancestorType);
+            return parent;
+        }
         #endregion
 
         #region "----------------------------- Private Methods -----------------------------"
@@ -32,27 +47,16 @@ namespace DBracket.Common.UI.WPF.Sample.ViewModels
         #region "------------------------------ Event Handling -----------------------------"
 
         #endregion
+        #endregion
 
-        #region "----------------------------- Command Handling ----------------------------"
-        public override void ExecuteCommands(object? command)
-        {
-            
-        }
-        #endregion
-        #endregion
 
 
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
-        public ObservableCollection<object> Items { get => _items; set { _items = value; OnMySelfChanged(); } }
-        private ObservableCollection<object> _items = new();
+
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"
-
-        #endregion
-
-        #region "-------------------------------- Commands ---------------------------------"
 
         #endregion
         #endregion

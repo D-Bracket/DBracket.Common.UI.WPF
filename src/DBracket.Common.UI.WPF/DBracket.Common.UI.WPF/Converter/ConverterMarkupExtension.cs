@@ -1,20 +1,24 @@
-﻿using DBracket.Common.UI.WPF.Bases;
-using System.Collections.ObjectModel;
+﻿using System.Globalization;
+using System.Windows.Data;
+using System.Windows.Markup;
 
-namespace DBracket.Common.UI.WPF.Sample.ViewModels
+namespace DBracket.Common.UI.WPF.Converter
 {
-    public class MainViewModel : ViewModelBase
+    // Source: https://www.broculos.net/2014/04/wpf-how-to-use-converters-without.html
+
+
+
+    public abstract class ConverterMarkupExtension<T> : MarkupExtension, IValueConverter where T : class, new()
     {
         #region "----------------------------- Private Fields ------------------------------"
-
+        private static T _converter = null;
         #endregion
 
 
 
         #region "------------------------------ Constructor --------------------------------"
-        public MainViewModel()
+        public ConverterMarkupExtension()
         {
-            Items.Add(new object());
         }
         #endregion
 
@@ -22,7 +26,13 @@ namespace DBracket.Common.UI.WPF.Sample.ViewModels
 
         #region "--------------------------------- Methods ---------------------------------"
         #region "----------------------------- Public Methods ------------------------------"
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return _converter ?? (_converter = new T());
+        }
 
+        public abstract object Convert(object value, Type targetType, object parameter, CultureInfo culture);
+        public abstract object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture);
         #endregion
 
         #region "----------------------------- Private Methods -----------------------------"
@@ -32,27 +42,15 @@ namespace DBracket.Common.UI.WPF.Sample.ViewModels
         #region "------------------------------ Event Handling -----------------------------"
 
         #endregion
-
-        #region "----------------------------- Command Handling ----------------------------"
-        public override void ExecuteCommands(object? command)
-        {
-            
-        }
-        #endregion
         #endregion
 
 
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
-        public ObservableCollection<object> Items { get => _items; set { _items = value; OnMySelfChanged(); } }
-        private ObservableCollection<object> _items = new();
+
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"
-
-        #endregion
-
-        #region "-------------------------------- Commands ---------------------------------"
 
         #endregion
         #endregion

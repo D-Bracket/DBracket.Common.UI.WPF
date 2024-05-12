@@ -1,9 +1,6 @@
-﻿using DBracket.Common.UI.WPF.Bases;
-using System.Collections.ObjectModel;
-
-namespace DBracket.Common.UI.WPF.Sample.ViewModels
+﻿namespace DBracket.Common.UI.WPF.Controls.States
 {
-    public class MainViewModel : ViewModelBase
+    public class ControlStateCollection : List<ControlState>
     {
         #region "----------------------------- Private Fields ------------------------------"
 
@@ -12,10 +9,7 @@ namespace DBracket.Common.UI.WPF.Sample.ViewModels
 
 
         #region "------------------------------ Constructor --------------------------------"
-        public MainViewModel()
-        {
-            Items.Add(new object());
-        }
+
         #endregion
 
 
@@ -32,27 +26,16 @@ namespace DBracket.Common.UI.WPF.Sample.ViewModels
         #region "------------------------------ Event Handling -----------------------------"
 
         #endregion
+        #endregion
 
-        #region "----------------------------- Command Handling ----------------------------"
-        public override void ExecuteCommands(object? command)
-        {
-            
-        }
-        #endregion
-        #endregion
 
 
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
-        public ObservableCollection<object> Items { get => _items; set { _items = value; OnMySelfChanged(); } }
-        private ObservableCollection<object> _items = new();
+
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"
-
-        #endregion
-
-        #region "-------------------------------- Commands ---------------------------------"
 
         #endregion
         #endregion

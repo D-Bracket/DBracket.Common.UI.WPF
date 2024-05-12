@@ -1,9 +1,9 @@
 ﻿using DBracket.Common.UI.WPF.Bases;
 using System.Collections.ObjectModel;
 
-namespace DBracket.Common.UI.WPF.Sample.ViewModels
+namespace DBracket.Common.UI.WPF.Sample.Views.Examples
 {
-    public class MainViewModel : ViewModelBase
+    public class SideBarItem : PropertyChangedBase
     {
         #region "----------------------------- Private Fields ------------------------------"
 
@@ -12,9 +12,9 @@ namespace DBracket.Common.UI.WPF.Sample.ViewModels
 
 
         #region "------------------------------ Constructor --------------------------------"
-        public MainViewModel()
+        public SideBarItem()
         {
-            Items.Add(new object());
+
         }
         #endregion
 
@@ -32,27 +32,22 @@ namespace DBracket.Common.UI.WPF.Sample.ViewModels
         #region "------------------------------ Event Handling -----------------------------"
 
         #endregion
-
-        #region "----------------------------- Command Handling ----------------------------"
-        public override void ExecuteCommands(object? command)
-        {
-            
-        }
-        #endregion
         #endregion
 
 
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
-        public ObservableCollection<object> Items { get => _items; set { _items = value; OnMySelfChanged(); } }
-        private ObservableCollection<object> _items = new();
+        public string Name { get => _name; set { _name = value; OnMySelfChanged(); } }
+        private string _name;
+        
+        public ObservableCollection<SideBarItem> SubItems { get => _subItems; set { _subItems = value; OnMySelfChanged(); } }
+        private ObservableCollection<SideBarItem> _subItems = new();
+
+        public ObservableCollection<SideBarItem> ShownSubItems { get => _shownSubItems; set { _shownSubItems = value; OnMySelfChanged(); } }
+        private ObservableCollection<SideBarItem> _shownSubItems;
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"
-
-        #endregion
-
-        #region "-------------------------------- Commands ---------------------------------"
 
         #endregion
         #endregion

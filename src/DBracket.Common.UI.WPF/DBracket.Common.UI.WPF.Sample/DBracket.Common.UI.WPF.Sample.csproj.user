@@ -19,11 +19,23 @@
     <Compile Update="PathExamples\Example3.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Examples\SideBar.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Examples\Test.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\ThemeExamples\ThemeSettingsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Views\Examples\SideBar.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Examples\Test.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>

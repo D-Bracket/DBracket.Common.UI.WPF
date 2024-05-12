@@ -1,11 +1,8 @@
 ﻿using System.Windows;
 
-namespace DBracket.Common.UI.WPF.Sample.Views
+namespace DBracket.Common.UI.WPF.Controls.States
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    public class ControlState : DependencyObject
     {
         #region "----------------------------- Private Fields ------------------------------"
 
@@ -14,10 +11,7 @@ namespace DBracket.Common.UI.WPF.Sample.Views
 
 
         #region "------------------------------ Constructor --------------------------------"
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+
         #endregion
 
 
@@ -40,7 +34,21 @@ namespace DBracket.Common.UI.WPF.Sample.Views
 
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
+        public string Name
+        {
+            get => (string)GetValue(NameProperty);
+            set => SetValue(NameProperty, value);
+        }
+        public static readonly DependencyProperty NameProperty = DependencyProperty.Register(
+            "Name", typeof(string), typeof(ControlState), new FrameworkPropertyMetadata(string.Empty));
 
+        public ControlStateSettings ControlStateSettings
+        {
+            get => (ControlStateSettings)GetValue(ControlStateSettingsProperty);
+            set => SetValue(ControlStateSettingsProperty, value);
+        }
+        public static readonly DependencyProperty ControlStateSettingsProperty = DependencyProperty.Register(
+            "ControlStateSettings", typeof(ControlStateSettings), typeof(Button), new FrameworkPropertyMetadata(null));
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"

@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="DBracket.Common.UI.WPF.Sample.Views.Examples.SideBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DBracket.Common.UI.WPF.Sample.Views.Examples"
+             xmlns:commonHelpers="clr-namespace:DBracket.Common.UI.WPF.Helpers;assembly=DBracket.Common.UI.WPF"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <commonHelpers:BindingProxy x:Key="BindingProxy"
+                                    DataSource="{Binding}" />
+
+        <DataTemplate x:Key="Test"
+                      DataType="local:SideBarItem">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                
+                <ToggleButton x:Name="Toggle"
+                              Content="Test"
+                              Command="{Binding Source={StaticResource BindingProxy}, Path=DataSource.ToggleCommand}"
+                              CommandParameter="{Binding}"/>
+
+                <ItemsControl ItemsSource="{Binding ShownSubItems}"
+                              Margin="8,0,0,0"
+                              Grid.Row="1">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ToggleButton Content="Test2" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <ItemsControl x:Name="Menu"
+                  ItemTemplate="{StaticResource ResourceKey=Test}">
+        <!--<ItemsControl.ItemTemplate>
+            <DataTemplate 
+        </ItemsControl.ItemTemplate>-->
+    </ItemsControl>
+</UserControl>

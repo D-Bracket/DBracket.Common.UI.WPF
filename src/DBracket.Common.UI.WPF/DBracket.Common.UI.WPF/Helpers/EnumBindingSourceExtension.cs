@@ -1,9 +1,8 @@
-﻿using DBracket.Common.UI.WPF.Bases;
-using System.Collections.ObjectModel;
+﻿using System.Windows.Markup;
 
-namespace DBracket.Common.UI.WPF.Sample.ViewModels
+namespace DBracket.Common.UI.WPF.Helpers
 {
-    public class MainViewModel : ViewModelBase
+    public class EnumBindingSourceExtension : MarkupExtension
     {
         #region "----------------------------- Private Fields ------------------------------"
 
@@ -12,9 +11,17 @@ namespace DBracket.Common.UI.WPF.Sample.ViewModels
 
 
         #region "------------------------------ Constructor --------------------------------"
-        public MainViewModel()
+        public EnumBindingSourceExtension()
         {
-            Items.Add(new object());
+
+        }
+
+        public EnumBindingSourceExtension(Type enumType)
+        {
+            if (enumType is null || enumType.IsEnum == false)
+                throw new ArgumentException("Type must nit be null and of type Enum");
+
+            EnumType = enumType;
         }
         #endregion
 
@@ -22,7 +29,13 @@ namespace DBracket.Common.UI.WPF.Sample.ViewModels
 
         #region "--------------------------------- Methods ---------------------------------"
         #region "----------------------------- Public Methods ------------------------------"
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            if (EnumType is null)
+                return new string[1];
 
+            return Enum.GetValues(EnumType);
+        }
         #endregion
 
         #region "----------------------------- Private Methods -----------------------------"
@@ -32,27 +45,15 @@ namespace DBracket.Common.UI.WPF.Sample.ViewModels
         #region "------------------------------ Event Handling -----------------------------"
 
         #endregion
-
-        #region "----------------------------- Command Handling ----------------------------"
-        public override void ExecuteCommands(object? command)
-        {
-            
-        }
-        #endregion
         #endregion
 
 
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
-        public ObservableCollection<object> Items { get => _items; set { _items = value; OnMySelfChanged(); } }
-        private ObservableCollection<object> _items = new();
+        public Type? EnumType { get; private set; }
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"
-
-        #endregion
-
-        #region "-------------------------------- Commands ---------------------------------"
 
         #endregion
         #endregion

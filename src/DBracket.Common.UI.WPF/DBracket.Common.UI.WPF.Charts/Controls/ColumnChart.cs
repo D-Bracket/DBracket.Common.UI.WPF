@@ -112,6 +112,7 @@ namespace DBracket.Common.UI.WPF.Charts.Controls
         #endregion
 
 
+
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
         public ObservableCollection<Column> Columns

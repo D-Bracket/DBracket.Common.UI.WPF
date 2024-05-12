@@ -1,9 +1,15 @@
 ﻿using DBracket.Common.UI.WPF.Bases;
-using System.Collections.ObjectModel;
+using DBracket.Common.UI.WPF.Commands;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Input;
 
-namespace DBracket.Common.UI.WPF.Sample.ViewModels
+namespace DBracket.Common.UI.WPF.Sample.Views.Examples
 {
-    public class MainViewModel : ViewModelBase
+    public class SideBarControl : ViewModelBase
     {
         #region "----------------------------- Private Fields ------------------------------"
 
@@ -12,10 +18,7 @@ namespace DBracket.Common.UI.WPF.Sample.ViewModels
 
 
         #region "------------------------------ Constructor --------------------------------"
-        public MainViewModel()
-        {
-            Items.Add(new object());
-        }
+
         #endregion
 
 
@@ -36,16 +39,34 @@ namespace DBracket.Common.UI.WPF.Sample.ViewModels
         #region "----------------------------- Command Handling ----------------------------"
         public override void ExecuteCommands(object? command)
         {
-            
+            throw new NotImplementedException();
+        }
+
+        private void ExecuteToggleCommand(object? obj)
+        {
+            if (obj is not SideBarItem item)
+                return;
+
+            if (item.SubItems.Count > 0)
+            {
+                if (item.ShownSubItems is not null)
+                {
+                    item.ShownSubItems = null;
+                }
+                else
+                {
+                    item.ShownSubItems = item.SubItems;
+                }
+            }
         }
         #endregion
         #endregion
 
 
+
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
-        public ObservableCollection<object> Items { get => _items; set { _items = value; OnMySelfChanged(); } }
-        private ObservableCollection<object> _items = new();
+
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"
@@ -53,7 +74,8 @@ namespace DBracket.Common.UI.WPF.Sample.ViewModels
         #endregion
 
         #region "-------------------------------- Commands ---------------------------------"
-
+        /// <summary>Commands from the UI</summary>
+        public ICommand ToggleCommand => new RelayCommand(ExecuteToggleCommand);
         #endregion
         #endregion
     }

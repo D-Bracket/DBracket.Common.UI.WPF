@@ -10,6 +10,7 @@
         xmlns:charts="clr-namespace:DBracket.Common.UI.WPF.Charts.Controls;assembly=DBracket.Common.UI.WPF.Charts"
         xmlns:chartComponents="clr-namespace:DBracket.Common.UI.WPF.Charts.Controls.Components;assembly=DBracket.Common.UI.WPF.Charts"
         xmlns:vms="clr-namespace:DBracket.Common.UI.WPF.Sample.PathExamples.ViewModel"
+        xmlns:views="clr-namespace:DBracket.Common.UI.WPF.Sample.Views.Examples"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="MainWindow"
@@ -21,7 +22,246 @@
         <vms:MainViewModel />
     </Window.DataContext>
 
-    <Grid>
+    <Window.Resources>
+        <ControlTemplate x:Key="DBracket.Common.UI.Styles.Button.Base2"
+                         TargetType="{x:Type Button}">
+            <Grid>
+                
+            <Border x:Name="PART_Host"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}">
+                <ContentPresenter x:Name="PART_Content_Host"
+                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+            </Border>
+
+            </Grid>
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter Property="Background"
+                            Value="Green" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <Style x:Key="TestButton2"
+               TargetType="{x:Type Button}">
+            <Setter Property="Template"
+                    Value="{StaticResource DBracket.Common.UI.Styles.Button.Base2}" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="HorizontalAlignment"
+                    Value="Center" />
+        </Style>
+
+        <ControlTemplate x:Key="DBracket.Common.UI.Styles.ToggleButton.Base"
+                         TargetType="{x:Type ToggleButton}">
+            <Grid>
+
+                <Border x:Name="PART_Host"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                    <ContentPresenter x:Name="PART_Content_Host"
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                </Border>
+
+                <Popup x:Name="PART_PopUp"
+                       IsOpen="{TemplateBinding IsChecked}"
+                       Width="250"
+                       Height="400">
+                    <Grid Background="WhiteSmoke">
+                    <TextBlock Text="Test" />
+                        
+                    </Grid>
+                </Popup>
+            </Grid>
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter Property="Background"
+                            Value="Green" />
+                </Trigger>
+
+                <Trigger Property="IsChecked"
+                         Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation To="250"
+                                                Duration="0:0:0.4"
+                                                 Storyboard.TargetName="PART_PopUp"
+                                                 Storyboard.TargetProperty="Width" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation To="0"
+                                                 Duration="0:0:0.4"
+                                                 Storyboard.TargetName="PART_PopUp"
+                                                 Storyboard.TargetProperty="Width" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <Style x:Key="TestToggleButton"
+               TargetType="{x:Type ToggleButton}">
+            <Setter Property="Template"
+                    Value="{StaticResource DBracket.Common.UI.Styles.ToggleButton.Base}" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="HorizontalAlignment"
+                    Value="Center" />
+        </Style>
+
+    </Window.Resources>
+
+    <Grid Background="Gray">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Border CornerRadius="20"
+                Margin="8,20,8,20"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+
+                Background="LightGray">
+            <commonControls:SideMenu Style="{StaticResource DBracket.Common.UI.WPF.SideMenu}">
+                <commonControls:SideMenu.Items>
+                    <commonControls:SideMenuItem Style="{StaticResource TestItem}" Header="Test1" Command="{Binding MenuCommand}" CommandParameter="Test1">
+                        <commonControls:SideMenuItem.SubItems>
+                            <commonControls:SideMenuItem Style="{StaticResource TestItem}"
+                                                         Header="Test1-1"
+                                                         Command="{Binding MenuCommand}"
+                                                         CommandParameter="Test1-1" />
+                            <commonControls:SideMenuItem Style="{StaticResource TestItem}"
+                                                         Header="Test1-2"
+                                                         Command="{Binding MenuCommand}"
+                                                         CommandParameter="Test1-2" />
+                            <commonControls:SideMenuItem Style="{StaticResource TestItem}"
+                                                         Header="Test1-3"
+                                                         Command="{Binding MenuCommand}"
+                                                         CommandParameter="Test1-3" />
+                        </commonControls:SideMenuItem.SubItems>
+                    </commonControls:SideMenuItem>
+                    <commonControls:SideMenuItem Style="{StaticResource TestItem}"
+                                                 Header="Test2"
+                                                 Command="{Binding MenuCommand}"
+                                                 CommandParameter="Test2" />
+                    <commonControls:SideMenuItem Style="{StaticResource TestItem}"
+                                                 Header="Test3"
+                                                 Command="{Binding MenuCommand}"
+                                                 CommandParameter="Test3" />
+                    <commonControls:SideMenuItem Style="{StaticResource TestItem}"
+                                                 Header="Test4"
+                                                 Command="{Binding MenuCommand}"
+                                                 CommandParameter="Test4" />
+                </commonControls:SideMenu.Items>
+            </commonControls:SideMenu>
+
+            <!--<TreeView>
+                <TreeView.Items>
+                    <TreeViewItem Header="Test1">
+                        <TreeViewItem.Items>
+                            <MenuItem Header="Test1-1" />
+                        </TreeViewItem.Items>
+                    </TreeViewItem>
+                    <MenuItem Header="Test2" />
+                    <TreeViewItem Header="Test3" />
+                    <TreeViewItem Header="Test4" />
+                    <TreeViewItem Header="Test5" />
+                    <TreeViewItem Header="Test6" />
+                </TreeView.Items>
+            </TreeView>-->
+            
+            
+            <!--<views:SideBar>
+                <views:SideBar.Items>
+                    <views:SideBarItem Name="Test">
+                        <views:SideBarItem.SubItems>
+                            <views:SideBarItem Name="Test-1" />
+                            <views:SideBarItem Name="Test-2" />
+                            <views:SideBarItem Name="Test-3" />
+                        </views:SideBarItem.SubItems>
+                    </views:SideBarItem>
+                    <views:SideBarItem Name="Test2" />
+                    <views:SideBarItem Name="Test3" />
+                    <views:SideBarItem Name="Test4" />
+                    <views:SideBarItem Name="Test5" />
+                </views:SideBar.Items>
+            </views:SideBar>-->
+            
+            <!--<commonControls:Button Style="{StaticResource TestButton}"
+                                   CornerRadius="20"
+                                   Content="Test" />-->
+            <!--<StackPanel>
+                <Button Style="{StaticResource TestButton2}"
+                        Content="Test2"
+                        Width="150"
+                        Height="40" 
+                        Command="{Binding Commands}"
+                        CommandParameter="Test"/>
+
+                <ToggleButton Style="{StaticResource TestToggleButton}"
+                        Content="Test2"
+                        Width="150"
+                        Height="40" />
+            </StackPanel>-->
+        </Border>
+
+        <Border CornerRadius="20"
+                Margin="8,20,8,20"
+                Grid.Column="1"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Background="LightGray">
+
+            <ScrollViewer>
+            <!--<ItemsControl ItemsSource="{Binding Items}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            --><!--<Image x:Name="Main"
+                                   Source="{Binding Source}"
+                                   Width="200"
+                                   Height="100" />--><!--
+                                <commonControls:AsyncImage DefaultSource="C:\Users\D-Bracket\Desktop\1.png"
+                                                           ImagePath="{Binding ImagePath}"
+                                                           Width="200"
+                                                           Height="100"
+                                                           ToolTip="{Binding ImagePath}"/>
+                            </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+            </ItemsControl>-->
+            </ScrollViewer>
+            
+            
+    
+            <!--<commonControls:AsyncImage ImagePath="Test" />-->
+        </Border>
+    </Grid>
+    
+    
+    
+    
+    <!--<Grid>
         <Grid Background="#1C1B1F">
             <Grid.Resources>
                 <commonHelpers:BindingProxy x:Key="BindingProxy"
@@ -82,5 +322,5 @@
                 </Grid>
             </commonControls:Flyout.Content>
         </commonControls:Flyout>
-    </Grid>
+    </Grid>-->
 </Window>

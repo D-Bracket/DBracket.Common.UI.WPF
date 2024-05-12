@@ -1,0 +1,138 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:DBracket.Common.UI.WPF.Controls"
+                    xmlns:controlStates="clr-namespace:DBracket.Common.UI.WPF.Controls.States"
+                    xmlns:converter="clr-namespace:DBracket.Common.UI.WPF.Converter">
+
+    <converter:BoolToVisibilityConverter x:Key="BoolToVisConv" />
+
+    <ControlTemplate x:Key="DBracket.Common.UI.Styles.Button.Base"
+                     TargetType="{x:Type controls:Button}">
+        <Border x:Name="PART_Host"
+                CornerRadius="{TemplateBinding CornerRadius}"
+                Background="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActiveStateSettings.Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}">
+            <ContentPresenter x:Name="PART_Content_Host"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+        </Border>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver"
+                     Value="True">
+                <Setter Property="ActiveState"
+                        Value="MouseOver" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+
+    <controlStates:ControlStateCollection x:Key="ButtonStates">
+        <controlStates:ControlState Name="Default">
+            <controlStates:ControlState.ControlStateSettings>
+                <controlStates:ControlStateSettings Background="WhiteSmoke" />
+            </controlStates:ControlState.ControlStateSettings>
+        </controlStates:ControlState>
+
+        <controlStates:ControlState Name="MouseOver">
+            <controlStates:ControlState.ControlStateSettings>
+                <controlStates:ControlStateSettings Background="Green" />
+            </controlStates:ControlState.ControlStateSettings>
+        </controlStates:ControlState>
+
+        <controlStates:ControlState Name="Enabled">
+            <controlStates:ControlState.ControlStateSettings>
+                <controlStates:ControlStateSettings Background="Yellow" />
+            </controlStates:ControlState.ControlStateSettings>
+        </controlStates:ControlState>
+    </controlStates:ControlStateCollection>
+
+    <Style x:Key="TestButton"
+           TargetType="{x:Type controls:Button}">
+        <Setter Property="Template"
+                Value="{StaticResource DBracket.Common.UI.Styles.Button.Base}" />
+        <Setter Property="States"
+                Value="{StaticResource ButtonStates}" />
+
+        <!--<Setter Property="States">
+            <Setter.Value>
+                <StaticResource ResourceKey="MouseOverState" />
+                <StaticResource ResourceKey="EnabledState" />
+            </Setter.Value>
+        </Setter>-->
+    </Style>
+
+
+    <DataTemplate x:Key="DBracket.Common.UI.WPF.SideMenuItem"
+                  DataType="{x:Type controls:SideMenuItem}">
+        <Grid Margin="10,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
+            <ToggleButton Content="{Binding Header}" />
+            <!--<ItemsPresenter x:Name="ItemsHost"
+                            Grid.Row="1"/>-->
+        </Grid>
+    </DataTemplate>
+
+    <Style x:Key="TestItem"
+           TargetType="{x:Type controls:SideMenuItem}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:SideMenuItem}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <MenuItem x:Name="ExpandButton"
+                                  Header="{TemplateBinding Header}"
+                                  BorderBrush="Gray"
+                                  BorderThickness="1"/>
+                        <Border x:Name="IsSelectedIndicator"
+                                Background="Purple"
+                                CornerRadius="4"
+                                HorizontalAlignment="Left"
+                                Margin="2,0,0,0"
+                                Width="4" 
+                                Height="0"/>
+                        <Border Background="Green"
+                                HorizontalAlignment="Right"
+                                Visibility="{TemplateBinding HasItems, Converter={StaticResource BoolToVisConv}}"
+                                Width="10" />
+                        <ItemsPresenter x:Name="ItemsHost"
+                            Grid.Row="1"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <!--<ControlTemplate x:Key="SideMenuTest"
+                     TargetType="{x:Type controls:SideMenu}">
+        <Grid>
+            <Border x:Name="PART_Bd">
+
+            </Border>
+
+            <ItemsPresenter />
+
+            --><!--<ItemsPresenter />--><!--
+        </Grid>
+
+        <ControlTemplate.Triggers>
+
+        </ControlTemplate.Triggers>
+    </ControlTemplate>-->
+
+    <Style x:Key="DBracket.Common.UI.WPF.SideMenu"
+           TargetType="{x:Type controls:SideMenu}">
+        <Setter Property="ItemTemplate"
+                Value="{StaticResource DBracket.Common.UI.WPF.SideMenuItem}" />
+    </Style>
+</ResourceDictionary>
