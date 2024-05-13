@@ -327,6 +327,15 @@ namespace DBracket.Common.UI.WPF.Controls
         }
         public static readonly DependencyProperty IconContentProperty = DependencyProperty.Register(
             "IconContent", typeof(object), typeof(SideMenuItem), new FrameworkPropertyMetadata(null));
+
+
+        public double ItemHeight
+        {
+            get => (double)GetValue(ItemHeightProperty);
+            set => SetValue(ItemHeightProperty, value);
+        }
+        public static readonly DependencyProperty ItemHeightProperty = DependencyProperty.Register(
+            "ItemHeight", typeof(double), typeof(SideMenuItem), new FrameworkPropertyMetadata(40.0));
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"

@@ -23,18 +23,23 @@
     </Window.DataContext>
 
     <Window.Resources>
+        <SolidColorBrush x:Key="DBracket.Colors.Menu.Background">#1E2025</SolidColorBrush>
+        <SolidColorBrush x:Key="DBracket.Colors.ContentMenu.Background">#26272B</SolidColorBrush>
+        
+        
+
         <ControlTemplate x:Key="DBracket.Common.UI.Styles.Button.Base2"
                          TargetType="{x:Type Button}">
             <Grid>
-                
-            <Border x:Name="PART_Host"
-                    Background="{TemplateBinding Background}"
-                    BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}">
-                <ContentPresenter x:Name="PART_Content_Host"
-                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-            </Border>
+
+                <Border x:Name="PART_Host"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                    <ContentPresenter x:Name="PART_Content_Host"
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                </Border>
 
             </Grid>
 
@@ -73,8 +78,8 @@
                        Width="250"
                        Height="400">
                     <Grid Background="WhiteSmoke">
-                    <TextBlock Text="Test" />
-                        
+                        <TextBlock Text="Test" />
+
                     </Grid>
                 </Popup>
             </Grid>
@@ -92,7 +97,7 @@
                         <BeginStoryboard>
                             <Storyboard>
                                 <DoubleAnimation To="250"
-                                                Duration="0:0:0.4"
+                                                 Duration="0:0:0.4"
                                                  Storyboard.TargetName="PART_PopUp"
                                                  Storyboard.TargetProperty="Width" />
                             </Storyboard>
@@ -121,9 +126,11 @@
                     Value="Center" />
         </Style>
 
-
-        <SolidColorBrush x:Key="DBracket.Colors.Menu.Background">#1E2025</SolidColorBrush>
-        <SolidColorBrush x:Key="DBracket.Colors.ContentMenu.Background">#26272B</SolidColorBrush>
+        <Style TargetType="{x:Type commonControls:SideMenuItem}"
+               BasedOn="{StaticResource DBracket.Common.UI.WPF.SideMenuItem}">
+            <Setter Property="Background"
+                    Value="{DynamicResource ResourceKey=DBracket.Colors.Menu.Background}" />
+        </Style>
     </Window.Resources>
 
     <Grid Background="{DynamicResource ResourceKey=DBracket.Colors.Menu.Background}">
@@ -141,38 +148,34 @@
                                      Margin="0,30,0,0"
                                      Width="300">
                 <commonControls:SideMenu.Items>
-                    <commonControls:SideMenuItem Style="{StaticResource TestItem}" Header="Test1" Command="{Binding MenuCommand}" CommandParameter="Test1">
+                    <commonControls:SideMenuItem Header="Test1"
+                                                 Command="{Binding MenuCommand}"
+                                                 CommandParameter="Test1">
                         <commonControls:SideMenuItem.IconContent>
                             <commonControls:Icon IconType="Accept_PicolIcons" 
                                                  Width="15"
                                                  Height="15"/>
                         </commonControls:SideMenuItem.IconContent>
-                        
+
                         <commonControls:SideMenuItem.SubItems>
-                            <commonControls:SideMenuItem Style="{StaticResource TestItem}"
-                                                         Header="Test1-1"
+                            <commonControls:SideMenuItem Header="Test1-1"
                                                          Command="{Binding MenuCommand}"
                                                          CommandParameter="Test1-1" />
-                            <commonControls:SideMenuItem Style="{StaticResource TestItem}"
-                                                         Header="Test1-2"
+                            <commonControls:SideMenuItem Header="Test1-2"
                                                          Command="{Binding MenuCommand}"
                                                          CommandParameter="Test1-2" />
-                            <commonControls:SideMenuItem Style="{StaticResource TestItem}"
-                                                         Header="Test1-3"
+                            <commonControls:SideMenuItem Header="Test1-3"
                                                          Command="{Binding MenuCommand}"
                                                          CommandParameter="Test1-3" />
                         </commonControls:SideMenuItem.SubItems>
                     </commonControls:SideMenuItem>
-                    <commonControls:SideMenuItem Style="{StaticResource TestItem}"
-                                                 Header="Test2"
+                    <commonControls:SideMenuItem Header="Test2"
                                                  Command="{Binding MenuCommand}"
                                                  CommandParameter="Test2" />
-                    <commonControls:SideMenuItem Style="{StaticResource TestItem}"
-                                                 Header="Test3"
+                    <commonControls:SideMenuItem Header="Test3"
                                                  Command="{Binding MenuCommand}"
                                                  CommandParameter="Test3" />
-                    <commonControls:SideMenuItem Style="{StaticResource TestItem}"
-                                                 Header="Test4"
+                    <commonControls:SideMenuItem Header="Test4"
                                                  Command="{Binding MenuCommand}"
                                                  CommandParameter="Test4" />
                 </commonControls:SideMenu.Items>
@@ -192,8 +195,8 @@
                     <TreeViewItem Header="Test6" />
                 </TreeView.Items>
             </TreeView>-->
-            
-            
+
+
             <!--<views:SideBar>
                 <views:SideBar.Items>
                     <views:SideBarItem Name="Test">
@@ -209,7 +212,7 @@
                     <views:SideBarItem Name="Test5" />
                 </views:SideBar.Items>
             </views:SideBar>-->
-            
+
             <!--<commonControls:Button Style="{StaticResource TestButton}"
                                    CornerRadius="20"
                                    Content="Test" />-->
@@ -236,14 +239,17 @@
                 Background="{DynamicResource ResourceKey=DBracket.Colors.ContentMenu.Background}">
 
             <ScrollViewer>
-            <!--<ItemsControl ItemsSource="{Binding Items}">
+                <paths:Example3 />
+                <!--<ItemsControl ItemsSource="{Binding Items}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            --><!--<Image x:Name="Main"
+                            -->
+                <!--<Image x:Name="Main"
                                    Source="{Binding Source}"
                                    Width="200"
-                                   Height="100" />--><!--
+                                   Height="100" />-->
+                <!--
                                 <commonControls:AsyncImage DefaultSource="C:\Users\D-Bracket\Desktop\1.png"
                                                            ImagePath="{Binding ImagePath}"
                                                            Width="200"
@@ -260,16 +266,16 @@
                     </ItemsControl.ItemsPanel>
             </ItemsControl>-->
             </ScrollViewer>
-            
-            
-    
+
+
+
             <!--<commonControls:AsyncImage ImagePath="Test" />-->
         </Border>
     </Grid>
-    
-    
-    
-    
+
+
+
+
     <!--<Grid>
         <Grid Background="#1C1B1F">
             <Grid.Resources>

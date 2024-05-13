@@ -1,9 +1,20 @@
-﻿using DBracket.Common.UI.WPF.Utils;
-using System.Collections.Specialized;
-using System.Security.Policy;
+﻿using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
+
+// ToDo:
+// - Expand false -> Expand true -> Error when selecting a new item
+// - Width of the Menu is static in the animations (300), width needs to adapt automatically
+// - Selected Item Background should change
+// - Margin of Items needs to change, depending on layer
+// - ToggleButton, to expand Menu needs to be correctely styled
+// - Mouseover Background needs to be stylized 
+// - Submenu expansion animation
+// - Sometimes error when selecting item -> Height is NaN, can't use doubleanimation
+// 
+// - Feature: MenuItemSeparator
+// - Feature: SearchBar
 
 namespace DBracket.Common.UI.WPF.Controls
 {
@@ -139,7 +150,7 @@ namespace DBracket.Common.UI.WPF.Controls
             {
                 if (sideMenu.Width == double.NaN)
                     sideMenu.Width = 50;
-                var animation = new DoubleAnimation(300, new TimeSpan(0, 0, 0, 0, 200));
+                var animation = new DoubleAnimation(280, new TimeSpan(0, 0, 0, 0, 200));
                 sideMenu.BeginAnimation(WidthProperty, animation);
             }
             else
@@ -172,7 +183,7 @@ namespace DBracket.Common.UI.WPF.Controls
 
                 // Change menu width
                 if (sideMenu.Width == double.NaN)
-                    sideMenu.Width = 300;
+                    sideMenu.Width = 280;
                 var animation = new DoubleAnimation(50, new TimeSpan(0, 0, 0, 0, 200));
                 sideMenu.BeginAnimation(WidthProperty, animation);
             }

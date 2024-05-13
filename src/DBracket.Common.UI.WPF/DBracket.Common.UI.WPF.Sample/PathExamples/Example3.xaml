@@ -17,7 +17,7 @@
                         <Duration x:Key="AnimationDuration">0:0:0.2</Duration>
                     </ControlTemplate.Resources>
                     <Border Background="Transparent">
-                        <Path Stroke="Black" StrokeThickness="1" Width="10" Height="5">
+                        <Path Stroke="White" StrokeThickness="1" Width="10" Height="5">
                             <Path.Data>
                                 <PathGeometry>
                                     <PathFigure x:Name="Figure" StartPoint="0,0">

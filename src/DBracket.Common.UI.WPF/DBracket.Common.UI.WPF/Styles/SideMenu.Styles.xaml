@@ -15,24 +15,24 @@
             </Grid.RowDefinitions>
 
             <ToggleButton Content="{Binding Header}" />
-            --><!--<ItemsPresenter x:Name="ItemsHost"
-                           Grid.Row="1"/>--><!--
+            <ItemsPresenter x:Name="ItemsHost"
+                           Grid.Row="1"/>
         </Grid>
     </DataTemplate>-->
 
-    <Style x:Key="TestItem"
+    <Style x:Key="DBracket.Common.UI.WPF.SideMenuItem"
            TargetType="{x:Type controls:SideMenuItem}">
         <Setter Property="Foreground"
                 Value="White" />
         <Setter Property="FontSize"
                 Value="16" />
-        <Setter Property="Height"
-                Value="40" />
+        <!--<Setter Property="Height"
+                Value="40" />-->
 
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:SideMenuItem}">
-                    <Grid >
+                    <Grid Margin="0,0,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -47,57 +47,100 @@
                             </Grid.ColumnDefinitions>
 
                             <MenuItem x:Name="ExpandButton"
-                                      Height="{TemplateBinding Height}"
+                                      Height="{TemplateBinding ItemHeight}"
                                       Grid.Column="0"
                                       Grid.ColumnSpan="4"
                                       FontSize="{TemplateBinding FontSize}"
-                                      Header="{TemplateBinding Header}"
                                       Foreground="{TemplateBinding Foreground}"
                                       Background="{TemplateBinding Background}"
                                       BorderBrush="{TemplateBinding BorderBrush}"
-                                      BorderThickness="{TemplateBinding BorderThickness}" />
+                                      BorderThickness="{TemplateBinding BorderThickness}">
+                                <MenuItem.Header>
+                                    <TextBlock Text="{TemplateBinding Header}"
+                                               Margin="16,0,0,0"/>
+                                </MenuItem.Header>
+                            </MenuItem>
                             <Border x:Name="IsSelectedIndicator"
                                     Background="Purple"
                                     Grid.Column="0"
                                     CornerRadius="4"
                                     HorizontalAlignment="Left"
-                                    Margin="2,0,0,0"
+                                    Margin="1,0,0,0"
                                     Width="4"
                                     Height="0" />
                             <ContentPresenter x:Name="PART_IconPresenter"
                                               Grid.Column="1"
-                                              Margin="4,0,4,0"
+                                              Margin="8,0,0,0"
                                               VerticalAlignment="Center"
                                               Content="{TemplateBinding IconContent}" />
-                            <Border Background="Green"
-                                    Grid.Column="0"
-                                    Grid.ColumnSpan="4"
-                                    HorizontalAlignment="Right"
-                                    Visibility="{TemplateBinding HasItems, Converter={StaticResource BoolToVisConv}}"
-                                    Width="10" />
+                            <Path Stroke="White"
+                                  StrokeThickness="1"
+                                  Visibility="{TemplateBinding HasItems, Converter={StaticResource BoolToVisConv}}"
+                                  Grid.Column="0"
+                                  Grid.ColumnSpan="4"
+                                  HorizontalAlignment="Right"
+                                  Margin="0,0,20,0"
+                                  Width="10"
+                                  Height="5">
+                                <Path.Data>
+                                    <PathGeometry>
+                                        <PathFigure x:Name="Figure"
+                                                    StartPoint="0,0">
+                                            <LineSegment x:Name="Line1"
+                                                         Point="5,5" />
+                                            <LineSegment x:Name="Line2"
+                                                         Point="10,0" />
+                                        </PathFigure>
+                                    </PathGeometry>
+                                </Path.Data>
+                            </Path>
                         </Grid>
 
                         <ItemsPresenter x:Name="ItemsHost"
                                         Grid.Row="1" />
-                        <!--<Grid.RenderTransform>
-                           <TranslateTransform Y="-30" />
-                       </Grid.RenderTransform>
-
-                       <Grid.Triggers>
-                           <EventTrigger RoutedEvent="Loaded">
-                               <BeginStoryboard>
-                                   <Storyboard>
-                                       <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                                                        To="1"
-                                                        Duration="00:00:00.6" />
-                                       <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).Y"
-                                                        To="0"
-                                                        Duration="00:00:00.4" />
-                                   </Storyboard>
-                               </BeginStoryboard>
-                           </EventTrigger>
-                       </Grid.Triggers>-->
                     </Grid>
+
+                    <ControlTemplate.Resources>
+                        <Duration x:Key="AnimationDuration">0:0:0.2</Duration>
+                    </ControlTemplate.Resources>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsExpanded"
+                                 Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard Name="ToggleOn">
+                                    <Storyboard>
+                                        <PointAnimation To="0,5"
+                                                        Duration="{StaticResource AnimationDuration}"
+                                                        Storyboard.TargetName="Figure"
+                                                        Storyboard.TargetProperty="StartPoint" />
+                                        <PointAnimation To="5,0"
+                                                        Duration="{StaticResource AnimationDuration}"
+                                                        Storyboard.TargetName="Line1"
+                                                        Storyboard.TargetProperty="Point" />
+                                        <PointAnimation To="10,5"
+                                                        Duration="{StaticResource AnimationDuration}"
+                                                        Storyboard.TargetName="Line2"
+                                                        Storyboard.TargetProperty="Point" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard Name="ToggleOff">
+                                    <Storyboard>
+                                        <PointAnimation Duration="{StaticResource AnimationDuration}"
+                                                        Storyboard.TargetName="Figure"
+                                                        Storyboard.TargetProperty="StartPoint" />
+                                        <PointAnimation Duration="{StaticResource AnimationDuration}"
+                                                        Storyboard.TargetName="Line1"
+                                                        Storyboard.TargetProperty="Point" />
+                                        <PointAnimation Duration="{StaticResource AnimationDuration}"
+                                                        Storyboard.TargetName="Line2"
+                                                        Storyboard.TargetProperty="Point" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
