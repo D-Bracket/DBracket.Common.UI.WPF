@@ -40,7 +40,8 @@ namespace DBracket.Common.UI.WPF.Controls
                     break;
 
                 case IconTypes.Accept_PicolIcons:
-                    icon.Data= "M437.5 562.5L812.5 187.5L937.5 312.5L437.5 812.5L125 500L250 375Z";
+                    icon.Data = "M437.5 562.5L812.5 187.5L937.5 312.5L437.5 812.5L125 500L250 375Z";
+                    icon.Flip = 1;
                     break;
             }
         }

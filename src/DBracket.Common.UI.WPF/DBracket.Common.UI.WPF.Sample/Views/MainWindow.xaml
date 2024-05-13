@@ -136,9 +136,17 @@
                 VerticalAlignment="Stretch"
 
                 Background="LightGray">
-            <commonControls:SideMenu Style="{StaticResource DBracket.Common.UI.WPF.SideMenu}">
+            <commonControls:SideMenu Style="{StaticResource DBracket.Common.UI.WPF.SideMenu}"
+                                     Margin="0,30,0,0"
+                                     Width="300">
                 <commonControls:SideMenu.Items>
                     <commonControls:SideMenuItem Style="{StaticResource TestItem}" Header="Test1" Command="{Binding MenuCommand}" CommandParameter="Test1">
+                        <commonControls:SideMenuItem.IconContent>
+                            <commonControls:Icon IconType="Accept_PicolIcons" 
+                                                 Width="15"
+                                                 Height="15"/>
+                        </commonControls:SideMenuItem.IconContent>
+                        
                         <commonControls:SideMenuItem.SubItems>
                             <commonControls:SideMenuItem Style="{StaticResource TestItem}"
                                                          Header="Test1-1"

@@ -15,7 +15,7 @@ namespace DBracket.Common.UI.WPF.Controls
         #region "----------------------------- Private Fields ------------------------------"
         private SideMenu _parentSideMenu;
         internal System.Windows.Controls.MenuItem _button;
-        //internal System.Windows.Controls.Button _button;
+        
         internal SideMenuItem _parentSideMenuItem;
         internal int _menuIndex = -1;
         internal Border _isSelectedIndicator;
@@ -56,14 +56,6 @@ namespace DBracket.Common.UI.WPF.Controls
                 return;
             }
             HasItems = false;
-
-            //if (sender is IList list)
-            //{
-            //    if (list.Count > 0)
-            //    {
-            //        HasItems = true;
-            //    }
-            //}
         }
 
         public override void OnApplyTemplate()
@@ -86,26 +78,6 @@ namespace DBracket.Common.UI.WPF.Controls
 
         private void HandleButtonClick(object sender, RoutedEventArgs e)
         {
-            //if (HasItems)
-            //{
-            //    if (SubItems?.Count > 0)
-            //    {
-            //        if (Items is null || Items.Count == 0)
-            //        {
-            //            foreach (var newItem in SubItems)
-            //            {
-            //                Items.Add(newItem);
-            //            }
-            //            IsExpanded = true;
-            //        }
-            //        else
-            //        {
-            //            Items.Clear();
-            //            IsExpanded = false;
-            //        }
-            //    }
-            //}
-
             _parentSideMenu.NewMenuItemSelected(this);
             Command?.Execute(CommandParameter);
         }
@@ -142,7 +114,7 @@ namespace DBracket.Common.UI.WPF.Controls
             }
         }
 
-        internal bool CollapseIfNotParentIDMenu(SideMenuItem newSelectedItem)
+        internal bool CheckStateAndCollapse(SideMenuItem newSelectedItem)
         {
             var selectionCase = GetSelectionCase(newSelectedItem);
 
@@ -171,15 +143,27 @@ namespace DBracket.Common.UI.WPF.Controls
                 default:
                     throw new Exception();
             }
+        }
 
-            void CollapseMenu(SideMenuItem sideMenuItem)
+        internal static void CollapseMenu(SideMenuItem sideMenuItem)
+        {
+            sideMenuItem.Items.Clear();
+            sideMenuItem.IsExpanded = false;
+        }
+
+        internal void CollapseAllSubMenus()
+        {
+            Items.Clear();
+            IsExpanded = false;
+
+            foreach (var subItem in SubItems)
             {
-                sideMenuItem.Items.Clear();
-                sideMenuItem.IsExpanded = false;
+                subItem.CollapseAllSubMenus();
             }
         }
 
-        public int GetSelectionCase(SideMenuItem newSelectedItem)
+
+        internal int GetSelectionCase(SideMenuItem newSelectedItem)
         {
             // Check for Case 1:
             // Selected:
@@ -267,53 +251,7 @@ namespace DBracket.Common.UI.WPF.Controls
             if (sideMenuItem is null)
                 return;
 
-            //if (isSelected)
-            //{
-            //    if (sideMenuItem.HasItems)
-            //    {
-            //        if (sideMenuItem.SubItems?.Count > 0)
-            //        {
-            //            if (sideMenuItem.Items is null || sideMenuItem.Items.Count == 0)
-            //            {
-            //                foreach (var newItem in sideMenuItem.SubItems)
-            //                {
-            //                    sideMenuItem.Items.Add(newItem);
-            //                }
-            //                sideMenuItem.IsExpanded = true;
-            //            }
-            //            else
-            //            {
-            //                sideMenuItem.Items.Clear();
-            //                sideMenuItem.IsExpanded = false;
-            //            }
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    sideMenuItem.Items.Clear();
-            //    sideMenuItem.IsExpanded = false;
-            //}
         }
-        //private static void HandleExpandStateChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        //{
-        //    //var item = (SideMenuItem)d;
-        //    //if (item.SubItems?.Count > 0)
-        //    //{
-        //    //    if (item.Items is null || item.Items.Count == 0)
-        //    //    {
-        //    //        foreach (var newItem in item.SubItems)
-        //    //        {
-        //    //            item.Items.Add(newItem);
-        //    //        }
-        //    //    }
-        //    //    else
-        //    //    {
-        //    //        item.Items.Clear();
-        //    //    }
-        //    //}
-        //}
-
         #endregion
         #endregion
 
@@ -379,6 +317,16 @@ namespace DBracket.Common.UI.WPF.Controls
         }
         public static readonly DependencyProperty CommandParameterProperty = DependencyProperty.Register(
             "CommandParameter", typeof(object), typeof(SideMenuItem), new FrameworkPropertyMetadata(null));
+
+
+
+        public object IconContent
+        {
+            get => (object)GetValue(IconContentProperty);
+            set => SetValue(IconContentProperty, value);
+        }
+        public static readonly DependencyProperty IconContentProperty = DependencyProperty.Register(
+            "IconContent", typeof(object), typeof(SideMenuItem), new FrameworkPropertyMetadata(null));
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"

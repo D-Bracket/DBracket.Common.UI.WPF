@@ -89,23 +89,61 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
-                        <MenuItem x:Name="ExpandButton"
-                                  Header="{TemplateBinding Header}"
-                                  BorderBrush="Gray"
-                                  BorderThickness="1"/>
-                        <Border x:Name="IsSelectedIndicator"
-                                Background="Purple"
-                                CornerRadius="4"
-                                HorizontalAlignment="Left"
-                                Margin="2,0,0,0"
-                                Width="4" 
-                                Height="0"/>
-                        <Border Background="Green"
-                                HorizontalAlignment="Right"
-                                Visibility="{TemplateBinding HasItems, Converter={StaticResource BoolToVisConv}}"
-                                Width="10" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <MenuItem x:Name="ExpandButton"
+                                      Grid.Column="0"
+                                      Grid.ColumnSpan="4"
+                                      Header="{TemplateBinding Header}"
+                                      BorderBrush="Gray"
+                                      BorderThickness="1" />
+                            <Border x:Name="IsSelectedIndicator"
+                                    Background="Purple"
+                                    Grid.Column="0"
+                                    CornerRadius="4"
+                                    HorizontalAlignment="Left"
+                                    Margin="2,0,0,0"
+                                    Width="4"
+                                    Height="0" />
+                            <ContentPresenter x:Name="PART_IconPresenter" 
+                                              Grid.Column="1"
+                                              Margin="4,0,4,0"
+                                              VerticalAlignment="Center"
+                                              Content="{TemplateBinding IconContent}"/>
+                            <Border Background="Green"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="4"
+                                    HorizontalAlignment="Right"
+                                    Visibility="{TemplateBinding HasItems, Converter={StaticResource BoolToVisConv}}"
+                                    Width="10" />
+                        </Grid>
+
                         <ItemsPresenter x:Name="ItemsHost"
-                            Grid.Row="1"/>
+                                        Grid.Row="1"/>
+                        <!--<Grid.RenderTransform>
+                            <TranslateTransform Y="-30" />
+                        </Grid.RenderTransform>
+
+                        <Grid.Triggers>
+                            <EventTrigger RoutedEvent="Loaded">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                         To="1"
+                                                         Duration="00:00:00.6" />
+                                        <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).Y"
+                                                         To="0"
+                                                         Duration="00:00:00.4" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Grid.Triggers>-->
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -113,26 +151,32 @@
     </Style>
 
 
-    <!--<ControlTemplate x:Key="SideMenuTest"
+    <ControlTemplate x:Key="SideMenuTest"
                      TargetType="{x:Type controls:SideMenu}">
         <Grid>
-            <Border x:Name="PART_Bd">
+            <Border x:Name="PART_Root">
+                <StackPanel>
+                    <ItemsPresenter />
 
+                    <Button x:Name="PART_ToggleButton"
+                            Margin="0,20,0,0"
+                            Content="Toggle"/>
+                </StackPanel>
             </Border>
-
-            <ItemsPresenter />
-
-            --><!--<ItemsPresenter />--><!--
         </Grid>
 
         <ControlTemplate.Triggers>
 
         </ControlTemplate.Triggers>
-    </ControlTemplate>-->
+    </ControlTemplate>
 
     <Style x:Key="DBracket.Common.UI.WPF.SideMenu"
            TargetType="{x:Type controls:SideMenu}">
         <Setter Property="ItemTemplate"
                 Value="{StaticResource DBracket.Common.UI.WPF.SideMenuItem}" />
+        <Setter Property="Template"
+                Value="{StaticResource SideMenuTest}" />
+        <Setter Property="HorizontalAlignment"
+                Value="Left" />
     </Style>
 </ResourceDictionary>
