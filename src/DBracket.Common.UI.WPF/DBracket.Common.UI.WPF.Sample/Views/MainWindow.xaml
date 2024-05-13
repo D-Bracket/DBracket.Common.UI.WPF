@@ -55,7 +55,6 @@
             <Setter Property="HorizontalAlignment"
                     Value="Center" />
         </Style>
-
         <ControlTemplate x:Key="DBracket.Common.UI.Styles.ToggleButton.Base"
                          TargetType="{x:Type ToggleButton}">
             <Grid>
@@ -122,20 +121,22 @@
                     Value="Center" />
         </Style>
 
+
+        <SolidColorBrush x:Key="DBracket.Colors.Menu.Background">#1E2025</SolidColorBrush>
+        <SolidColorBrush x:Key="DBracket.Colors.ContentMenu.Background">#26272B</SolidColorBrush>
     </Window.Resources>
 
-    <Grid Background="Gray">
+    <Grid Background="{DynamicResource ResourceKey=DBracket.Colors.Menu.Background}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Border CornerRadius="20"
+        <Border CornerRadius="0"
                 Margin="8,20,8,20"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
-
-                Background="LightGray">
+                Background="{DynamicResource ResourceKey=DBracket.Colors.Menu.Background}">
             <commonControls:SideMenu Style="{StaticResource DBracket.Common.UI.WPF.SideMenu}"
                                      Margin="0,30,0,0"
                                      Width="300">
@@ -232,7 +233,7 @@
                 Grid.Column="1"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
-                Background="LightGray">
+                Background="{DynamicResource ResourceKey=DBracket.Colors.ContentMenu.Background}">
 
             <ScrollViewer>
             <!--<ItemsControl ItemsSource="{Binding Items}">

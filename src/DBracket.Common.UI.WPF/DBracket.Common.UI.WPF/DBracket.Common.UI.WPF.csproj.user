@@ -34,5 +34,8 @@
     <Page Update="Styles\Icon.Styles.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Styles\SideMenu.Styles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 </Project>
