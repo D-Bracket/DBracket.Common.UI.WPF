@@ -135,7 +135,7 @@
 
     <Grid Background="{DynamicResource ResourceKey=DBracket.Colors.Menu.Background}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
@@ -146,7 +146,7 @@
                 Background="{DynamicResource ResourceKey=DBracket.Colors.Menu.Background}">
             <commonControls:SideMenu Style="{StaticResource DBracket.Common.UI.WPF.SideMenu}"
                                      Margin="0,30,0,0"
-                                     Width="300">
+                                     Width="400">
                 <commonControls:SideMenu.Items>
                     <commonControls:SideMenuItem Header="Test1"
                                                  Command="{Binding MenuCommand}"

@@ -5,7 +5,7 @@
                     xmlns:converter="clr-namespace:DBracket.Common.UI.WPF.Converter">
 
     <converter:BoolToVisibilityConverter x:Key="BoolToVisConv" />
-    
+
     <!--<DataTemplate x:Key="DBracket.Common.UI.WPF.SideMenuItem"
                   DataType="{x:Type controls:SideMenuItem}">
         <Grid Margin="10,0,0,0">
@@ -46,20 +46,28 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
-                            <MenuItem x:Name="ExpandButton"
-                                      Height="{TemplateBinding ItemHeight}"
-                                      Grid.Column="0"
-                                      Grid.ColumnSpan="4"
-                                      FontSize="{TemplateBinding FontSize}"
-                                      Foreground="{TemplateBinding Foreground}"
-                                      Background="{TemplateBinding Background}"
-                                      BorderBrush="{TemplateBinding BorderBrush}"
-                                      BorderThickness="{TemplateBinding BorderThickness}">
-                                <MenuItem.Header>
-                                    <TextBlock Text="{TemplateBinding Header}"
-                                               Margin="16,0,0,0"/>
-                                </MenuItem.Header>
-                            </MenuItem>
+                            <!--Background="{TemplateBinding Background}"-->
+
+
+                            <Menu Grid.Column="0"
+                                  Grid.ColumnSpan="4"
+                                  Background="{x:Null}"
+                                  HorizontalAlignment="Stretch"
+                                  HorizontalContentAlignment="Stretch">
+                                <MenuItem x:Name="ExpandButton"
+                                          Height="{TemplateBinding ItemHeight}"
+                                          Width="{TemplateBinding Width}"
+                                          FontSize="{TemplateBinding FontSize}"
+                                          Foreground="{TemplateBinding Foreground}"
+                                          Background="Green"
+                                          BorderBrush="{TemplateBinding BorderBrush}"
+                                          BorderThickness="{TemplateBinding BorderThickness}">
+                                    <MenuItem.Header>
+                                        <TextBlock Text="{TemplateBinding Header}"
+                                                   Margin="38,0,0,0" />
+                                    </MenuItem.Header>
+                                </MenuItem>
+                            </Menu>
                             <Border x:Name="IsSelectedIndicator"
                                     Background="Purple"
                                     Grid.Column="0"

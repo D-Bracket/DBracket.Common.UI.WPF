@@ -1,20 +1,26 @@
 ﻿using System.Collections.Specialized;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 
 // ToDo:
-// - Expand false -> Expand true -> Error when selecting a new item
-// - Width of the Menu is static in the animations (300), width needs to adapt automatically
 // - Selected Item Background should change
 // - Margin of Items needs to change, depending on layer
 // - ToggleButton, to expand Menu needs to be correctely styled
 // - Mouseover Background needs to be stylized 
 // - Submenu expansion animation
-// - Sometimes error when selecting item -> Height is NaN, can't use doubleanimation
+// - When Expanded Item is click again -> Collapse
+// - When not Expanded -> MenuItems as actual MenuItems
 // 
 // - Feature: MenuItemSeparator
 // - Feature: SearchBar
+
+// Done:
+// - Sometimes error when selecting item -> Height is NaN, can't use doubleanimation -> Before collapsing the menu, animate the indicator for the new selectedmenuitem
+// - Expand false -> Expand true -> Error when selecting a new item
+// - Width of the Menu is static in the animations (300), width needs to adapt automatically
+
 
 namespace DBracket.Common.UI.WPF.Controls
 {
@@ -44,6 +50,21 @@ namespace DBracket.Common.UI.WPF.Controls
         #endregion
 
         #region "----------------------------- Private Methods -----------------------------"
+        private double GetWidthOfWidestSideMenuItemIconContent()
+        {
+            var iconWidth = 0.0;
+            foreach (var item in Items)
+            {
+                if (item is SideMenuItem sideMenuItem)
+                {
+                    var tmp= sideMenuItem._iconPresenter.ActualWidth + 20;
+                    if (tmp > iconWidth)
+                        iconWidth = tmp;
+                }
+            }
+            return iconWidth;
+        } 
+
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -98,10 +119,13 @@ namespace DBracket.Common.UI.WPF.Controls
             // Animate deselection of current Item
             if (_selectedSideMenuItem is not null)
             {
-                _selectedSideMenuItem.IsSelected = false;
-                menuWasCollapsed = _selectedSideMenuItem.CheckStateAndCollapse(newSelectedSideMenuItem);
+                if (_selectedSideMenuItem._isSelectedIndicator.Height == double.NaN)
+                    _selectedSideMenuItem._isSelectedIndicator.Height = _selectedSideMenuItem.ActualHeight;
                 animation = new DoubleAnimation(0, new TimeSpan(0, 0, 0, 0, 200));
                 _selectedSideMenuItem._isSelectedIndicator.BeginAnimation(HeightProperty, animation);
+
+                _selectedSideMenuItem.IsSelected = false;
+                menuWasCollapsed = _selectedSideMenuItem.CheckStateAndCollapse(newSelectedSideMenuItem);
             }
             else
             {
@@ -110,6 +134,8 @@ namespace DBracket.Common.UI.WPF.Controls
 
 
             // Animate new Selected Item
+            if (newSelectedSideMenuItem._isSelectedIndicator.Height == double.NaN)
+                newSelectedSideMenuItem._isSelectedIndicator.Height = newSelectedSideMenuItem.ActualHeight;
             animation = new DoubleAnimation(newSelectedSideMenuItem._button.ActualHeight - 4, new TimeSpan(0, 0, 0, 0, 200));
             newSelectedSideMenuItem._isSelectedIndicator.BeginAnimation(HeightProperty, animation);
             newSelectedSideMenuItem.IsSelected = true;
@@ -117,9 +143,6 @@ namespace DBracket.Common.UI.WPF.Controls
                 newSelectedSideMenuItem.ExpandMenu();
 
             _selectedSideMenuItem = newSelectedSideMenuItem;
-
-            //PointAnimation animation = new PointAnimation(new System.Windows.Point(xOffset, -value), new TimeSpan(0, 0, 0, 0, 400));
-            //this.BeginAnimation(DataProperty, animation);
         }
         #endregion
 
@@ -146,25 +169,22 @@ namespace DBracket.Common.UI.WPF.Controls
                 return;
 
             var sideMenu = d as SideMenu;
+            var iconWidth = sideMenu.GetWidthOfWidestSideMenuItemIconContent();
+
             if (isExpanded)
             {
                 if (sideMenu.Width == double.NaN)
-                    sideMenu.Width = 50;
-                var animation = new DoubleAnimation(280, new TimeSpan(0, 0, 0, 0, 200));
+                    sideMenu.Width = iconWidth;
+                var animation = new DoubleAnimation(((SideMenuItem)sideMenu.Items[0]).Width, new TimeSpan(0, 0, 0, 0, 200));
                 sideMenu.BeginAnimation(WidthProperty, animation);
-            }
-            else
-            {
-                // Collapse all opened menus
                 foreach (var item in sideMenu.Items)
                 {
                     if (item is SideMenuItem sideMenuItem)
-                    {
-                        sideMenuItem.CollapseAllSubMenus();
-                    }
+                        sideMenuItem.RemoveSubItemsAsMenuItems();
                 }
-
-
+            }
+            else
+            {
                 // Select top level menu
                 if (sideMenu._selectedSideMenuItem?._parentSideMenuItem is not null)
                 {
@@ -181,21 +201,24 @@ namespace DBracket.Common.UI.WPF.Controls
                 }
 
 
+                // Collapse all opened menus and move SubMenus in _button
+                foreach (var item in sideMenu.Items)
+                {
+                    if (item is SideMenuItem sideMenuItem)
+                    {
+                        sideMenuItem.CollapseAllSubMenus();
+                        sideMenuItem.SetSubItemsAsMenuItems();
+                    }
+                }
+
+
                 // Change menu width
                 if (sideMenu.Width == double.NaN)
-                    sideMenu.Width = 280;
-                var animation = new DoubleAnimation(50, new TimeSpan(0, 0, 0, 0, 200));
+                    sideMenu.Width = ((SideMenuItem)sideMenu.Items[0]).Width;
+                var animation = new DoubleAnimation(iconWidth, new TimeSpan(0, 0, 0, 0, 200));
                 sideMenu.BeginAnimation(WidthProperty, animation);
             }
         }
-
-        //public SideMenuItemCollection Entries
-        //{
-        //    get => (SideMenuItemCollection)GetValue(EntriesProperty);
-        //    set => SetValue(EntriesProperty, value);
-        //}
-        //public static readonly DependencyProperty EntriesProperty = DependencyProperty.Register(
-        //    "Entries", typeof(SideMenuItemCollection), typeof(SideMenu), new FrameworkPropertyMetadata(null));
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"

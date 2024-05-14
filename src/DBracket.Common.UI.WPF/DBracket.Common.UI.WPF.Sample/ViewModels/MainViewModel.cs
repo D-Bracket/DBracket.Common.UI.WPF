@@ -45,7 +45,7 @@ namespace DBracket.Common.UI.WPF.Sample.ViewModels
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
         public ObservableCollection<object> Items { get => _items; set { _items = value; OnMySelfChanged(); } }
-        private ObservableCollection<object> _items = new();
+        private ObservableCollection<object> _items = [];
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"

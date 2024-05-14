@@ -1,11 +1,8 @@
 ﻿using DBracket.Common.UI.WPF.Utils;
-using System.Collections;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
 namespace DBracket.Common.UI.WPF.Controls
@@ -14,8 +11,8 @@ namespace DBracket.Common.UI.WPF.Controls
     {
         #region "----------------------------- Private Fields ------------------------------"
         private SideMenu _parentSideMenu;
-        internal System.Windows.Controls.MenuItem _button;
-        
+        internal MenuItem _button;
+        internal ContentPresenter _iconPresenter;
         internal SideMenuItem _parentSideMenuItem;
         internal int _menuIndex = -1;
         internal Border _isSelectedIndicator;
@@ -26,7 +23,7 @@ namespace DBracket.Common.UI.WPF.Controls
         #region "------------------------------ Constructor --------------------------------"
         public SideMenuItem()
         {
-            SubItems = new ObservableCollection<SideMenuItem>();
+            SubItems = [];
             if (SubItems is not null)
             {
                 SubItems.CollectionChanged += HandleCollectionChanged;
@@ -38,6 +35,7 @@ namespace DBracket.Common.UI.WPF.Controls
         internal void SetParentSideMenu(SideMenu parent, ref int menuIndex)
         {
             _parentSideMenu = parent;
+            this.Width = _parentSideMenu.Width - 20;
             _menuIndex = menuIndex;
             menuIndex++;
 
@@ -67,10 +65,18 @@ namespace DBracket.Common.UI.WPF.Controls
             button.Click += HandleButtonClick;
             _button = button;
 
+
             var border = GetTemplateChild("IsSelectedIndicator") as Border;
             if (border is null)
                 return;
             _isSelectedIndicator = border;
+
+
+            var iconPresenter = GetTemplateChild("PART_IconPresenter") as ContentPresenter;
+            if (iconPresenter is null)
+                return;
+            _iconPresenter = iconPresenter;
+
 
             var parentSideMenuItem = VisualTreeUtils.FindParent(this, "SideMenuItem") as SideMenuItem;
             _parentSideMenuItem = parentSideMenuItem;
@@ -162,7 +168,6 @@ namespace DBracket.Common.UI.WPF.Controls
             }
         }
 
-
         internal int GetSelectionCase(SideMenuItem newSelectedItem)
         {
             // Check for Case 1:
@@ -185,7 +190,7 @@ namespace DBracket.Common.UI.WPF.Controls
             // New Selection:
             // Item, outside of Expanded Item selected
             var t = _parentSideMenuItem?.IsExpanded;
-            bool t2 = t is null ? false : (bool)t ? true : false;
+            bool t2 = t is null ? false : (bool)t;
             if (t2 &&
                 newSelectedItem._menuIndex != _menuIndex &&
                 newSelectedItem._parentSideMenuItem?._menuIndex != _menuIndex &&
@@ -238,6 +243,35 @@ namespace DBracket.Common.UI.WPF.Controls
 
             // Unkown case, error
             return -1;
+        }
+
+
+        internal void SetSubItemsAsMenuItems()
+        {
+            if (SubItems.Count > 0)
+            {
+                foreach (var subItem in SubItems)
+                {
+                    var newMenuItem = new MenuItem
+                    {
+                        Header = subItem.Header
+                    };
+                    _button.Items.Add(newMenuItem);
+                    subItem.SetSubItemsAsMenuItems();
+                }
+            }
+        }
+
+        internal void RemoveSubItemsAsMenuItems()
+        {
+            if (SubItems.Count > 0)
+            {
+                foreach (var subItem in SubItems)
+                {
+                    _button.Items.Clear();
+                    subItem.SetSubItemsAsMenuItems();
+                }
+            }
         }
         #endregion
 
