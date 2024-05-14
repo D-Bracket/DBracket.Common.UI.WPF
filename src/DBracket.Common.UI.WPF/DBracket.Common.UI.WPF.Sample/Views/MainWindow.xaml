@@ -7,6 +7,7 @@
         xmlns:paths="clr-namespace:DBracket.Common.UI.WPF.Sample.PathExamples"
         xmlns:commonHelpers="clr-namespace:DBracket.Common.UI.WPF.Helpers;assembly=DBracket.Common.UI.WPF"
         xmlns:commonControls="clr-namespace:DBracket.Common.UI.WPF.Controls;assembly=DBracket.Common.UI.WPF"
+        xmlns:cCS="clr-namespace:DBracket.Common.UI.WPF.Controls.Settings;assembly=DBracket.Common.UI.WPF"
         xmlns:charts="clr-namespace:DBracket.Common.UI.WPF.Charts.Controls;assembly=DBracket.Common.UI.WPF.Charts"
         xmlns:chartComponents="clr-namespace:DBracket.Common.UI.WPF.Charts.Controls.Components;assembly=DBracket.Common.UI.WPF.Charts"
         xmlns:vms="clr-namespace:DBracket.Common.UI.WPF.Sample.PathExamples.ViewModel"
@@ -25,6 +26,8 @@
     <Window.Resources>
         <SolidColorBrush x:Key="DBracket.Colors.Menu.Background">#1E2025</SolidColorBrush>
         <SolidColorBrush x:Key="DBracket.Colors.ContentMenu.Background">#26272B</SolidColorBrush>
+        <SolidColorBrush x:Key="DBracket.Colors.ContentMenu.Background.IsSelected">#2B2D31</SolidColorBrush>
+        <SolidColorBrush x:Key="DBracket.Colors.ContentMenu.Background.MouseOver">#203E50</SolidColorBrush>
         
         
 
@@ -130,6 +133,10 @@
                BasedOn="{StaticResource DBracket.Common.UI.WPF.SideMenuItem}">
             <Setter Property="Background"
                     Value="{DynamicResource ResourceKey=DBracket.Colors.Menu.Background}" />
+            <Setter Property="cCS:SideMenuItemSettings.IsSelectedBrush"
+                    Value="{DynamicResource DBracket.Colors.ContentMenu.Background.IsSelected}" />
+            <Setter Property="cCS:SideMenuItemSettings.MouseOverBrush"
+                    Value="{DynamicResource DBracket.Colors.ContentMenu.Background.MouseOver}" />
         </Style>
     </Window.Resources>
 

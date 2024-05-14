@@ -2,23 +2,37 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:DBracket.Common.UI.WPF.Controls"
                     xmlns:controlStates="clr-namespace:DBracket.Common.UI.WPF.Controls.States"
+                    xmlns:controlSettings="clr-namespace:DBracket.Common.UI.WPF.Controls.Settings"
                     xmlns:converter="clr-namespace:DBracket.Common.UI.WPF.Converter">
 
     <converter:BoolToVisibilityConverter x:Key="BoolToVisConv" />
 
-    <!--<DataTemplate x:Key="DBracket.Common.UI.WPF.SideMenuItem"
-                  DataType="{x:Type controls:SideMenuItem}">
-        <Grid Margin="10,0,0,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-
-            <ToggleButton Content="{Binding Header}" />
-            <ItemsPresenter x:Name="ItemsHost"
-                           Grid.Row="1"/>
-        </Grid>
-    </DataTemplate>-->
+    <Style TargetType="MenuItem"
+           x:Key="CustomMenuItemStyle">
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MenuItem">
+                    <Border Name="Border"
+                            VerticalAlignment="Center"
+                            Background="{TemplateBinding Background}"
+                            Padding="8">
+                        <ContentPresenter ContentSource="Header" 
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+                            <Setter TargetName="Border"
+                                    Property="Background"
+                                    Value="{Binding RelativeSource={RelativeSource AncestorType=controls:SideMenuItem}, Path=(controlSettings:SideMenuItemSettings.MouseOverBrush)}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <Style x:Key="DBracket.Common.UI.WPF.SideMenuItem"
            TargetType="{x:Type controls:SideMenuItem}">
@@ -26,12 +40,20 @@
                 Value="White" />
         <Setter Property="FontSize"
                 Value="16" />
-        <!--<Setter Property="Height"
-                Value="40" />-->
-
+        <Setter Property="BackgroundIsSelected"
+                Value="Gray" />
+        <Setter Property="controlSettings:SideMenuItemSettings.IsSelectedBrush"
+                Value="Green" />
+        <Setter Property="controlSettings:SideMenuItemSettings.MouseOverBrush"
+                Value="LightYellow" />
+        
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:SideMenuItem}">
+                    <ControlTemplate.Resources>
+                        <Duration x:Key="AnimationDuration">0:0:0.2</Duration>
+                    </ControlTemplate.Resources>
+
                     <Grid Margin="0,0,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -46,20 +68,18 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
-                            <!--Background="{TemplateBinding Background}"-->
-
-
                             <Menu Grid.Column="0"
                                   Grid.ColumnSpan="4"
                                   Background="{x:Null}"
                                   HorizontalAlignment="Stretch"
                                   HorizontalContentAlignment="Stretch">
                                 <MenuItem x:Name="ExpandButton"
+                                          Style="{StaticResource CustomMenuItemStyle}"
                                           Height="{TemplateBinding ItemHeight}"
                                           Width="{TemplateBinding Width}"
                                           FontSize="{TemplateBinding FontSize}"
                                           Foreground="{TemplateBinding Foreground}"
-                                          Background="Green"
+                                          Background="{TemplateBinding Background}"
                                           BorderBrush="{TemplateBinding BorderBrush}"
                                           BorderThickness="{TemplateBinding BorderThickness}">
                                     <MenuItem.Header>
@@ -108,9 +128,6 @@
                                         Grid.Row="1" />
                     </Grid>
 
-                    <ControlTemplate.Resources>
-                        <Duration x:Key="AnimationDuration">0:0:0.2</Duration>
-                    </ControlTemplate.Resources>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsExpanded"
                                  Value="True">
@@ -148,6 +165,16 @@
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
                         </Trigger>
+                        <Trigger Property="IsSelected"
+                                 Value="True">
+                            <Setter Property="Background"
+                                    Value="{Binding RelativeSource={RelativeSource Self}, Path=(controlSettings:SideMenuItemSettings.IsSelectedBrush)}" />
+                        </Trigger>
+                        <!--<Trigger Property="IsMouseOver"
+                                 Value="True">
+                            <Setter Property="Background"
+                                    Value="{Binding RelativeSource={RelativeSource Self}, Path=(controlSettings:SideMenuItemSettings.MouseOverBrush)}" />
+                        </Trigger>-->
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

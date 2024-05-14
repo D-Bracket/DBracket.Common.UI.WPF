@@ -24,5 +24,6 @@
 	<ItemGroup>
 	  <Folder Include="Dialogs\ViewModels\" />
 	  <Folder Include="Dialogs\Views\" />
+	  <Folder Include="Behaviors\" />
 	</ItemGroup>
 </Project>

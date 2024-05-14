@@ -1,25 +1,25 @@
 ﻿using System.Collections.Specialized;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 
 // ToDo:
-// - Selected Item Background should change
 // - Margin of Items needs to change, depending on layer
 // - ToggleButton, to expand Menu needs to be correctely styled
-// - Mouseover Background needs to be stylized 
 // - Submenu expansion animation
 // - When Expanded Item is click again -> Collapse
 // - When not Expanded -> MenuItems as actual MenuItems
 // 
 // - Feature: MenuItemSeparator
 // - Feature: SearchBar
+// __ __ CLEAN UP __ __
 
 // Done:
 // - Sometimes error when selecting item -> Height is NaN, can't use doubleanimation -> Before collapsing the menu, animate the indicator for the new selectedmenuitem
 // - Expand false -> Expand true -> Error when selecting a new item
 // - Width of the Menu is static in the animations (300), width needs to adapt automatically
+// - Selected Item Background should change
+// - Mouseover Background needs to be stylized 
 
 
 namespace DBracket.Common.UI.WPF.Controls

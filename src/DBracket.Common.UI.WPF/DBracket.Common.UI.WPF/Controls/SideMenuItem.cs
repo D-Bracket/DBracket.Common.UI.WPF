@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace DBracket.Common.UI.WPF.Controls
 {
@@ -370,6 +371,16 @@ namespace DBracket.Common.UI.WPF.Controls
         }
         public static readonly DependencyProperty ItemHeightProperty = DependencyProperty.Register(
             "ItemHeight", typeof(double), typeof(SideMenuItem), new FrameworkPropertyMetadata(40.0));
+
+        #region "--------------------------------- Colors ----------------------------------"
+        public Brush BackgroundIsSelected
+        {
+            get => (Brush)GetValue(BackgroundIsSelectedProperty);
+            set => SetValue(BackgroundIsSelectedProperty, value);
+        }
+        public static readonly DependencyProperty BackgroundIsSelectedProperty = DependencyProperty.Register(
+            "BackgroundIsSelected", typeof(Brush), typeof(SideMenuItem), new FrameworkPropertyMetadata(new SolidColorBrush(Colors.Gray), FrameworkPropertyMetadataOptions.Inherits));
+        #endregion
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"
