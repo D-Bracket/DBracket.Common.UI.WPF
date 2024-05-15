@@ -6,7 +6,6 @@
                     xmlns:converter="clr-namespace:DBracket.Common.UI.WPF.Converter">
 
     <converter:BoolToVisibilityConverter x:Key="BoolToVisConv" />
-    <!--<converter:DoubleMuilitplyConverter x:Key="DoubleMultiplyConv" />-->
     <controlConverter:SideMenuItemLayerConverter x:Key="SideMenuLayerConv" />
 
     <Style x:Key="DBracket.Common.UI.WPF.SideMenuItemSeparator"
@@ -56,12 +55,10 @@
                 Value="White" />
         <Setter Property="FontSize"
                 Value="16" />
-        <Setter Property="BackgroundIsSelected"
-                Value="Gray" />
         <Setter Property="controlSettings:SideMenuItemSettings.IsSelectedBrush"
-                Value="Green" />
+                Value="Gray" />
         <Setter Property="controlSettings:SideMenuItemSettings.MouseOverBrush"
-                Value="LightYellow" />
+                Value="LightGray" />
 
         <Setter Property="Template">
             <Setter.Value>
@@ -217,11 +214,18 @@
 
         <Grid>
             <Border x:Name="PART_Root">
-                <StackPanel>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
                     <ItemsPresenter />
 
                     <Button x:Name="PART_ToggleButton"
+                            BorderThickness="1"
                             Margin="0,20,0,0"
+                            Grid.Row="2"
                             Background="{TemplateBinding Background}"
                             Height="40">
                         <Path Stroke="White"
@@ -230,17 +234,17 @@
                             <Path.Data>
                                 <PathGeometry>
                                     <PathFigure x:Name="Figure"
-                                                StartPoint="0,0">
+                                                StartPoint="5,0">
                                         <LineSegment x:Name="Line1"
-                                                     Point="5,5" />
+                                                     Point="0,5" />
                                         <LineSegment x:Name="Line2"
-                                                     Point="0,10" />
+                                                     Point="5,10" />
                                     </PathFigure>
                                 </PathGeometry>
                             </Path.Data>
                         </Path>
                     </Button>
-                </StackPanel>
+                </Grid>
             </Border>
         </Grid>
 
@@ -250,15 +254,15 @@
                 <Trigger.EnterActions>
                     <BeginStoryboard Name="ToggleOff">
                         <Storyboard>
-                            <PointAnimation To="5,0"
+                            <PointAnimation To="0,0"
                                             Duration="{StaticResource AnimationDuration}"
                                             Storyboard.TargetName="Figure"
                                             Storyboard.TargetProperty="StartPoint" />
-                            <PointAnimation To="0,5"
+                            <PointAnimation To="5,5"
                                             Duration="{StaticResource AnimationDuration}"
                                             Storyboard.TargetName="Line1"
                                             Storyboard.TargetProperty="Point" />
-                            <PointAnimation To="5,10"
+                            <PointAnimation To="0,10"
                                             Duration="{StaticResource AnimationDuration}"
                                             Storyboard.TargetName="Line2"
                                             Storyboard.TargetProperty="Point" />
@@ -286,8 +290,6 @@
 
     <Style x:Key="DBracket.Common.UI.WPF.SideMenu"
            TargetType="{x:Type controls:SideMenu}">
-        <!--<Setter Property="ItemTemplate"
-                Value="{StaticResource DBracket.Common.UI.WPF.SideMenuItem}" />-->
         <Setter Property="Template"
                 Value="{StaticResource SideMenuTest}" />
         <Setter Property="HorizontalAlignment"

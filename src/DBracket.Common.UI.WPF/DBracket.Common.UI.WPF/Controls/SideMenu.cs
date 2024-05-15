@@ -5,11 +5,9 @@ using System.Windows.Media.Animation;
 
 // ToDo:
 
-// - ToggleButton, to expand Menu needs to be correctely styled
-// - Submenu expansion animation
 // - When not Expanded -> MenuItems as actual MenuItems
 // - When Collapsed and item selected, IsSelectedIndicator does not show
-// - Button (Items) ToolTip 
+// - ToggleButton, to expand Menu needs to be correctely styled
 //
 // - Feature: SearchBar
 // __ __ CLEAN UP __ __
@@ -24,6 +22,7 @@ using System.Windows.Media.Animation;
 // - Margin of Items needs to change, depending on layer
 // - When Expanded Item is click again -> Collapse
 // -    -> When other item is selected, Case unkown
+// - Submenu expansion animation
 
 namespace DBracket.Common.UI.WPF.Controls
 {

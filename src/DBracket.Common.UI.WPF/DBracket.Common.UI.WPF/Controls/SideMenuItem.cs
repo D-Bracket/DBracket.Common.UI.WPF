@@ -388,15 +388,7 @@ namespace DBracket.Common.UI.WPF.Controls
         }
         public static readonly DependencyProperty LayerProperty = DependencyProperty.Register(
             "Layer", typeof(double), typeof(SideMenuItem), new FrameworkPropertyMetadata(0.0));
-        #region "--------------------------------- Colors ----------------------------------"
-        public Brush BackgroundIsSelected
-        {
-            get => (Brush)GetValue(BackgroundIsSelectedProperty);
-            set => SetValue(BackgroundIsSelectedProperty, value);
-        }
-        public static readonly DependencyProperty BackgroundIsSelectedProperty = DependencyProperty.Register(
-            "BackgroundIsSelected", typeof(Brush), typeof(SideMenuItem), new FrameworkPropertyMetadata(new SolidColorBrush(Colors.Gray), FrameworkPropertyMetadataOptions.Inherits));
-        #endregion
+        
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"

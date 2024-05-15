@@ -7,6 +7,7 @@
         xmlns:paths="clr-namespace:DBracket.Common.UI.WPF.Sample.PathExamples"
         xmlns:commonHelpers="clr-namespace:DBracket.Common.UI.WPF.Helpers;assembly=DBracket.Common.UI.WPF"
         xmlns:commonControls="clr-namespace:DBracket.Common.UI.WPF.Controls;assembly=DBracket.Common.UI.WPF"
+        xmlns:controlSettings="clr-namespace:DBracket.Common.UI.WPF.Controls.Settings;assembly=DBracket.Common.UI.WPF"
         xmlns:cCS="clr-namespace:DBracket.Common.UI.WPF.Controls.Settings;assembly=DBracket.Common.UI.WPF"
         xmlns:charts="clr-namespace:DBracket.Common.UI.WPF.Charts.Controls;assembly=DBracket.Common.UI.WPF.Charts"
         xmlns:chartComponents="clr-namespace:DBracket.Common.UI.WPF.Charts.Controls.Components;assembly=DBracket.Common.UI.WPF.Charts"
@@ -129,6 +130,9 @@
                     Value="Center" />
         </Style>
 
+        
+        
+        
         <Style TargetType="{x:Type commonControls:SideMenuItem}"
                BasedOn="{StaticResource DBracket.Common.UI.WPF.SideMenuItem}">
             <Setter Property="Background"
@@ -148,20 +152,28 @@
             <Setter Property="Foreground"
                     Value="White" />
         </Style>
+
+        <Style TargetType="{x:Type commonControls:SideMenu}"
+               BasedOn="{StaticResource DBracket.Common.UI.WPF.SideMenu}">
+
+        </Style>
     </Window.Resources>
 
+    <!--Background="{DynamicResource ResourceKey=DBracket.Colors.Menu.Background}"-->
     <Grid Background="{DynamicResource ResourceKey=DBracket.Colors.Menu.Background}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Border CornerRadius="0"
+        <!--<Border CornerRadius="0"
                 Margin="8,20,8,20"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
-                Background="{DynamicResource ResourceKey=DBracket.Colors.Menu.Background}">
+                Background="{DynamicResource ResourceKey=DBracket.Colors.Menu.Background}">-->
+        <Grid Background="{DynamicResource ResourceKey=DBracket.Colors.Menu.Background}">
             <commonControls:SideMenu Style="{StaticResource DBracket.Common.UI.WPF.SideMenu}"
+                                     VerticalAlignment="Stretch"
                                      Margin="0,30,0,0"
                                      Width="400">
                 <commonControls:SideMenu.Items>
@@ -253,56 +265,9 @@
                     </commonControls:SideMenuItem>
                 </commonControls:SideMenu.Items>
             </commonControls:SideMenu>
+        </Grid>
 
-            <!--<TreeView>
-                <TreeView.Items>
-                    <TreeViewItem Header="Test1">
-                        <TreeViewItem.Items>
-                            <MenuItem Header="Test1-1" />
-                        </TreeViewItem.Items>
-                    </TreeViewItem>
-                    <MenuItem Header="Test2" />
-                    <TreeViewItem Header="Test3" />
-                    <TreeViewItem Header="Test4" />
-                    <TreeViewItem Header="Test5" />
-                    <TreeViewItem Header="Test6" />
-                </TreeView.Items>
-            </TreeView>-->
-
-
-            <!--<views:SideBar>
-                <views:SideBar.Items>
-                    <views:SideBarItem Name="Test">
-                        <views:SideBarItem.SubItems>
-                            <views:SideBarItem Name="Test-1" />
-                            <views:SideBarItem Name="Test-2" />
-                            <views:SideBarItem Name="Test-3" />
-                        </views:SideBarItem.SubItems>
-                    </views:SideBarItem>
-                    <views:SideBarItem Name="Test2" />
-                    <views:SideBarItem Name="Test3" />
-                    <views:SideBarItem Name="Test4" />
-                    <views:SideBarItem Name="Test5" />
-                </views:SideBar.Items>
-            </views:SideBar>-->
-
-            <!--<commonControls:Button Style="{StaticResource TestButton}"
-                                   CornerRadius="20"
-                                   Content="Test" />-->
-            <!--<StackPanel>
-                <Button Style="{StaticResource TestButton2}"
-                        Content="Test2"
-                        Width="150"
-                        Height="40" 
-                        Command="{Binding Commands}"
-                        CommandParameter="Test"/>
-
-                <ToggleButton Style="{StaticResource TestToggleButton}"
-                        Content="Test2"
-                        Width="150"
-                        Height="40" />
-            </StackPanel>-->
-        </Border>
+        <!--</Border>-->
 
         <Border CornerRadius="20"
                 Margin="8,20,8,20"
