@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace DBracket.Common.UI.WPF.Controls
 {
@@ -29,8 +30,63 @@ namespace DBracket.Common.UI.WPF.Controls
             {
                 SubItems.CollectionChanged += HandleCollectionChanged;
             }
+        }
 
-            var t = VisualTreeUtils.FindParent(this, nameof(SideMenu));
+        protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)
+        {
+            base.OnItemsChanged(e);
+
+
+            if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                foreach (var newItem in e.NewItems)
+                {
+                    var container = (FrameworkElement)ItemContainerGenerator.ContainerFromItem(newItem);
+                    if (container != null)
+                    {
+                        AnimateNewItem(container);
+                    }
+                }
+            }
+        }
+
+        //private void AnimateNewItem(FrameworkElement element)
+        //{
+        //    var transform = new TranslateTransform();
+        //    element.RenderTransform = transform;
+
+        //    var storyboard = new Storyboard();
+
+        //    // Create the animation for the TranslateTransform.X property
+        //    var slideAnimation = new DoubleAnimation
+        //    {
+        //        From = -element.ActualHeight,
+        //        To = 0,
+        //        Duration = new Duration(TimeSpan.FromSeconds(1)),
+        //        EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+        //    };
+
+        //    Storyboard.SetTarget(slideAnimation, element);
+        //    Storyboard.SetTargetProperty(slideAnimation, new PropertyPath("RenderTransform.(TranslateTransform.Y)"));
+
+        //    storyboard.Children.Add(slideAnimation);
+
+        //    storyboard.Begin();
+        //}
+        private void AnimateNewItem(FrameworkElement element)
+        {
+            var storyboard = new Storyboard();
+            var opacityAnimation = new DoubleAnimation
+            {
+                From = 0,
+                To = 1,
+                Duration = new Duration(TimeSpan.FromMilliseconds(500))
+            };
+            Storyboard.SetTarget(opacityAnimation, element);
+            Storyboard.SetTargetProperty(opacityAnimation, new PropertyPath("Opacity"));
+            storyboard.Children.Add(opacityAnimation);
+
+            storyboard.Begin();
         }
 
         internal void SetParentSideMenu(SideMenu parent, ref int menuIndex, int layer)
@@ -124,24 +180,43 @@ namespace DBracket.Common.UI.WPF.Controls
 
         internal bool CheckStateAndCollapse(SideMenuItem newSelectedItem)
         {
-            if (newSelectedItem._parentSideMenuItem is not null)
+            var rootItem = _parentSideMenuItem;
+            while (rootItem is not null)
+            {
+                if (rootItem._parentSideMenuItem is null)
+                    break;
+
+                rootItem = rootItem._parentSideMenuItem;
+            }
+            var rootSelected = rootItem?._menuIndex == newSelectedItem._menuIndex;
+
+            if (newSelectedItem._parentSideMenuItem is not null || rootSelected)
+                                                                 //newSelectedItem._menuIndex == _parentSideMenuItem?._menuIndex)
             {
                 // Still inside the same branch
 
                 // Check if an Item in the same subsection of the branch was selected, if yes, collapse nothing
-                if (newSelectedItem._parentSideMenuItem._menuIndex == _menuIndex ||
-                    newSelectedItem._parentSideMenuItem._menuIndex == _parentSideMenuItem?._menuIndex)
+                if (newSelectedItem._parentSideMenuItem?._menuIndex == _menuIndex ||
+                    newSelectedItem._parentSideMenuItem?._menuIndex == _parentSideMenuItem?._menuIndex)
                 {
                     return newSelectedItem.HasItems;
                 }
 
+                // If parent of same layer
+                if (newSelectedItem._menuIndex == _parentSideMenuItem?._menuIndex)
+                {
+                    SideMenuItem.CollapseMenu(this);
+                    return false;
+                }
+
                 // Collapse menus until correct layer reached
                 var parent = _parentSideMenuItem;
-                while(parent._menuIndex != newSelectedItem._parentSideMenuItem._menuIndex)
+                while (CheckRunPredicate(parent))
                 {
                     SideMenuItem.CollapseMenu(parent);
                     parent = parent._parentSideMenuItem;
                 }
+                return false;
             }
             else
             {
@@ -152,9 +227,16 @@ namespace DBracket.Common.UI.WPF.Controls
                     SideMenuItem.CollapseMenu(parent);
                     parent = parent._parentSideMenuItem;
                 }
+                return true;
             }
 
-            return true;
+            bool CheckRunPredicate(SideMenuItem parent)
+            {
+                if (rootSelected)
+                    return parent._menuIndex != newSelectedItem._menuIndex;
+
+                return parent._menuIndex != newSelectedItem._parentSideMenuItem?._menuIndex;
+            }
         }
 
         internal static void CollapseMenu(SideMenuItem sideMenuItem)

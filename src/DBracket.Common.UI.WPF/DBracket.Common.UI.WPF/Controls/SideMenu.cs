@@ -4,8 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Animation;
 
 // ToDo:
-// - When Expanded Item is click again -> Collapse
-// -    -> When other item is selected, Case unkown
+
 // - ToggleButton, to expand Menu needs to be correctely styled
 // - Submenu expansion animation
 // - When not Expanded -> MenuItems as actual MenuItems
@@ -23,7 +22,8 @@ using System.Windows.Media.Animation;
 // - Mouseover Background needs to be stylized 
 // - Feature: MenuItemSeparator
 // - Margin of Items needs to change, depending on layer
-
+// - When Expanded Item is click again -> Collapse
+// -    -> When other item is selected, Case unkown
 
 namespace DBracket.Common.UI.WPF.Controls
 {
@@ -121,8 +121,8 @@ namespace DBracket.Common.UI.WPF.Controls
                 return;
             }
 
-            DoubleAnimation animation = null;
-            var menuWasCollapsed = false;
+            DoubleAnimation animation;
+            bool menuWasCollapsed;
 
             // Animate deselection of current Item
             if (_selectedSideMenuItem is not null)
