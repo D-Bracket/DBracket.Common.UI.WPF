@@ -124,36 +124,37 @@ namespace DBracket.Common.UI.WPF.Controls
 
         internal bool CheckStateAndCollapse(SideMenuItem newSelectedItem)
         {
-            var selectionCase = GetSelectionCase(newSelectedItem);
-
-            switch (selectionCase)
+            if (newSelectedItem._parentSideMenuItem is not null)
             {
-                case 1:
-                    CollapseMenu(this);
-                    return true;
+                // Still inside the same branch
 
-                case 2:
-                    CollapseMenu(_parentSideMenuItem);
-                    return true;
+                // Check if an Item in the same subsection of the branch was selected, if yes, collapse nothing
+                if (newSelectedItem._parentSideMenuItem._menuIndex == _menuIndex ||
+                    newSelectedItem._parentSideMenuItem._menuIndex == _parentSideMenuItem?._menuIndex)
+                {
+                    return newSelectedItem.HasItems;
+                }
 
-                case 3:
-                    return false;
-
-                case 4:
-                    return false;
-
-                case 5:
-                    return true;
-
-                case 6:
-                    return false;
-
-                case 7:
-                    return true;
-
-                default:
-                    throw new Exception();
+                // Collapse menus until correct layer reached
+                var parent = _parentSideMenuItem;
+                while(parent._menuIndex != newSelectedItem._parentSideMenuItem._menuIndex)
+                {
+                    SideMenuItem.CollapseMenu(parent);
+                    parent = parent._parentSideMenuItem;
+                }
             }
+            else
+            {
+                // Inside a new Branch, collapse the complete tree
+                var parent = this;
+                while (parent is not null)
+                {
+                    SideMenuItem.CollapseMenu(parent);
+                    parent = parent._parentSideMenuItem;
+                }
+            }
+
+            return true;
         }
 
         internal static void CollapseMenu(SideMenuItem sideMenuItem)
@@ -173,104 +174,19 @@ namespace DBracket.Common.UI.WPF.Controls
             }
         }
 
-        internal int GetSelectionCase(SideMenuItem newSelectedItem)
-        {
-            // Check for Case 1:
-            // Selected:
-            // Expanded Item selected
-
-            // New Selection:
-            // Item, outside of Expanded Item selected, that also needs to expand
-            if (IsExpanded &&
-                newSelectedItem._parentSideMenuItem?._menuIndex != _menuIndex)
-            {
-                return 1;
-            }
-
-
-            // Check for Case 2:
-            // Selected:
-            // SubItem, of Expanded Item selected
-
-            // New Selection:
-            // Item, outside of Expanded Item selected
-            var t = _parentSideMenuItem?.IsExpanded;
-            bool t2 = t is null ? false : (bool)t;
-            if (t2 &&
-                newSelectedItem._menuIndex != _menuIndex &&
-                newSelectedItem._parentSideMenuItem?._menuIndex != _menuIndex &&
-                newSelectedItem._parentSideMenuItem?._menuIndex != _parentSideMenuItem?._menuIndex)
-            {
-                return 2;
-            }
-
-
-            // Check for Case 3:
-            // Selected:
-            // SubItem, of Expanded Item selected
-
-            // New Selection:
-            // Parent Item, that is expanded, selected
-            if (t2 &&
-                newSelectedItem._menuIndex == _parentSideMenuItem?._menuIndex)
-            {
-                return 3;
-            }
-
-
-            // Check for Case 4:
-            // Selected:
-            // SubItem, of Expanded Item selected
-
-            // New Selection:
-            // Other SubItem, of Expanded Item selected
-            if (t2 &&
-                newSelectedItem._parentSideMenuItem?._menuIndex == _parentSideMenuItem?._menuIndex)
-            {
-                return 4;
-            }
-
-
-            // Check for Case 5:
-
-            if (_parentSideMenuItem is null &&
-                HasItems == false &&
-                newSelectedItem._menuIndex != _menuIndex)
-            {
-                return 5;
-            }
-
-
-            // Check for Case 6:
-            if (_parentSideMenuItem is null &&
-                newSelectedItem._parentSideMenuItem?._menuIndex == _menuIndex)
-                return 6;
-
-
-            // Check for Case 7:
-            if (newSelectedItem._parentSideMenuItem?._menuIndex != _menuIndex)
-            {
-                return 7;
-            }
-
-            // Unkown case, error
-            return -1;
-        }
-
-
         internal void SetSubItemsAsMenuItems()
         {
             if (SubItems.Count > 0)
             {
-                foreach (var subItem in SubItems)
-                {
-                    var newMenuItem = new MenuItem
-                    {
-                        Header = subItem.Header
-                    };
-                    _button.Items.Add(newMenuItem);
-                    subItem.SetSubItemsAsMenuItems();
-                }
+                //foreach (var subItem in SubItems)
+                //{
+                //    var newMenuItem = new MenuItem
+                //    {
+                //        Header = subItem.Header
+                //    };
+                //    _button.Items.Add(newMenuItem);
+                //    subItem.SetSubItemsAsMenuItems();
+                //}
             }
         }
 

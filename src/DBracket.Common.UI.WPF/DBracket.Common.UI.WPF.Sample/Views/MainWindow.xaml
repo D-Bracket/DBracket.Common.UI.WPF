@@ -132,7 +132,7 @@
         <Style TargetType="{x:Type commonControls:SideMenuItem}"
                BasedOn="{StaticResource DBracket.Common.UI.WPF.SideMenuItem}">
             <Setter Property="Background"
-                    Value="Green" />        
+                    Value="{DynamicResource ResourceKey=DBracket.Colors.Menu.Background}" />        
             <!--<Setter Property="Background"
                     Value="{DynamicResource ResourceKey=DBracket.Colors.Menu.Background}" />-->
 
@@ -208,7 +208,8 @@
                     </commonControls:SideMenuItem>
 
 
-                    <commonControls:SideMenuItemSeparator/>
+                    <commonControls:SideMenuItemSeparator Margin="0,2,0,2"
+                                                          Foreground="{DynamicResource ResourceKey=DBracket.Colors.ContentMenu.Background.IsSelected}"/>
 
                     <commonControls:SideMenuItem Header="Test3"
                                                  Command="{Binding MenuCommand}"

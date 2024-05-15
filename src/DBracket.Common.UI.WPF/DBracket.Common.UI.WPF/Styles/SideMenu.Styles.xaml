@@ -211,6 +211,10 @@
 
     <ControlTemplate x:Key="SideMenuTest"
                      TargetType="{x:Type controls:SideMenu}">
+        <ControlTemplate.Resources>
+            <Duration x:Key="AnimationDuration">0:0:0.2</Duration>
+        </ControlTemplate.Resources>
+
         <Grid>
             <Border x:Name="PART_Root">
                 <StackPanel>
@@ -218,13 +222,65 @@
 
                     <Button x:Name="PART_ToggleButton"
                             Margin="0,20,0,0"
-                            Content="Toggle" />
+                            Background="{TemplateBinding Background}"
+                            Height="40">
+                        <Path Stroke="White"
+                              StrokeThickness="1"
+                              HorizontalAlignment="Right">
+                            <Path.Data>
+                                <PathGeometry>
+                                    <PathFigure x:Name="Figure"
+                                                StartPoint="0,0">
+                                        <LineSegment x:Name="Line1"
+                                                     Point="5,5" />
+                                        <LineSegment x:Name="Line2"
+                                                     Point="0,10" />
+                                    </PathFigure>
+                                </PathGeometry>
+                            </Path.Data>
+                        </Path>
+                    </Button>
                 </StackPanel>
             </Border>
         </Grid>
 
         <ControlTemplate.Triggers>
-
+            <Trigger Property="IsExpanded"
+                     Value="False">
+                <Trigger.EnterActions>
+                    <BeginStoryboard Name="ToggleOff">
+                        <Storyboard>
+                            <PointAnimation To="5,0"
+                                            Duration="{StaticResource AnimationDuration}"
+                                            Storyboard.TargetName="Figure"
+                                            Storyboard.TargetProperty="StartPoint" />
+                            <PointAnimation To="0,5"
+                                            Duration="{StaticResource AnimationDuration}"
+                                            Storyboard.TargetName="Line1"
+                                            Storyboard.TargetProperty="Point" />
+                            <PointAnimation To="5,10"
+                                            Duration="{StaticResource AnimationDuration}"
+                                            Storyboard.TargetName="Line2"
+                                            Storyboard.TargetProperty="Point" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard Name="ToggleOn">
+                        <Storyboard>
+                            <PointAnimation Duration="{StaticResource AnimationDuration}"
+                                            Storyboard.TargetName="Figure"
+                                            Storyboard.TargetProperty="StartPoint" />
+                            <PointAnimation Duration="{StaticResource AnimationDuration}"
+                                            Storyboard.TargetName="Line1"
+                                            Storyboard.TargetProperty="Point" />
+                            <PointAnimation Duration="{StaticResource AnimationDuration}"
+                                            Storyboard.TargetName="Line2"
+                                            Storyboard.TargetProperty="Point" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 

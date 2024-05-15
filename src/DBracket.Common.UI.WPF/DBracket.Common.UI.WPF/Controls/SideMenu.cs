@@ -60,7 +60,7 @@ namespace DBracket.Common.UI.WPF.Controls
             {
                 if (item is SideMenuItem sideMenuItem)
                 {
-                    var tmp = sideMenuItem._iconPresenter.ActualWidth + 20;
+                    var tmp = sideMenuItem._iconPresenter.ActualWidth + 30;
                     if (tmp > iconWidth)
                         iconWidth = tmp;
                 }
