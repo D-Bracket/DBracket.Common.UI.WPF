@@ -33,16 +33,17 @@ namespace DBracket.Common.UI.WPF.Controls
             var t = VisualTreeUtils.FindParent(this, nameof(SideMenu));
         }
 
-        internal void SetParentSideMenu(SideMenu parent, ref int menuIndex)
+        internal void SetParentSideMenu(SideMenu parent, ref int menuIndex, int layer)
         {
             _parentSideMenu = parent;
             this.Width = _parentSideMenu.Width - 20;
             _menuIndex = menuIndex;
             menuIndex++;
+            Layer = layer;
 
             foreach (var sideMenu in SubItems)
             {
-                sideMenu.SetParentSideMenu(parent, ref menuIndex);
+                sideMenu.SetParentSideMenu(parent, ref menuIndex, layer + 1);
             }
         }
 
@@ -60,7 +61,7 @@ namespace DBracket.Common.UI.WPF.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            var button = GetTemplateChild("ExpandButton") as System.Windows.Controls.MenuItem ;
+            var button = GetTemplateChild("ExpandButton") as System.Windows.Controls.MenuItem;
             if (button is null)
                 return;
             button.Click += HandleButtonClick;
@@ -146,6 +147,9 @@ namespace DBracket.Common.UI.WPF.Controls
 
                 case 6:
                     return false;
+
+                case 7:
+                    return true;
 
                 default:
                     throw new Exception();
@@ -241,6 +245,13 @@ namespace DBracket.Common.UI.WPF.Controls
             if (_parentSideMenuItem is null &&
                 newSelectedItem._parentSideMenuItem?._menuIndex == _menuIndex)
                 return 6;
+
+
+            // Check for Case 7:
+            if (newSelectedItem._parentSideMenuItem?._menuIndex != _menuIndex)
+            {
+                return 7;
+            }
 
             // Unkown case, error
             return -1;
@@ -372,6 +383,13 @@ namespace DBracket.Common.UI.WPF.Controls
         public static readonly DependencyProperty ItemHeightProperty = DependencyProperty.Register(
             "ItemHeight", typeof(double), typeof(SideMenuItem), new FrameworkPropertyMetadata(40.0));
 
+        public double Layer
+        {
+            get => (double)GetValue(LayerProperty);
+            set => SetValue(LayerProperty, value);
+        }
+        public static readonly DependencyProperty LayerProperty = DependencyProperty.Register(
+            "Layer", typeof(double), typeof(SideMenuItem), new FrameworkPropertyMetadata(0.0));
         #region "--------------------------------- Colors ----------------------------------"
         public Brush BackgroundIsSelected
         {

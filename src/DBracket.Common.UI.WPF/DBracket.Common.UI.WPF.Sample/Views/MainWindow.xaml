@@ -132,11 +132,21 @@
         <Style TargetType="{x:Type commonControls:SideMenuItem}"
                BasedOn="{StaticResource DBracket.Common.UI.WPF.SideMenuItem}">
             <Setter Property="Background"
-                    Value="{DynamicResource ResourceKey=DBracket.Colors.Menu.Background}" />
+                    Value="Green" />        
+            <!--<Setter Property="Background"
+                    Value="{DynamicResource ResourceKey=DBracket.Colors.Menu.Background}" />-->
+
+            
             <Setter Property="cCS:SideMenuItemSettings.IsSelectedBrush"
                     Value="{DynamicResource DBracket.Colors.ContentMenu.Background.IsSelected}" />
             <Setter Property="cCS:SideMenuItemSettings.MouseOverBrush"
                     Value="{DynamicResource DBracket.Colors.ContentMenu.Background.MouseOver}" />
+        </Style>
+
+        <Style TargetType="{x:Type commonControls:SideMenuItemSeparator}"
+               BasedOn="{StaticResource DBracket.Common.UI.WPF.SideMenuItemSeparator}">
+            <Setter Property="Foreground"
+                    Value="White" />
         </Style>
     </Window.Resources>
 
@@ -167,7 +177,16 @@
                         <commonControls:SideMenuItem.SubItems>
                             <commonControls:SideMenuItem Header="Test1-1"
                                                          Command="{Binding MenuCommand}"
-                                                         CommandParameter="Test1-1" />
+                                                         CommandParameter="Test1-1">
+                                <commonControls:SideMenuItem.SubItems>
+                                    <commonControls:SideMenuItem Header="Test1-1-1"
+                                                                 Command="{Binding MenuCommand}"
+                                                                 CommandParameter="Test1-2" />
+                                    <commonControls:SideMenuItem Header="Test1-1-2"
+                                                                 Command="{Binding MenuCommand}"
+                                                                 CommandParameter="Test1-3" />
+                                </commonControls:SideMenuItem.SubItems>
+                            </commonControls:SideMenuItem>
                             <commonControls:SideMenuItem Header="Test1-2"
                                                          Command="{Binding MenuCommand}"
                                                          CommandParameter="Test1-2" />
@@ -176,15 +195,61 @@
                                                          CommandParameter="Test1-3" />
                         </commonControls:SideMenuItem.SubItems>
                     </commonControls:SideMenuItem>
+
+
                     <commonControls:SideMenuItem Header="Test2"
                                                  Command="{Binding MenuCommand}"
-                                                 CommandParameter="Test2" />
+                                                 CommandParameter="Test2">
+                        <commonControls:SideMenuItem.IconContent>
+                            <commonControls:Icon IconType="Accept_PicolIcons"
+                                                 Width="15"
+                                                 Height="15" />
+                        </commonControls:SideMenuItem.IconContent>
+                    </commonControls:SideMenuItem>
+
+
+                    <commonControls:SideMenuItemSeparator/>
+
                     <commonControls:SideMenuItem Header="Test3"
                                                  Command="{Binding MenuCommand}"
-                                                 CommandParameter="Test3" />
+                                                 CommandParameter="Test3">
+                        <commonControls:SideMenuItem.IconContent>
+                            <commonControls:Icon IconType="Accept_PicolIcons"
+                                                 Width="15"
+                                                 Height="15" />
+                        </commonControls:SideMenuItem.IconContent>
+
+                        <commonControls:SideMenuItem.SubItems>
+                            <commonControls:SideMenuItem Header="Test3-1"
+                                                         Command="{Binding MenuCommand}"
+                                                         CommandParameter="Test3-1">
+                                <commonControls:SideMenuItem.SubItems>
+                                    <commonControls:SideMenuItem Header="Test3-1-1"
+                                                                 Command="{Binding MenuCommand}"
+                                                                 CommandParameter="Test3-1-1" />
+                                    <commonControls:SideMenuItem Header="Test3-1-2"
+                                                                 Command="{Binding MenuCommand}"
+                                                                 CommandParameter="Test3-1-2" />
+                                </commonControls:SideMenuItem.SubItems>
+                            </commonControls:SideMenuItem>
+                            <commonControls:SideMenuItem Header="Test3-2"
+                                                         Command="{Binding MenuCommand}"
+                                                         CommandParameter="Test3-2" />
+                            <commonControls:SideMenuItem Header="Test3-3"
+                                                         Command="{Binding MenuCommand}"
+                                                         CommandParameter="Test3-3" />
+                        </commonControls:SideMenuItem.SubItems>
+                    </commonControls:SideMenuItem>
+
                     <commonControls:SideMenuItem Header="Test4"
                                                  Command="{Binding MenuCommand}"
-                                                 CommandParameter="Test4" />
+                                                 CommandParameter="Test4">
+                        <commonControls:SideMenuItem.IconContent>
+                            <commonControls:Icon IconType="Accept_PicolIcons"
+                                                 Width="15"
+                                                 Height="15" />
+                        </commonControls:SideMenuItem.IconContent>
+                    </commonControls:SideMenuItem>
                 </commonControls:SideMenu.Items>
             </commonControls:SideMenu>
 

@@ -4,13 +4,14 @@ using System.Windows.Controls;
 using System.Windows.Media.Animation;
 
 // ToDo:
-// - Margin of Items needs to change, depending on layer
+// - When Expanded Item is click again -> Collapse
+// -    -> When other item is selected, Case unkown
 // - ToggleButton, to expand Menu needs to be correctely styled
 // - Submenu expansion animation
-// - When Expanded Item is click again -> Collapse
 // - When not Expanded -> MenuItems as actual MenuItems
-// 
-// - Feature: MenuItemSeparator
+// - When Collapsed and item selected, IsSelectedIndicator does not show
+// - Button (Items) ToolTip 
+//
 // - Feature: SearchBar
 // __ __ CLEAN UP __ __
 
@@ -20,6 +21,8 @@ using System.Windows.Media.Animation;
 // - Width of the Menu is static in the animations (300), width needs to adapt automatically
 // - Selected Item Background should change
 // - Mouseover Background needs to be stylized 
+// - Feature: MenuItemSeparator
+// - Margin of Items needs to change, depending on layer
 
 
 namespace DBracket.Common.UI.WPF.Controls
@@ -57,13 +60,13 @@ namespace DBracket.Common.UI.WPF.Controls
             {
                 if (item is SideMenuItem sideMenuItem)
                 {
-                    var tmp= sideMenuItem._iconPresenter.ActualWidth + 20;
+                    var tmp = sideMenuItem._iconPresenter.ActualWidth + 20;
                     if (tmp > iconWidth)
                         iconWidth = tmp;
                 }
             }
             return iconWidth;
-        } 
+        }
 
         public override void OnApplyTemplate()
         {
@@ -89,10 +92,15 @@ namespace DBracket.Common.UI.WPF.Controls
         {
             base.OnItemsChanged(e);
             int menuIndex = 0;
-            foreach (SideMenuItem sideMenuItem in Items)
+            for (int i = 0; i < Items.Count; i++)
             {
-                sideMenuItem.SetParentSideMenu(this, ref menuIndex);
+                if (Items[i] is SideMenuItem sideMenuItem)
+                    sideMenuItem.SetParentSideMenu(this, ref menuIndex, 0);
             }
+            //foreach (SideMenuItem sideMenuItem in Items)
+            //{
+            //    sideMenuItem.SetParentSideMenu(this, ref menuIndex);
+            //}
         }
 
         internal void NewMenuItemSelected(SideMenuItem newSelectedSideMenuItem)
