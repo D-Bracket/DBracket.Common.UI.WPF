@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace DBracket.Common.UI.WPF.Utils
@@ -37,6 +33,21 @@ namespace DBracket.Common.UI.WPF.Utils
             }
             while(type != ancestorType);
             return parent;
+        }
+
+        public static FrameworkElement? GetChildByName(FrameworkElement parent, string childName)
+        {
+            var cnt = VisualTreeHelper.GetChildrenCount(parent);
+            FrameworkElement? child = null;
+            for (int i = 0; i<cnt; i++)
+            {
+                child = VisualTreeHelper.GetChild(parent, i) as FrameworkElement;
+                if (child is null)
+                    continue;
+                if (child.Name == childName)
+                    return child;
+            }
+            return null;
         }
         #endregion
 

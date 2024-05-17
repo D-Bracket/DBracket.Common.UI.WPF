@@ -1,8 +1,10 @@
 ﻿using DBracket.Common.UI.WPF.Bases;
+using DBracket.Common.UI.WPF.Commands;
+using System.Windows.Input;
 
-namespace DBracket.Common.UI.WPF.Sample.ViewModels.ThemeExamples
+namespace DBracket.Common.UI.WPF.Sample.ViewModels.Base
 {
-    public class ThemeSettingsViewModel : ViewModelBase
+    public class ButtonsViewModel : ViewModelBase
     {
         #region "----------------------------- Private Fields ------------------------------"
 
@@ -51,5 +53,6 @@ namespace DBracket.Common.UI.WPF.Sample.ViewModels.ThemeExamples
 
         #endregion
         #endregion
+
     }
 }

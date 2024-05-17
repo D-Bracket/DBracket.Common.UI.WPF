@@ -7,16 +7,22 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="PathExamples\ChartTest.xaml.cs">
+    <Compile Update="Prototyping\DragableCanvasTest.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="PathExamples\Example1.xaml.cs">
+    <Compile Update="Prototyping\PathExamples\ChartTest.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="PathExamples\Example2.xaml.cs">
+    <Compile Update="Prototyping\PathExamples\Example1.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="PathExamples\Example3.xaml.cs">
+    <Compile Update="Prototyping\PathExamples\Example2.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Prototyping\PathExamples\Example3.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Base\ButtonsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Examples\Test.xaml.cs">
@@ -27,22 +33,28 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Prototyping\DragableCanvasTest.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Base\ButtonsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Examples\Test.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="PathExamples\ChartTest.xaml">
+    <Page Update="Prototyping\PathExamples\ChartTest.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="PathExamples\Example1.xaml">
+    <Page Update="Prototyping\PathExamples\Example1.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="PathExamples\Example2.xaml">
+    <Page Update="Prototyping\PathExamples\Example2.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="PathExamples\Example3.xaml">
+    <Page Update="Prototyping\PathExamples\Example3.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\ThemeExamples\ThemeSettingsView.xaml">

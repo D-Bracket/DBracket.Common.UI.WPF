@@ -11,7 +11,7 @@
         xmlns:cCS="clr-namespace:DBracket.Common.UI.WPF.Controls.Settings;assembly=DBracket.Common.UI.WPF"
         xmlns:charts="clr-namespace:DBracket.Common.UI.WPF.Charts.Controls;assembly=DBracket.Common.UI.WPF.Charts"
         xmlns:chartComponents="clr-namespace:DBracket.Common.UI.WPF.Charts.Controls.Components;assembly=DBracket.Common.UI.WPF.Charts"
-        xmlns:vms="clr-namespace:DBracket.Common.UI.WPF.Sample.PathExamples.ViewModel"
+        xmlns:vms="clr-namespace:DBracket.Common.UI.WPF.Sample.ViewModels"
         xmlns:views="clr-namespace:DBracket.Common.UI.WPF.Sample.Views.Examples"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
@@ -159,27 +159,22 @@
         </Style>
     </Window.Resources>
 
-    <!--Background="{DynamicResource ResourceKey=DBracket.Colors.Menu.Background}"-->
     <Grid Background="{DynamicResource ResourceKey=DBracket.Colors.Menu.Background}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <!--<Border CornerRadius="0"
-                Margin="8,20,8,20"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Background="{DynamicResource ResourceKey=DBracket.Colors.Menu.Background}">-->
+
         <Grid Background="{DynamicResource ResourceKey=DBracket.Colors.Menu.Background}">
             <commonControls:SideMenu Style="{StaticResource DBracket.Common.UI.WPF.SideMenu}"
                                      VerticalAlignment="Stretch"
                                      Margin="0,30,0,0"
                                      Width="400">
                 <commonControls:SideMenu.Items>
-                    <commonControls:SideMenuItem Header="Test1"
+                    <commonControls:SideMenuItem Header="DBracket.Common.UI.WPF"
                                                  Command="{Binding MenuCommand}"
-                                                 CommandParameter="Test1">
+                                                 CommandParameter="DBracket.Common.UI.WPF">
                         <commonControls:SideMenuItem.IconContent>
                             <commonControls:Icon IconType="Accept_PicolIcons" 
                                                  Width="15"
@@ -187,41 +182,47 @@
                         </commonControls:SideMenuItem.IconContent>
 
                         <commonControls:SideMenuItem.SubItems>
-                            <commonControls:SideMenuItem Header="Test1-1"
+                            <commonControls:SideMenuItem Header="Controls"
                                                          Command="{Binding MenuCommand}"
-                                                         CommandParameter="Test1-1">
+                                                         CommandParameter="DBracket.Common.UI.WPF_Controls">
                                 <commonControls:SideMenuItem.SubItems>
-                                    <commonControls:SideMenuItem Header="Test1-1-1"
+                                    <commonControls:SideMenuItem Header="Namespaces"
                                                                  Command="{Binding MenuCommand}"
-                                                                 CommandParameter="Test1-2" />
-                                    <commonControls:SideMenuItem Header="Test1-1-2"
+                                                                 CommandParameter="DBracket.Common.UI.WPF_Controls_Namespaces" />
+                                    <commonControls:SideMenuItem Header="Buttons"
                                                                  Command="{Binding MenuCommand}"
-                                                                 CommandParameter="Test1-3" />
+                                                                 CommandParameter="DBracket.Common.UI.WPF_Controls_Buttons" />
+                                    <commonControls:SideMenuItem Header="TextBoxes"
+                                                                 Command="{Binding MenuCommand}"
+                                                                 CommandParameter="DBracket.Common.UI.WPF_Controls_TextBoxes" />
                                 </commonControls:SideMenuItem.SubItems>
                             </commonControls:SideMenuItem>
-                            <commonControls:SideMenuItem Header="Test1-2"
+                            <commonControls:SideMenuItem Header="Helpers"
                                                          Command="{Binding MenuCommand}"
-                                                         CommandParameter="Test1-2" />
-                            <commonControls:SideMenuItem Header="Test1-3"
+                                                         CommandParameter="DBracket.Common.UI.WPF_Helpers" />
+                            <commonControls:SideMenuItem Header="Converter"
                                                          Command="{Binding MenuCommand}"
-                                                         CommandParameter="Test1-3" />
+                                                         CommandParameter="DBracket.Common.UI.WPF_Converter" />
                         </commonControls:SideMenuItem.SubItems>
                     </commonControls:SideMenuItem>
 
 
-                    <commonControls:SideMenuItem Header="Test2"
+                    
+                    
+                    
+
+                    <commonControls:SideMenuItemSeparator Margin="0,20,0,2"
+                                                          Foreground="{DynamicResource ResourceKey=DBracket.Colors.ContentMenu.Background.IsSelected}" />
+
+                    <commonControls:SideMenuItem Header="DBracket.Common.UI.WPF.Charts"
                                                  Command="{Binding MenuCommand}"
-                                                 CommandParameter="Test2">
+                                                 CommandParameter="DBracket.Common.UI.WPF.Charts">
                         <commonControls:SideMenuItem.IconContent>
                             <commonControls:Icon IconType="Accept_PicolIcons"
                                                  Width="15"
                                                  Height="15" />
                         </commonControls:SideMenuItem.IconContent>
                     </commonControls:SideMenuItem>
-
-
-                    <commonControls:SideMenuItemSeparator Margin="0,2,0,2"
-                                                          Foreground="{DynamicResource ResourceKey=DBracket.Colors.ContentMenu.Background.IsSelected}"/>
 
                     <commonControls:SideMenuItem Header="Test3"
                                                  Command="{Binding MenuCommand}"
@@ -254,9 +255,9 @@
                         </commonControls:SideMenuItem.SubItems>
                     </commonControls:SideMenuItem>
 
-                    <commonControls:SideMenuItem Header="Test4"
+                    <commonControls:SideMenuItem Header="Prototypes"
                                                  Command="{Binding MenuCommand}"
-                                                 CommandParameter="Test4">
+                                                 CommandParameter="Prototypes">
                         <commonControls:SideMenuItem.IconContent>
                             <commonControls:Icon IconType="Accept_PicolIcons"
                                                  Width="15"
@@ -267,8 +268,8 @@
             </commonControls:SideMenu>
         </Grid>
 
-        <!--</Border>-->
 
+        
         <Border CornerRadius="20"
                 Margin="8,20,8,20"
                 Grid.Column="1"
@@ -276,18 +277,103 @@
                 VerticalAlignment="Stretch"
                 Background="{DynamicResource ResourceKey=DBracket.Colors.ContentMenu.Background}">
 
-            <ScrollViewer>
-                <paths:Example3 />
-                <!--<ItemsControl ItemsSource="{Binding Items}">
+            <ScrollViewer Style="{StaticResource DBracket.Common.UI.WPF.ScrollViewer}"
+                          Margin="0,20,0,20"
+                          controlSettings:ScrollViewerSettings.VerticalScrollBarScrollPageButtonBorderBrush="Gray">
+                <StackPanel>
+                     <!--Add enough content to make the scrollbar visible--> 
+                    <TextBlock Text="Scroll content"
+                               FontSize="24" />
+                    <TextBlock Text="Scroll content"
+                               FontSize="24" />
+                    <Button Content="Test" />
+                    <!--<TextBox Text="Scroll content"
+                             FontSize="24">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox" />
+                        </TextBox.Style>
+                    </TextBox>-->
+                    <TextBlock Text="Scroll content"
+                               FontSize="24" />
+                    <TextBlock Text="Scroll content"
+                               FontSize="24" />
+                    <TextBlock Text="Scroll content"
+                               FontSize="24" />
+                    <TextBlock Text="Scroll content"
+                               FontSize="24" />
+                    <TextBlock Text="Scroll content"
+                               FontSize="24" />
+                    <TextBlock Text="Scroll content"
+                               FontSize="24" />
+                    <TextBlock Text="Scroll content"
+                               FontSize="24" />
+                    <TextBlock Text="Scroll content"
+                               FontSize="24" />
+                    <TextBlock Text="Scroll content"
+                               FontSize="24" />
+                    <TextBlock Text="Scroll content"
+                               FontSize="24" />
+                    <TextBlock Text="Scroll content"
+                               FontSize="24" />
+                    <TextBlock Text="Scroll content"
+                               FontSize="24" />
+                    <TextBlock Text="Scroll content"
+                               FontSize="24" />
+                    <TextBlock Text="Scroll content"
+                               FontSize="24" />
+                    <TextBlock Text="Scroll content"
+                               FontSize="24" />
+                    <TextBlock Text="Scroll content"
+                               FontSize="24" />
+                    <TextBlock Text="Scroll content"
+                               FontSize="24" />
+                    <TextBlock Text="Scroll content"
+                               FontSize="24" />
+                    <TextBlock Text="Scroll content"
+                               FontSize="24" />
+                    <TextBlock Text="Scroll content"
+                               FontSize="24" />
+                    <TextBlock Text="Scroll content"
+                               FontSize="24" />
+                    <TextBlock Text="Scroll content"
+                               FontSize="24" />
+                    <TextBlock Text="Scroll content"
+                               FontSize="24" />
+                    <TextBlock Text="Scroll content"
+                               FontSize="24" />
+                    <TextBlock Text="Scroll content"
+                               FontSize="24" />
+                </StackPanel>
+                <!--<ContentPresenter />-->
+            </ScrollViewer>
+        </Border>
+    </Grid>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--________________________________________-->
+
+    <!--<ItemsControl ItemsSource="{Binding Items}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
                             -->
-                <!--<Image x:Name="Main"
+    <!--<Image x:Name="Main"
                                    Source="{Binding Source}"
                                    Width="200"
                                    Height="100" />-->
-                <!--
+    <!--
                                 <commonControls:AsyncImage DefaultSource="C:\Users\D-Bracket\Desktop\1.png"
                                                            ImagePath="{Binding ImagePath}"
                                                            Width="200"
@@ -303,16 +389,8 @@
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
             </ItemsControl>-->
-            </ScrollViewer>
 
-
-
-            <!--<commonControls:AsyncImage ImagePath="Test" />-->
-        </Border>
-    </Grid>
-
-
-
+    <!--________________________________________-->
 
     <!--<Grid>
         <Grid Background="#1C1B1F">
@@ -354,6 +432,9 @@
 
             </charts:ColumnChart>
         </Grid>
+    
+    
+    
 
         <commonControls:Flyout Style="{StaticResource DBracket.Common.UI.Styles.Flyout}"
                                IsOpened="{Binding IsFlyoutOpened}"

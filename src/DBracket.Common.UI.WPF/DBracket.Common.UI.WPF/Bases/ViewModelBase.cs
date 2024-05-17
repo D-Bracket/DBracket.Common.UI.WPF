@@ -34,7 +34,7 @@ namespace DBracket.Common.UI.WPF.Bases
         #region "----------------------------- Command Handling ----------------------------"
         /// <summary>Executes the commands from the UI</summary>
         /// <param name="command">Command that has to be executed</param>
-        public abstract void ExecuteCommands(object? command);
+        public abstract void ExecuteCommands(string? command);
         #endregion
         #endregion
 
@@ -50,7 +50,7 @@ namespace DBracket.Common.UI.WPF.Bases
 
         #region "-------------------------------- Commands ---------------------------------"
         /// <summary>Commands from the UI</summary>
-        public ICommand Commands => new RelayCommand(ExecuteCommands);
+        public ICommand Commands => new StringCommand(ExecuteCommands);
         #endregion
         #endregion
     }

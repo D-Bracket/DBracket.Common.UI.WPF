@@ -1,8 +1,8 @@
-﻿using DBracket.Common.UI.WPF.Bases;
+﻿using System.Windows;
 
-namespace DBracket.Common.UI.WPF.Sample.ViewModels.ThemeExamples
+namespace DBracket.Common.UI.WPF.Controls
 {
-    public class ThemeSettingsViewModel : ViewModelBase
+    internal class RepeatButton : System.Windows.Controls.Primitives.RepeatButton  
     {
         #region "----------------------------- Private Fields ------------------------------"
 
@@ -28,26 +28,22 @@ namespace DBracket.Common.UI.WPF.Sample.ViewModels.ThemeExamples
         #region "------------------------------ Event Handling -----------------------------"
 
         #endregion
+        #endregion
 
-        #region "----------------------------- Command Handling ----------------------------"
-        public override void ExecuteCommands(string? command)
-        {
-            
-        }
-        #endregion
-        #endregion
 
 
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
-
+        public CornerRadius CornerRadius
+        {
+            get => (CornerRadius)GetValue(CornerRadiusProperty);
+            set => SetValue(CornerRadiusProperty, value);
+        }
+        public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
+            "CornerRadius", typeof(CornerRadius), typeof(RepeatButton), new FrameworkPropertyMetadata(null));
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"
-
-        #endregion
-
-        #region "-------------------------------- Commands ---------------------------------"
 
         #endregion
         #endregion
