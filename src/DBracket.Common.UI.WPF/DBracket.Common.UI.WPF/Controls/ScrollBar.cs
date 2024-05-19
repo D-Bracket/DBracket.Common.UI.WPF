@@ -71,6 +71,55 @@ namespace DBracket.Common.UI.WPF.Controls
         public static readonly DependencyProperty ScrollPageButtonCornerRadiusProperty = DependencyProperty.Register(
             "ScrollPageButtonCornerRadius", typeof(CornerRadius), typeof(ScrollBar), new FrameworkPropertyMetadata(new CornerRadius(2)));
         #endregion
+
+        #region ScrollButton
+        public Brush ScrollButtonBackground
+        {
+            get => (Brush)GetValue(ScrollButtonBackgroundProperty);
+            set => SetValue(ScrollButtonBackgroundProperty, value);
+        }
+        public static readonly DependencyProperty ScrollButtonBackgroundProperty = DependencyProperty.Register(
+            "ScrollButtonBackground", typeof(Brush), typeof(ScrollBar), new FrameworkPropertyMetadata(new SolidColorBrush(Colors.Transparent)));
+
+        public Brush ScrollButtonMouseOverBackground
+        {
+            get => (Brush)GetValue(ScrollButtonMouseOverBackgroundProperty);
+            set => SetValue(ScrollButtonMouseOverBackgroundProperty, value);
+        }
+        public static readonly DependencyProperty ScrollButtonMouseOverBackgroundProperty = DependencyProperty.Register(
+            "ScrollButtonMouseOverBackground", typeof(Brush), typeof(ScrollBar), new FrameworkPropertyMetadata(new SolidColorBrush(Colors.White)));
+
+        public Brush ScrollButtonForeground
+        {
+            get => (Brush)GetValue(ScrollButtonForegroundProperty);
+            set => SetValue(ScrollButtonForegroundProperty, value);
+        }
+        public static readonly DependencyProperty ScrollButtonForegroundProperty = DependencyProperty.Register(
+            "ScrollButtonForeground", typeof(Brush), typeof(ScrollBar), new FrameworkPropertyMetadata(new SolidColorBrush(Colors.Gray)));
+
+        public Thickness ScrollButtonBorderThickness
+        {
+            get => (Thickness)GetValue(ScrollButtonBorderThicknessProperty);
+            set => SetValue(ScrollButtonBorderThicknessProperty, value);
+        }
+        public static readonly DependencyProperty ScrollButtonBorderThicknessProperty = DependencyProperty.Register(
+            "ScrollButtonBorderThickness", typeof(Thickness), typeof(ScrollBar), new FrameworkPropertyMetadata(new Thickness(0)));
+        public Brush ScrollButtonBorderBrush
+        {
+            get => (Brush)GetValue(ScrollButtonBorderBrushProperty);
+            set => SetValue(ScrollButtonBorderBrushProperty, value);
+        }
+        public static readonly DependencyProperty ScrollButtonBorderBrushProperty = DependencyProperty.Register(
+            "ScrollButtonBorderBrush", typeof(Brush), typeof(ScrollBar), new FrameworkPropertyMetadata(new SolidColorBrush(Colors.Transparent)));
+
+        public CornerRadius ScrollButtonCornerRadius
+        {
+            get => (CornerRadius)GetValue(ScrollButtonCornerRadiusProperty);
+            set => SetValue(ScrollButtonCornerRadiusProperty, value);
+        }
+        public static readonly DependencyProperty ScrollButtonCornerRadiusProperty = DependencyProperty.Register(
+            "ScrollButtonCornerRadius", typeof(CornerRadius), typeof(ScrollBar), new FrameworkPropertyMetadata(new CornerRadius(0)));
+        #endregion
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"

@@ -71,6 +71,46 @@ namespace DBracket.Common.UI.WPF.Controls.Settings
             var verticalScrollBar = GetScrollBar(d, Orientation.Vertical);
             verticalScrollBar.ScrollPageButtonCornerRadius = cornerRadius;
         }
+
+
+
+
+
+        private static void HandleVerticalScrollBarScrollButtonBackgroundChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.NewValue is not Brush newBrush)
+                throw new Exception("Value is not of Type Brush");
+
+            var verticalScrollBar = GetScrollBar(d, Orientation.Vertical);
+            verticalScrollBar.ScrollButtonBackground = newBrush;
+        }
+
+        private static void HandleVerticalScrollBarScrollButtonBorderBrushChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.NewValue is not Brush newBrush)
+                throw new Exception("Value is not of Type Brush");
+
+            var verticalScrollBar = GetScrollBar(d, Orientation.Vertical);
+            verticalScrollBar.ScrollButtonBorderBrush = newBrush;
+        }
+
+        private static void HandleVerticalScrollBarScrollButtonCornerRadiusChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.NewValue is not CornerRadius cornerRadius)
+                throw new Exception("Value is not of Type Brush");
+
+            var verticalScrollBar = GetScrollBar(d, Orientation.Vertical);
+            verticalScrollBar.ScrollButtonCornerRadius = cornerRadius;
+        }
+
+        private static void HandleVerticalScrollBarScrollButtonMouseOverBackgroundChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.NewValue is not Brush newBrush)
+                throw new Exception("Value is not of Type Brush");
+
+            var verticalScrollBar = GetScrollBar(d, Orientation.Vertical);
+            verticalScrollBar.ScrollButtonMouseOverBackground = newBrush;
+        }
         #endregion
         #endregion
 
@@ -128,16 +168,98 @@ namespace DBracket.Common.UI.WPF.Controls.Settings
           "VerticalScrollBarScrollPageButtonCornerRadius",
           typeof(CornerRadius),
           typeof(ScrollViewerSettings),
-          new FrameworkPropertyMetadata(new SolidColorBrush(Colors.Gray), HandleVerticalScrollBarScrollPageButtonCornerRadiusChanged)
+          new FrameworkPropertyMetadata(new CornerRadius(2), HandleVerticalScrollBarScrollPageButtonCornerRadiusChanged)
         );
 
         // Declare a get accessor method.
-        public static Brush GetVerticalScrollBarScrollPageButtonCornerRadius(UIElement target) =>
-            (Brush)target.GetValue(VerticalScrollBarScrollPageButtonCornerRadiusProperty);
+        public static CornerRadius GetVerticalScrollBarScrollPageButtonCornerRadius(UIElement target) =>
+            (CornerRadius)target.GetValue(VerticalScrollBarScrollPageButtonCornerRadiusProperty);
 
         // Declare a set accessor method.
-        public static void SetVerticalScrollBarScrollPageButtonCornerRadius(UIElement target, Brush value) =>
+        public static void SetVerticalScrollBarScrollPageButtonCornerRadius(UIElement target, CornerRadius value) =>
             target.SetValue(VerticalScrollBarScrollPageButtonCornerRadiusProperty, value);
+        #endregion
+        #endregion
+
+        #region ScrollButton
+        #region VerticalScrollBarScrollButtonBackground
+        // Register an attached dependency property with the specified
+        // property name, property type, owner type, and property metadata.
+        public static readonly DependencyProperty VerticalScrollBarScrollButtonBackgroundProperty =
+            DependencyProperty.RegisterAttached(
+          "VerticalScrollBarScrollButtonBackground",
+          typeof(Brush),
+          typeof(ScrollViewerSettings),
+          new FrameworkPropertyMetadata(new SolidColorBrush(Colors.Gray), HandleVerticalScrollBarScrollButtonBackgroundChanged)
+        );
+
+        // Declare a get accessor method.
+        public static Brush GetVerticalScrollBarScrollButtonBackground(UIElement target) =>
+            (Brush)target.GetValue(VerticalScrollBarScrollButtonBackgroundProperty);
+
+        // Declare a set accessor method.
+        public static void SetVerticalScrollBarScrollButtonBackground(UIElement target, Brush value) =>
+            target.SetValue(VerticalScrollBarScrollButtonBackgroundProperty, value);
+        #endregion
+
+        #region VerticalScrollBarScrollButtonMouseOverBackground
+        // Register an attached dependency property with the specified
+        // property name, property type, owner type, and property metadata.
+        public static readonly DependencyProperty VerticalScrollBarScrollButtonMouseOverBackgroundProperty =
+            DependencyProperty.RegisterAttached(
+          "VerticalScrollBarScrollButtonMouseOverBackground",
+          typeof(Brush),
+          typeof(ScrollViewerSettings),
+          new FrameworkPropertyMetadata(new SolidColorBrush(Colors.Gray), HandleVerticalScrollBarScrollButtonMouseOverBackgroundChanged)
+        );
+
+        // Declare a get accessor method.
+        public static Brush GetVerticalScrollBarScrollButtonMouseOverBackground(UIElement target) =>
+            (Brush)target.GetValue(VerticalScrollBarScrollButtonMouseOverBackgroundProperty);
+
+        // Declare a set accessor method.
+        public static void SetVerticalScrollBarScrollButtonMouseOverBackground(UIElement target, Brush value) =>
+            target.SetValue(VerticalScrollBarScrollButtonMouseOverBackgroundProperty, value);
+        #endregion
+
+        #region VerticalScrollBarScrollButtonBorderBrush
+        // Register an attached dependency property with the specified
+        // property name, property type, owner type, and property metadata.
+        public static readonly DependencyProperty VerticalScrollBarScrollButtonBorderBrushProperty =
+            DependencyProperty.RegisterAttached(
+          "VerticalScrollBarScrollButtonBorderBrush",
+          typeof(Brush),
+          typeof(ScrollViewerSettings),
+          new FrameworkPropertyMetadata(new SolidColorBrush(Colors.Gray), HandleVerticalScrollBarScrollButtonBorderBrushChanged)
+        );
+
+        // Declare a get accessor method.
+        public static Brush GetVerticalScrollBarScrollButtonBorderBrush(UIElement target) =>
+            (Brush)target.GetValue(VerticalScrollBarScrollButtonBorderBrushProperty);
+
+        // Declare a set accessor method.
+        public static void SetVerticalScrollBarScrollButtonBorderBrush(UIElement target, Brush value) =>
+            target.SetValue(VerticalScrollBarScrollButtonBorderBrushProperty, value);
+        #endregion
+
+        #region VerticalScrollBarScrollButtonCornerRadius
+        // Register an attached dependency property with the specified
+        // property name, property type, owner type, and property metadata.
+        public static readonly DependencyProperty VerticalScrollBarScrollButtonCornerRadiusProperty =
+            DependencyProperty.RegisterAttached(
+          "VerticalScrollBarScrollButtonCornerRadius",
+          typeof(CornerRadius),
+          typeof(ScrollViewerSettings),
+          new FrameworkPropertyMetadata(new CornerRadius(2), HandleVerticalScrollBarScrollButtonCornerRadiusChanged)
+        );
+
+        // Declare a get accessor method.
+        public static CornerRadius GetVerticalScrollBarScrollButtonCornerRadius(UIElement target) =>
+            (CornerRadius)target.GetValue(VerticalScrollBarScrollButtonCornerRadiusProperty);
+
+        // Declare a set accessor method.
+        public static void SetVerticalScrollBarScrollButtonCornerRadius(UIElement target, CornerRadius value) =>
+            target.SetValue(VerticalScrollBarScrollButtonCornerRadiusProperty, value);
         #endregion
         #endregion
         #endregion
