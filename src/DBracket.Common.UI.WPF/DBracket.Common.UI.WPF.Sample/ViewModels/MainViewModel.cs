@@ -1,6 +1,7 @@
 ﻿using DBracket.Common.UI.WPF.Bases;
 using DBracket.Common.UI.WPF.Commands;
 using DBracket.Common.UI.WPF.Sample.PathExamples.ViewModel;
+using DBracket.Common.UI.WPF.Sample.Views.Base;
 using DBracket.Common.UI.WPF.Themes;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -13,7 +14,7 @@ namespace DBracket.Common.UI.WPF.Sample.ViewModels
     {
 
         #region "----------------------------- Private Fields ------------------------------"
-
+        private ControlPresenterView _presenterView = new();
         #endregion
 
 
@@ -81,7 +82,7 @@ namespace DBracket.Common.UI.WPF.Sample.ViewModels
                 switch(path) 
                 {
                     case "Buttons":
-
+                        PresenterContent = _presenterView;
                         break;
 
                     default:
@@ -143,7 +144,10 @@ namespace DBracket.Common.UI.WPF.Sample.ViewModels
         private double _value;
 
         public bool IsFlyoutOpened { get => _isFlyoutOpened; set { _isFlyoutOpened = value; OnMySelfChanged(); } }
-        private bool _isFlyoutOpened;
+        private bool _isFlyoutOpened;        
+        
+        public object PresenterContent { get => _presenterContent; set { _presenterContent = value; OnMySelfChanged(); } }
+        private object _presenterContent;
 
         public ObservableCollection<ImageContainer> Items { get => _items; set { _items = value; OnMySelfChanged(); } }
         private ObservableCollection<ImageContainer> _items = new();

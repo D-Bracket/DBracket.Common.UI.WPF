@@ -40,6 +40,7 @@ namespace DBracket.Common.UI.WPF.Sample.ViewModels.Base
         #endregion
 
 
+
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
 
@@ -53,6 +54,5 @@ namespace DBracket.Common.UI.WPF.Sample.ViewModels.Base
 
         #endregion
         #endregion
-
     }
 }

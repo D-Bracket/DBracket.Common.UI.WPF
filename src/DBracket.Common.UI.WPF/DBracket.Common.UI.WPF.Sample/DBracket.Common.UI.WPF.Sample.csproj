@@ -9,12 +9,30 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Fonts\JetBrainsMono-Medium.ttf" />
+    <None Remove="Resources\Fonts\JetBrainsMono-Regular.ttf" />
+    <None Remove="Resources\JetBrainsMono-VariableFont_wght.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DBracket.Common.UI.WPF.Charts\DBracket.Common.UI.WPF.Charts.csproj" />
     <ProjectReference Include="..\DBracket.Common.UI.WPF\DBracket.Common.UI.WPF.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Themes\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Fonts\JetBrainsMono-Medium.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Fonts\JetBrainsMono-Regular.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Fonts\JetBrainsMono-Thin.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

@@ -15,7 +15,10 @@
                 <Setter Property="Template"
                         Value="{StaticResource DBracket.WPF.Icon.ControlTemplate}" />
             </Style>
-                
+
+            <FontFamily x:Key="JetBrainsMono_Thin">pack://application:,,,/DBracket.Common.UI.WPF.Sample;component/Resources/Fonts/#JetBrains Mono Thin</FontFamily>
+            <FontFamily x:Key="JetBrainsMono_Regular">pack://application:,,,/DBracket.Common.UI.WPF.Sample;component/Resources/Fonts/#JetBrains Mono Regular</FontFamily>
+            <FontFamily x:Key="JetBrainsMono_Medium">pack://application:,,,/DBracket.Common.UI.WPF.Sample;component/Resources/Fonts/#JetBrains Mono Medium</FontFamily>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

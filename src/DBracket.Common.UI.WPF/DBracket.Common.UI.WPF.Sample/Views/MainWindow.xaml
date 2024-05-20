@@ -280,9 +280,14 @@
             <ScrollViewer Style="{StaticResource DBracket.Common.UI.WPF.ScrollViewer}"
                           Margin="0,20,0,20"
                           HorizontalScrollBarVisibility="Visible"
-                          controlSettings:ScrollViewerSettings.VerticalScrollBarScrollPageButtonBorderBrush="Gray"
-                          controlSettings:ScrollViewerSettings.VerticalScrollBarScrollButtonMouseOverBackground="LightGray">
-                <StackPanel Orientation="Horizontal">
+                          controlSettings:ScrollViewerSettings.VerticalScrollBarScrollPageButtonBorderBrush="Gray">
+                <Grid>
+
+                    <!--<ContentPresenter Content="{Binding PresenterContent}"/>-->
+
+
+                    <StackPanel Orientation="Horizontal"
+                                Visibility="Visible">
                     
                 <StackPanel>
                     <!--Add enough content to make the scrollbar visible--> 
@@ -291,12 +296,6 @@
                     <TextBlock Text="Scroll content"
                                FontSize="24" />
                     <Button Content="Test" />
-                    <!--<TextBox Text="Scroll content"
-                             FontSize="24">
-                        <TextBox.Style>
-                            <Style TargetType="TextBox" />
-                        </TextBox.Style>
-                    </TextBox>-->
                     <TextBlock Text="Scroll content"
                                FontSize="24" />
                     <TextBlock Text="Scroll content"
@@ -356,12 +355,6 @@
                         <TextBlock Text="Scroll content"
                                    FontSize="24" />
                         <Button Content="Test" />
-                        <!--<TextBox Text="Scroll content"
-             FontSize="24">
-        <TextBox.Style>
-            <Style TargetType="TextBox" />
-        </TextBox.Style>
-    </TextBox>-->
                         <TextBlock Text="Scroll content"
                                    FontSize="24" />
                         <TextBlock Text="Scroll content"
@@ -804,7 +797,8 @@
                                    FontSize="24" />
                     </StackPanel>
                 </StackPanel>
-                <!--<ContentPresenter />-->
+                </Grid>
+
             </ScrollViewer>
         </Border>
     </Grid>

@@ -79,7 +79,7 @@ namespace DBracket.Common.UI.WPF.Controls
             set => SetValue(ScrollButtonBackgroundProperty, value);
         }
         public static readonly DependencyProperty ScrollButtonBackgroundProperty = DependencyProperty.Register(
-            "ScrollButtonBackground", typeof(Brush), typeof(ScrollBar), new FrameworkPropertyMetadata(new SolidColorBrush(Colors.Transparent)));
+            "ScrollButtonBackground", typeof(Brush), typeof(ScrollBar), new FrameworkPropertyMetadata(new SolidColorBrush(Colors.Yellow)));
 
         public Brush ScrollButtonMouseOverBackground
         {
@@ -87,7 +87,7 @@ namespace DBracket.Common.UI.WPF.Controls
             set => SetValue(ScrollButtonMouseOverBackgroundProperty, value);
         }
         public static readonly DependencyProperty ScrollButtonMouseOverBackgroundProperty = DependencyProperty.Register(
-            "ScrollButtonMouseOverBackground", typeof(Brush), typeof(ScrollBar), new FrameworkPropertyMetadata(new SolidColorBrush(Colors.White)));
+            "ScrollButtonMouseOverBackground", typeof(Brush), typeof(ScrollBar), new FrameworkPropertyMetadata(new SolidColorBrush(Colors.Purple)));
 
         public Brush ScrollButtonForeground
         {

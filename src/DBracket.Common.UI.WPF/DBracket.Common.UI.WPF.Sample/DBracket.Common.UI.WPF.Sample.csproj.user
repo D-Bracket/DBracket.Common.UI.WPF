@@ -25,6 +25,9 @@
     <Compile Update="Views\Base\ButtonsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Base\ControlPresenterView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Examples\Test.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -37,6 +40,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Base\ButtonsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Base\ControlPresenterView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Examples\Test.xaml">
