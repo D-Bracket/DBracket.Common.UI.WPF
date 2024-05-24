@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using DBracket.Common.UI.WPF.Fonts;
+using System.Windows;
 
 namespace DBracket.Common.UI.WPF.Sample.Views
 {
@@ -8,7 +9,6 @@ namespace DBracket.Common.UI.WPF.Sample.Views
     public partial class MainWindow : Window
     {
         #region "----------------------------- Private Fields ------------------------------"
-
         #endregion
 
 

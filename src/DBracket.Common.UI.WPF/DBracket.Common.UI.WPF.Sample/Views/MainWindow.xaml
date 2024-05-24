@@ -292,9 +292,10 @@
                 <StackPanel>
                     <!--Add enough content to make the scrollbar visible--> 
                     <TextBlock Text="Scroll content"
-                               FontSize="24" />
+                               Style="{StaticResource DBracket.Text.1}"/>
                     <TextBlock Text="Scroll content"
-                               FontSize="24" />
+                               Foreground="White"
+                               FontSize="20" />
                     <Button Content="Test" />
                     <TextBlock Text="Scroll content"
                                FontSize="24" />

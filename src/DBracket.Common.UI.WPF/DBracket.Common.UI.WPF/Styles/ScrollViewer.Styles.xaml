@@ -2,7 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:DBracket.Common.UI.WPF.Controls"
                     xmlns:controlSettings="clr-namespace:DBracket.Common.UI.WPF.Controls.Settings">
-
     <Style x:Key="ScrollBarThumb"
            TargetType="{x:Type Thumb}">
         <Setter Property="SnapsToDevicePixels"

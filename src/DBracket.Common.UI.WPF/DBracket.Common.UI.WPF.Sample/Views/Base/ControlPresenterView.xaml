@@ -15,9 +15,9 @@
                        FontFamily="{StaticResource JetBrainsMono_Thin}"
                        FontSize="18" />
             <TextBlock Text="Tesatsdtasjlsakjklsadjas"
-                   FontWeight="Regular"
+                       FontWeight="Regular"
                        FontFamily="{StaticResource JetBrainsMono_Regular}"
-                   FontSize="18"/>
+                       FontSize="18"/>
             <TextBlock Text="Tesatsdtasjlsakjklsadjas"
                        FontWeight="Regular"
                        FontFamily="{StaticResource JetBrainsMono_Medium}"
@@ -28,6 +28,11 @@
                        FontSize="18" />
 
             <TextBlock Text="Tesatsdtasjlsakjklsadjas"
+                       FontFamily="segoe ui"
+                       FontSize="18" />
+
+
+            <TextBox Text="Tesatsdtasjlsakjklsadjas"
                        FontFamily="segoe ui"
                        FontSize="18" />
         </StackPanel>

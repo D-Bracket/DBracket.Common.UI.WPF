@@ -5,6 +5,9 @@
                     xmlns:controlSettings="clr-namespace:DBracket.Common.UI.WPF.Controls.Settings"
                     xmlns:converter="clr-namespace:DBracket.Common.UI.WPF.Converter">
 
+    <FontFamily x:Key="ThemeFont">Segoe UI</FontFamily>
+
+
     <converter:BoolToVisibilityConverter x:Key="BoolToVisConv" />
     <controlConverter:SideMenuItemLayerConverter x:Key="SideMenuLayerConv" />
 
@@ -110,6 +113,7 @@
                                                               Content="{TemplateBinding IconContent}" />
 
                                             <TextBlock Text="{TemplateBinding Header}"
+                                                       FontFamily="{DynamicResource ThemeFont}"
                                                        Grid.Column="1"
                                                    Margin="20,0,0,0" />
                                         </Grid>

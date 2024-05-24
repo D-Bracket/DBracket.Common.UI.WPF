@@ -1,40 +1,38 @@
-﻿using DBracket.Common.UI.WPF.Fonts;
-using DBracket.Common.UI.WPF.Sample.Views;
-using DBracket.Common.UI.WPF.Themes;
-using System.Windows;
+﻿using System.Windows;
+using System.Windows.Media;
 
-namespace DBracket.Common.UI.WPF.Sample
+namespace DBracket.Common.UI.WPF.Fonts
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+    public class FontController
     {
         #region "----------------------------- Private Fields ------------------------------"
-        private FontController _fontController = new();
+
         #endregion
 
 
 
         #region "------------------------------ Constructor --------------------------------"
+        public FontController()
+        {
 
+        }
         #endregion
 
 
 
         #region "--------------------------------- Methods ---------------------------------"
         #region "----------------------------- Public Methods ------------------------------"
-        private void Application_Startup(object sender, StartupEventArgs e)
+        public void SetFont(string fontName)
         {
-            //var themeController = ThemesTest.GetInstance();
-            //themeController.AddTheme("DBracket.Common.UI.WPF;component/Colors/ResourcesColors.xaml", "Red");
-            //themeController.AddTheme("DBracket.Common.UI.WPF;component/Styles/Icon.Styles.xaml", "Blue");
+            var font = Application.Current.FindResource(fontName) as FontFamily;
+            if (font is null)
+                throw new ArgumentException("Font not found in App Resources");
 
-            //themeController.Initialize();
-            _fontController.SetFont("JetBrainsMono_Medium");
+            var themeFont = Application.Current.FindResource("ThemeFont") as FontFamily;
+            if (themeFont is not null)
+                Application.Current.Resources.Remove(themeFont);
 
-            var window = new MainWindow();
-            window.Show();
+            Application.Current.Resources.Add("ThemeFont", font);
         }
         #endregion
 
@@ -46,6 +44,7 @@ namespace DBracket.Common.UI.WPF.Sample
 
         #endregion
         #endregion
+
 
 
         #region "--------------------------- Public Propterties ----------------------------"
