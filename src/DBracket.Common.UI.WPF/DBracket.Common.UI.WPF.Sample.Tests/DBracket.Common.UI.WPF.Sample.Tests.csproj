@@ -11,18 +11,13 @@
   <ItemGroup>
     <None Remove="Resources\Fonts\JetBrainsMono-Medium.ttf" />
     <None Remove="Resources\Fonts\JetBrainsMono-Regular.ttf" />
-    <None Remove="Resources\JetBrainsMono-VariableFont_wght.ttf" />
+    <None Remove="Resources\Fonts\JetBrainsMono-Thin.ttf" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DBracket.Common.TestFramework\DBracket.Common.TestFramework.csproj" />
     <ProjectReference Include="..\DBracket.Common.UI.TestFramework\DBracket.Common.UI.TestFramework.csproj" />
-    <ProjectReference Include="..\DBracket.Common.UI.WPF.Charts\DBracket.Common.UI.WPF.Charts.csproj" />
+    <ProjectReference Include="..\DBracket.Common.UI.WPF.Sample\DBracket.Common.UI.WPF.Sample.csproj" />
     <ProjectReference Include="..\DBracket.Common.UI.WPF\DBracket.Common.UI.WPF.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Themes\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -9,6 +9,7 @@
         xmlns:commonControls="clr-namespace:DBracket.Common.UI.WPF.Controls;assembly=DBracket.Common.UI.WPF"
         xmlns:controlSettings="clr-namespace:DBracket.Common.UI.WPF.Controls.Settings;assembly=DBracket.Common.UI.WPF"
         xmlns:cCS="clr-namespace:DBracket.Common.UI.WPF.Controls.Settings;assembly=DBracket.Common.UI.WPF"
+        xmlns:testBehaviors="clr-namespace:DBracket.Common.UI.TestFramework.Behaviors;assembly=DBracket.Common.UI.TestFramework"
         xmlns:charts="clr-namespace:DBracket.Common.UI.WPF.Charts.Controls;assembly=DBracket.Common.UI.WPF.Charts"
         xmlns:chartComponents="clr-namespace:DBracket.Common.UI.WPF.Charts.Controls.Components;assembly=DBracket.Common.UI.WPF.Charts"
         xmlns:vms="clr-namespace:DBracket.Common.UI.WPF.Sample.ViewModels"
@@ -296,7 +297,9 @@
                     <TextBlock Text="Scroll content"
                                Foreground="White"
                                FontSize="20" />
-                    <Button Content="Test" />
+                    <Button x:Name="TestButton"
+                            Content="Test" 
+                            testBehaviors:RegisterControl.IsTestControl="True"/>
                     <TextBlock Text="Scroll content"
                                FontSize="24" />
                     <TextBlock Text="Scroll content"
