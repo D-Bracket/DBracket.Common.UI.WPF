@@ -1,13 +1,11 @@
-﻿using DBracket.Common.UI.TestFramework;
-using DBracket.Common.UI.WPF.Sample.Views;
-using System.Windows;
+﻿using System.Windows.Controls;
 
-namespace DBracket.Common.UI.WPF.Sample.Tests
+namespace DBracket.Common.UI.WPF.Dialogs.CreateObjectDialog
 {
     /// <summary>
-    /// Interaction logic for App.xaml
+    /// Interaktionslogik für CreateObjectDialogView.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class CreateObjectDialogView : UserControl
     {
         #region "----------------------------- Private Fields ------------------------------"
 
@@ -16,24 +14,17 @@ namespace DBracket.Common.UI.WPF.Sample.Tests
 
 
         #region "------------------------------ Constructor --------------------------------"
-
+        public CreateObjectDialogView()
+        {
+            InitializeComponent();
+        }
         #endregion
 
 
 
         #region "--------------------------------- Methods ---------------------------------"
         #region "----------------------------- Public Methods ------------------------------"
-        private void Application_Startup(object sender, StartupEventArgs e)
-        {
-            UITester.Initialize();
-            var windowsToTest = new System.Collections.ObjectModel.ObservableCollection<Window>
-            {
-                new MainWindow()
-            };
 
-            var tester = new UITester(windowsToTest);
-            tester.Show();
-        }
         #endregion
 
         #region "----------------------------- Private Methods -----------------------------"

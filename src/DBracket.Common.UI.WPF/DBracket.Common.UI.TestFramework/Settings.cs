@@ -1,13 +1,6 @@
-﻿using DBracket.Common.UI.TestFramework;
-using DBracket.Common.UI.WPF.Sample.Views;
-using System.Windows;
-
-namespace DBracket.Common.UI.WPF.Sample.Tests
+﻿namespace DBracket.Common.UI.TestFramework
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+    internal class Settings
     {
         #region "----------------------------- Private Fields ------------------------------"
 
@@ -23,17 +16,7 @@ namespace DBracket.Common.UI.WPF.Sample.Tests
 
         #region "--------------------------------- Methods ---------------------------------"
         #region "----------------------------- Public Methods ------------------------------"
-        private void Application_Startup(object sender, StartupEventArgs e)
-        {
-            UITester.Initialize();
-            var windowsToTest = new System.Collections.ObjectModel.ObservableCollection<Window>
-            {
-                new MainWindow()
-            };
 
-            var tester = new UITester(windowsToTest);
-            tester.Show();
-        }
         #endregion
 
         #region "----------------------------- Private Methods -----------------------------"

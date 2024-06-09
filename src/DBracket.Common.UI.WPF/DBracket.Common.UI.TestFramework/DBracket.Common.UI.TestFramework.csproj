@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DBracket.Common.TestFramework\DBracket.Common.TestFramework.csproj" />
     <ProjectReference Include="..\DBracket.Common.UI.WPF\DBracket.Common.UI.WPF.csproj" />
   </ItemGroup>

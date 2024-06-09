@@ -4,7 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DBracket.Common.UI.TestFramework"
+        xmlns:protocol="clr-namespace:DBracket.Common.UI.TestFramework.Protocol"
         xmlns:commonConverter="clr-namespace:DBracket.Common.UI.WPF.Converter;assembly=DBracket.Common.UI.WPF"
+        xmlns:commonDialogControl="clr-namespace:DBracket.Common.UI.WPF.Dialogs.Control;assembly=DBracket.Common.UI.WPF"
+        xmlns:commonHelper="clr-namespace:DBracket.Common.UI.WPF.Helpers;assembly=DBracket.Common.UI.WPF"
         mc:Ignorable="d"
         Title="UITester"
         Height="1200"
@@ -14,169 +17,183 @@
 
     <Window.Resources>
         <commonConverter:NullToBoolConverter x:Key="NullToBoolVis" />
-    </Window.Resources>    
-    
+        <commonHelper:BindingProxy x:Key="ViewModelProxy"
+                                   DataSource="{Binding}" />
+    </Window.Resources>
+
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="20" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="20" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-
-        <!--Windows-->
         <Grid>
-            <ListBox ItemsSource="{Binding WindowsToTest}"
-                     SelectedItem="{Binding SelectedWindowToTest}"
-                     Grid.Row="1">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Margin="0,0,0,1"
-                                    Background="WhiteSmoke"
-                                    Width="280">
-                            <TextBlock Text="Window:" />
-                            <TextBlock Text="{Binding Name}" />
-                            <TextBlock Text="{Binding Type}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </Grid>
-        
-        <!--Test Menus-->
-        <Grid Grid.Column="2"
-              IsEnabled="{Binding SelectedWindowToTest, Converter={StaticResource NullToBoolVis}}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300" />
-                <ColumnDefinition Width="20" />
-                <ColumnDefinition Width="300" />
-                <ColumnDefinition Width="20" />
-                <ColumnDefinition Width="300" />
-            </Grid.ColumnDefinitions>
-
-            <!--TestSequences-->
-            <Grid Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <TextBlock Text="TestSequences" />
-
-                <ListBox ItemsSource="{Binding SelectedWindowToTest.TestSequences}"
-                         SelectedItem="{Binding SelectedTestSequence}"
-                         Grid.Row="1">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <TextBlock Text="{Binding Name}" />
-                                <TextBlock Text="{Binding Description}" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-
-                <StackPanel Orientation="Horizontal"
-                            Grid.Row="2">
-                    <Button Content="+"
-                            Width="40"
-                            Height="40"
-                            Command="{Binding Commands}"
-                            CommandParameter="AddTestSequence" />
-                </StackPanel>
-            </Grid>
-
-            
-            <!--Tests-->
-            <Grid Grid.Column="2"
-                  IsEnabled="{Binding SelectedTestSequence, Converter={StaticResource NullToBoolVis}}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <TextBlock Text="Tests" />
-
-                <ListBox ItemsSource="{Binding SelectedTestSequence.Tests}"
-                         Grid.Row="1">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <TextBlock Text="{Binding Name}" />
-                                <TextBlock Text="{Binding Description}" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-
-                <StackPanel Orientation="Horizontal"
-                            Grid.Row="2">
-                    <Button Content="+"
-                            Width="40"
-                            Height="40"
-                            Command="{Binding Commands}"
-                            CommandParameter="AddTest" />
-                </StackPanel>
-            </Grid>
-
-
-            <!--Test Event Logs-->
-            <Grid Grid.Column="4"
-                  IsEnabled="{Binding SelectedTestSequence, Converter={StaticResource NullToBoolVis}}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <TextBlock Text="Test Event Logs" />
-
-                <ListBox ItemsSource="{Binding SelectedTest.Result}"
-                         Grid.Row="1">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <TextBlock Text="{Binding Name}" />
-                                <TextBlock Text="{Binding Description}" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-
-                <StackPanel Orientation="Horizontal"
-                            Grid.Row="2">
-                    <Button Content="+"
-                            Width="40"
-                            Height="40"
-                            Command="{Binding Commands}"
-                            CommandParameter="ExecuteEvent" />
-                </StackPanel>
-            </Grid>
-        </Grid>
-  
-        <!--Window EventLogs-->
-        <Grid Grid.Column="4">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="8" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <TextBlock Text="EventLog" />
 
-            <ListBox ItemsSource="{Binding EventLog}"
-                     SelectedItem="{Binding SelectedEvent}"
-                     Grid.Row="1">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Margin="0,0,0,1"
-                                    Background="WhiteSmoke"
-                                    Width="280">
-                            <TextBlock Text="Event:" />
-                            <TextBlock Text="{Binding Name}" />
-                            <TextBlock Text="{Binding Description}" />
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Windows:"
+                           VerticalAlignment="Center" />
+
+                <ComboBox ItemsSource="{Binding WindowsToTest}"
+                          SelectedItem="{Binding SelectedWindowToTest}"
+                          DisplayMemberPath="Name"
+                          Margin="8,0,0,0"
+                          Width="350" />
+
+                <TextBlock Text="TestConfiguration File:"
+                           Margin="30,0,0,0"
+                           VerticalAlignment="Center" />
+
+                <TextBox Text="{Binding ConfigurationFilePath}"
+                         Margin="8,0,0,0"
+                         Width="350" />
+
+                <Button Content="Add Test Configuration"
+                        Command="{Binding Commands}"
+                        CommandParameter="AddTestConfiguration" />
+            </StackPanel>
+
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <!--<ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="20" />-->
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <!--Windows-->
+                <Grid>
+
+                </Grid>
+
+                <!--Test Menus-->
+                <Grid Grid.Column="0"
+                      IsEnabled="{Binding SelectedWindowToTest, Converter={StaticResource NullToBoolVis}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="300" />
+                    </Grid.ColumnDefinitions>
+
+                    <!--Test Objects-->
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="TestSequences" />
+
+                        <TreeView x:Name="TestTree"
+                                  Grid.Row="1"
+                                  ItemsSource="{Binding SelectedWindowToTest.TestSequences}">
+                            <!--<TreeView.ItemContainerStyle>
+                        <Style TargetType="{x:Type TreeViewItem}">
+                            <Setter Property="IsSelected"
+                                    Value="{Binding Source={StaticResource ViewModelProxy}, Path=DataSource.SelectedTestSequence}" />
+                        </Style>
+                    </TreeView.ItemContainerStyle>-->
+
+                            <TreeView.Resources>
+                                <HierarchicalDataTemplate DataType="{x:Type protocol:TestSequence}"
+                                                          ItemsSource="{Binding Tests}">
+                                    <TextBlock Text="{Binding Path=Name}" />
+                                </HierarchicalDataTemplate>
+                                <DataTemplate DataType="{x:Type protocol:Test}">
+                                    <TextBlock Text="{Binding Path=Name}" />
+                                </DataTemplate>
+                                <!--<HierarchicalDataTemplate DataType="{x:Type protocol:Test}"
+                                                  ItemsSource="{Binding Entries}">
+                            <TextBlock Text="{Binding Path=Name}" />
+                        </HierarchicalDataTemplate>-->
+                            </TreeView.Resources>
+                        </TreeView>
+
+                        <StackPanel Orientation="Horizontal"
+                                    Grid.Row="2">
+                            <Button Content="+ Sequence"
+                                    Width="80"
+                                    Height="40"
+                                    ToolTip="Add TestSequence"
+                                    Command="{Binding Commands}"
+                                    CommandParameter="AddTestSequence" />
+
+                            <Button Content="+ Test"
+                                    Width="80"
+                                    Height="40"
+                                    ToolTip="Add Test"
+                                    IsEnabled="{Binding SelectedTestSequence, Converter={StaticResource NullToBoolVis}}"
+                                    Command="{Binding Commands}"
+                                    CommandParameter="AddTest" />
                         </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                    </Grid>
+
+
+                    <!--Test Event Logs-->
+                    <Grid Grid.Column="4"
+                          IsEnabled="{Binding SelectedTestSequence, Converter={StaticResource NullToBoolVis}}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Test Event Logs" />
+
+                        <ListBox ItemsSource="{Binding SelectedTest.Result}"
+                                 Grid.Row="1">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Name}" />
+                                        <TextBlock Text="{Binding Description}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                        <StackPanel Orientation="Horizontal"
+                                    Grid.Row="2">
+                            <Button Content="Execute Event"
+                                    Width="100"
+                                    Height="40"
+                                    Command="{Binding Commands}"
+                                    CommandParameter="ExecuteEvent" />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+
+                <!--Window EventLogs-->
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="EventLog" />
+
+                    <ListBox ItemsSource="{Binding EventLog}"
+                             SelectedItem="{Binding SelectedEvent}"
+                             Grid.Row="1">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0,0,0,1"
+                                            Background="WhiteSmoke"
+                                            Width="280">
+                                    <TextBlock Text="Event:" />
+                                    <TextBlock Text="{Binding Name}" />
+                                    <TextBlock Text="{Binding Description}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </Grid>
         </Grid>
+
+
+        <commonDialogControl:DialogHost x:Name="DialogHost" />
     </Grid>
 </Window>

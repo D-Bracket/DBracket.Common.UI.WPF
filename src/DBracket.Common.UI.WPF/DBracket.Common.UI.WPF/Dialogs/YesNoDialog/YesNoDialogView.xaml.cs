@@ -1,10 +1,11 @@
-﻿using DBracket.Common.UI.WPF.Dialogs.Control;
-using System.Collections.ObjectModel;
+﻿using System.Windows.Controls;
 
-namespace DBracket.Common.UI.WPF.Dialogs
+namespace DBracket.Common.UI.WPF.Dialogs.YesNoDialog
 {
-    /// <summary>Settings, to customize how a dialog should be displayed</summary>
-    public class DialogSettings
+    /// <summary>
+    /// Interaktionslogik für YesNoDialogView.xaml
+    /// </summary>
+    public partial class YesNoDialogView : UserControl
     {
         #region "----------------------------- Private Fields ------------------------------"
 
@@ -13,10 +14,9 @@ namespace DBracket.Common.UI.WPF.Dialogs
 
 
         #region "------------------------------ Constructor --------------------------------"
-        /// <summary>Settings, to customize how a dialog should be displayed</summary>
-        public DialogSettings()
+        public YesNoDialogView()
         {
-            
+            InitializeComponent();
         }
         #endregion
 
@@ -37,13 +37,10 @@ namespace DBracket.Common.UI.WPF.Dialogs
         #endregion
 
 
+
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
-        /// <summary>When set, the dialog is stretched, horizontally accross the screen</summary>
-        public bool StrechHorizontally { get; set; }
 
-        /// <summary>Buttons to navigate the dialog</summary>
-        public ObservableCollection<DialogNavigationButton> NavigationButtons { get; set; } = new();
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"

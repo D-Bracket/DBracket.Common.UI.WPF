@@ -12,10 +12,6 @@
 
     <UserControl.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-
-            </ResourceDictionary.MergedDictionaries>
-
             <converter:BoolToVisibilityConverter x:Key="BoolToVisConv" />
         </ResourceDictionary>
     </UserControl.Resources>

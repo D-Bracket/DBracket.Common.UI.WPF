@@ -16,7 +16,7 @@ namespace DBracket.Common.UI.WPF.Dialogs.Control
         /// <summary>Button for the navigation in a dialog</summary>
         public DialogNavigationButton()
         {
-            
+            SpaceToLeft = 0;
         }
         #endregion
 
@@ -37,6 +37,7 @@ namespace DBracket.Common.UI.WPF.Dialogs.Control
         #endregion
 
 
+
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
         /// <summary>Content of the Button</summary>
@@ -48,8 +49,8 @@ namespace DBracket.Common.UI.WPF.Dialogs.Control
         private string _commandParameter = string.Empty;
 
         /// <summary>Space to the left of the button</summary>
-        public double SpaceToLeft { get => _saceToLeft; set { _saceToLeft = value; OnMySelfChanged(); } }
-        private double _saceToLeft = 40;
+        public double SpaceToLeft { get => _saceToLeft; set { _saceToLeft = value; Margin = new Thickness(value, 0, 0, 0); OnMySelfChanged(); } }
+        private double _saceToLeft;
 
         /// <summary>Margin to other objects</summary>
         public Thickness Margin { get => _margin; internal set { _margin = value; OnMySelfChanged(); } }
@@ -60,8 +61,8 @@ namespace DBracket.Common.UI.WPF.Dialogs.Control
         private double _width = 40;
 
         /// <summary>Determines wheter the button is only enabled under certain conditions</summary>
-        public bool HasEnableCondition { get => _hasEnableCondition; set { _hasEnableCondition = value; OnMySelfChanged(); } }
-        private bool _hasEnableCondition;
+        public bool IsEnabled { get => _isEnabled; set { _isEnabled = value; OnMySelfChanged(); } }
+        private bool _isEnabled = true;
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"

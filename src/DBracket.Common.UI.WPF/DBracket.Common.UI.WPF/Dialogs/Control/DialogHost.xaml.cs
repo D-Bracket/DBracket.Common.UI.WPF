@@ -5,9 +5,6 @@ using System.Windows.Media;
 
 namespace DBracket.Common.UI.WPF.Dialogs.Control
 {
-    /// <summary>
-    /// Interaktionslogik für DialogHost.xaml
-    /// </summary>
     public partial class DialogHost : UserControl, INotifyPropertyChanged
     {
         #region "----------------------------- Private Fields ------------------------------"
@@ -65,18 +62,19 @@ namespace DBracket.Common.UI.WPF.Dialogs.Control
 
             dialogView.DataContext = viewModel;
             ViewModel = viewModel;
-            var container = new DialogContainer(dialogView, settings);
+            var container = new DialogPresenter(dialogView, settings);
             DialogPresenter.Content = container;
             Visibility = System.Windows.Visibility.Visible;
         }
 
-        private void HandleCloseDialogRequest(object? dialogResult)
+        private void HandleCloseDialogRequest()
         {
             Visibility = System.Windows.Visibility.Collapsed;
             DialogPresenter.Content = null;
         }
         #endregion
         #endregion
+
 
 
         #region "--------------------------- Public Propterties ----------------------------"

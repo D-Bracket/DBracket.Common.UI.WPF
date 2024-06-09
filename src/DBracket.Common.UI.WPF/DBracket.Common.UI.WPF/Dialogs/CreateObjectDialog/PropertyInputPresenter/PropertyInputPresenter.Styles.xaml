@@ -1,0 +1,42 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controlSettings="clr-namespace:DBracket.Common.UI.WPF.Controls.Settings">
+    
+    <DataTemplate x:Key="TextBoxTemplate">
+        <TextBox Text="{Binding Input, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                 AcceptsReturn="True"
+                 IsTabStop="True"
+                 TextWrapping="Wrap"
+                 Margin="0,4,0,0"
+                 controlSettings:HeaderSettings.Header="{Binding Header}"
+                 MaxLength="{Binding MaxInputLength}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="ComboBoxTemplate">
+        <ComboBox ItemsSource="{Binding ListOfOptions}"
+                  SelectedItem="{Binding SelectedInput}"
+                  DisplayMemberPath="{Binding DisplayMemberPath}"
+                  controlSettings:HeaderSettings.Header="{Binding Header}"
+                  Margin="0,4,0,0"
+                  IsTabStop="True"
+                  IsEditable="{Binding IsEditable}" />
+    </DataTemplate>
+
+    <!--<DataTemplate x:Key="ComboBoxEditableTemplate">
+        <ComboBox ItemsSource="{Binding ListOfOptions}"
+                  Text="{Binding SelectedInput}"
+                  controlSettings:HeaderSettings.Header="{Binding Header}"
+                  Margin="0,4,0,0"
+                  IsTabStop="True"
+                  ItemTemplate="{Binding ItemTemplate}"
+                  IsEditable="{Binding IsEditable}" />
+    </DataTemplate>-->
+
+    <DataTemplate x:Key="SelectorTempalte">
+        <TextBox Text="{Binding Input, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                 MaxLength="{Binding MaxInputLength}"
+                 controlSettings:HeaderSettings.Header="{Binding Header}"
+                 Margin="0,4,0,0"
+                 IsTabStop="True" />
+    </DataTemplate>
+</ResourceDictionary>

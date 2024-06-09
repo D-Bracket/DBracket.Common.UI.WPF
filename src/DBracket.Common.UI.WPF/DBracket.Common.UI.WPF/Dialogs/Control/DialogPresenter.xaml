@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="DBracket.Common.UI.WPF.Dialogs.Control.DialogContainer"
+﻿<UserControl x:Class="DBracket.Common.UI.WPF.Dialogs.Control.DialogPresenter"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -16,9 +16,8 @@
                 <ResourceDictionary Source="pack://application:,,,/DBracket.Common.UI.WPF;component/Colors/ResourcesColors.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <local:ButtonConditionToBoolConverter x:Key="ConditionToBoolConv" />
-            <helpers:BindingProxy x:Key="BindingProxy" 
-                                  DataSource="{Binding}"/>
+            <helpers:BindingProxy x:Key="BindingProxy"
+                                  DataSource="{Binding}" />
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -47,6 +46,7 @@
                        HorizontalAlignment="Stretch" />
             <ItemsControl x:Name="NavigationButtons"
                           HorizontalAlignment="Center"
+                          ItemsSource="{Binding NavigationButtons}"
                           Grid.Row="1">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -55,16 +55,21 @@
                                 CommandParameter="{Binding CommandParameter}"
                                 Content="{Binding Content}"
                                 Margin="{Binding Margin}"
+                                IsEnabled="{Binding IsEnabled}"
                                 Width="150"
                                 Height="30">
-                            <Button.IsEnabled>
+                            <!--<Button.IsEnabled>
                                 <MultiBinding Converter="{StaticResource ConditionToBoolConv}">
                                     <Binding Path="HasEnableCondition"
                                              Mode="OneWay" />
-                                    <Binding Source="{StaticResource BindingProxy}"
-                                             Path="DataSource.IsAddingEnabled" />
+                                    <Binding Path="HasEnableCondition"
+                                             Mode="OneWay" />
+                                    -->
+                            <!--<Binding Source="{StaticResource BindingProxy}"
+                                             Path="DataSource.ConditionsFullFilled" />-->
+                            <!--
                                 </MultiBinding>
-                            </Button.IsEnabled>
+                            </Button.IsEnabled>-->
                         </Button>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

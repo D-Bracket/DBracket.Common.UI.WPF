@@ -2,10 +2,19 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
-    <Compile Update="Dialogs\Control\DialogContainer.xaml.cs">
+    <Compile Update="Dialogs\Control\DialogPresenter.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Dialogs\Control\DialogHost.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\CreateObjectDialog\CreateObjectDialogView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\InputDialog\InputDialogView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\YesNoDialog\YesNoDialogView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -19,10 +28,22 @@
     <Page Update="DBracket.WPF.Styles.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Dialogs\Control\DialogContainer.xaml">
+    <Page Update="Dialogs\Control\DialogPresenter.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Dialogs\Control\DialogHost.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\CreateObjectDialog\CreateObjectDialogView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\CreateObjectDialog\PropertyInputPresenter\PropertyInputPresenter.Styles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\InputDialog\InputDialogView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\YesNoDialog\YesNoDialogView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Styles\Button.Styles.xaml">

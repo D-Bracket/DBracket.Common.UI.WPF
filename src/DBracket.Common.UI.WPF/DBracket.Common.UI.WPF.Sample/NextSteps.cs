@@ -1,5 +1,15 @@
 ﻿namespace DBracket.Common.UI.WPF.Sample
 {
+    /*
+     *   Dialogs
+     *   - IValidation Method
+     *   - Seperate Types for InputObjects
+     *      - Possibility to add custom InputObjects
+     *   - CreateObject Dialog: No Validation -> Still Check if all properties have inputs
+     * 
+     */
+
+
         /*
          * 1 - Build the structure of the sample, to also get a feeling, what you want to do
          *     Sections:

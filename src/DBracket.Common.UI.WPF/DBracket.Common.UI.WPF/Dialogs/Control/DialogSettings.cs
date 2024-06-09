@@ -1,13 +1,7 @@
-﻿using DBracket.Common.UI.TestFramework;
-using DBracket.Common.UI.WPF.Sample.Views;
-using System.Windows;
-
-namespace DBracket.Common.UI.WPF.Sample.Tests
+﻿namespace DBracket.Common.UI.WPF.Dialogs.Control
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+    /// <summary>Settings, to customize how a dialog should be displayed</summary>
+    public class DialogSettings
     {
         #region "----------------------------- Private Fields ------------------------------"
 
@@ -16,24 +10,18 @@ namespace DBracket.Common.UI.WPF.Sample.Tests
 
 
         #region "------------------------------ Constructor --------------------------------"
-
+        /// <summary>Settings, to customize how a dialog should be displayed</summary>
+        public DialogSettings()
+        {
+            
+        }
         #endregion
 
 
 
         #region "--------------------------------- Methods ---------------------------------"
         #region "----------------------------- Public Methods ------------------------------"
-        private void Application_Startup(object sender, StartupEventArgs e)
-        {
-            UITester.Initialize();
-            var windowsToTest = new System.Collections.ObjectModel.ObservableCollection<Window>
-            {
-                new MainWindow()
-            };
 
-            var tester = new UITester(windowsToTest);
-            tester.Show();
-        }
         #endregion
 
         #region "----------------------------- Private Methods -----------------------------"
@@ -46,10 +34,10 @@ namespace DBracket.Common.UI.WPF.Sample.Tests
         #endregion
 
 
-
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
-
+        /// <summary>When set, the dialog is stretched, horizontally accross the screen</summary>
+        public bool StrechHorizontally { get; set; }
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"

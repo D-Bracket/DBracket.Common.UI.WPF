@@ -10,5 +10,7 @@
         <ResourceDictionary Source="pack://application:,,,/DBracket.Common.UI.WPF;component/Styles/Flyout.Styles.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/DBracket.Common.UI.WPF;component/Styles/Button.Styles.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/DBracket.Common.UI.WPF;component/Styles/SideMenu.Styles.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/DBracket.Common.UI.WPF;component/Dialogs/CreateObjectDialog/PropertyInputPresenter/PropertyInputPresenter.Styles.xaml"/>
+        
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

@@ -1,4 +1,7 @@
-﻿namespace DBracket.Common.UI.WPF.Bases
+﻿using DBracket.Common.UI.WPF.Dialogs.Control;
+using System.Collections.ObjectModel;
+
+namespace DBracket.Common.UI.WPF.Bases
 {
     /// <summary>Baseclass for Dialog ViewModels</summary>
     public abstract class DialogViewModelBase : ViewModelBase
@@ -66,6 +69,10 @@
         /// <summary>Determines, wheter the error popup is shown</summary>
         public bool ShowErrorMessage { get => _showErrorMessage; set { _showErrorMessage = value; OnMySelfChanged(); } }
         private bool _showErrorMessage;
+
+        /// <summary>Buttons to navigate the dialog</summary>
+        public ObservableCollection<DialogNavigationButton> NavigationButtons { get => _navigationButtons; set { _navigationButtons = value; OnMySelfChanged(); } }
+        private ObservableCollection<DialogNavigationButton> _navigationButtons = new();
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"

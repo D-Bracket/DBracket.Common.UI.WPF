@@ -1,9 +1,6 @@
-﻿using System.Windows.Controls;
-
-namespace DBracket.Common.UI.WPF.Dialogs.Control
+﻿namespace DBracket.Common.UI.WPF.Dialogs.CreateObjectDialog.PropertyInputPresenter
 {
-
-    public partial class DialogContainer : UserControl
+    public class TextBoxInput : PropertyInputPresenterBase
     {
         #region "----------------------------- Private Fields ------------------------------"
 
@@ -12,30 +9,11 @@ namespace DBracket.Common.UI.WPF.Dialogs.Control
 
 
         #region "------------------------------ Constructor --------------------------------"
-        public DialogContainer(UserControl dialogContent, DialogSettings settings)
+        public TextBoxInput(string propertyName, string header, int maxInputLength)
         {
-            InitializeComponent();
-            dialogContent.Content = dialogContent;
-            DataContext = dialogContent.DataContext;
-
-            if (settings.NavigationButtons.Count == 0)
-            {
-                NavigationGrid.Visibility = System.Windows.Visibility.Visible;
-                return;
-            }
-
-            var isFirst = true;
-            foreach (var button in settings.NavigationButtons)
-            {
-                if (isFirst)
-                {
-                    isFirst = false;
-                    button.Margin = new System.Windows.Thickness(0);
-                    continue;
-                }
-                button.Margin = new System.Windows.Thickness(button.SpaceToLeft, 0, 0, 0);
-            }
-            NavigationButtons.ItemsSource = settings.NavigationButtons;
+            PropertyName = propertyName;
+            Header = header;
+            MaxInputLength = maxInputLength;
         }
         #endregion
 
@@ -47,7 +25,10 @@ namespace DBracket.Common.UI.WPF.Dialogs.Control
         #endregion
 
         #region "----------------------------- Private Methods -----------------------------"
-
+        internal override object? GetInput()
+        {
+            return Input;
+        }
         #endregion
 
         #region "------------------------------ Event Handling -----------------------------"
@@ -56,9 +37,28 @@ namespace DBracket.Common.UI.WPF.Dialogs.Control
         #endregion
 
 
+
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
+        public string Input
+        {
+            get => _input;
+            set
+            {
+                _input = value;
 
+                // Reset previos errors
+                ResetErrors(nameof(Input));
+                var errors = OnValidateInput(value);
+                foreach (var error in errors)
+                {
+                    AddError(Input, error);
+                }
+
+                OnMySelfChanged();
+            }
+        }
+        private string _input = string.Empty;
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"
