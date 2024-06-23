@@ -9,7 +9,10 @@
 
 
         #region "------------------------------ Constructor --------------------------------"
-
+        public EventDetail()
+        {
+            
+        }
         #endregion
 
 

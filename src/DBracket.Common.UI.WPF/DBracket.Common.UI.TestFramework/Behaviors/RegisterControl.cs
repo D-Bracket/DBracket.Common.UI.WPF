@@ -1,5 +1,6 @@
 ﻿using DBracket.Common.TestFramework;
 using DBracket.Common.UI.TestFramework.Events.Types;
+using DBracket.Common.UI.WPF.Utils;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -35,14 +36,6 @@ namespace DBracket.Common.UI.TestFramework.Behaviors
                 return;
 
             UIReportCenter.RegisterControl(control);
-
-            //if (d is Button button)
-            //{
-            //    button.Click += (s, e) => 
-            //    {
-            //        UIReportCenter.ReportEvent(button.Name, "button_Clicked", EventTypes.EVENT_CLICK, button);
-            //    };
-            //}
         }
         #endregion
         #endregion

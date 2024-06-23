@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Newtonsoft.Json;
+using System.Collections;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -9,6 +10,7 @@ namespace DBracket.Common.UI.WPF.Bases
     {
         #region "----------------------------- Private Fields ------------------------------"
         /// <summary>Contains the validation errors of all properties</summary>
+        [JsonIgnore]
         public readonly Dictionary<string, List<string>> _propertyErrors = new();
         #endregion
 
@@ -100,6 +102,7 @@ namespace DBracket.Common.UI.WPF.Bases
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
         /// <summary>Shows, if there are any properties whose input validation failed</summary>
+        [JsonIgnore]
         public bool HasErrors => _propertyErrors.Any(x => x.Value.Any());
         #endregion
 

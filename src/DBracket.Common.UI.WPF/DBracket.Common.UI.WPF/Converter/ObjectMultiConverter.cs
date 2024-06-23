@@ -1,11 +1,9 @@
-﻿using DBracket.Common.TestFramework;
-using DBracket.Common.UI.WPF.Bases;
-using Newtonsoft.Json;
-using System.Collections.ObjectModel;
+﻿using System.Globalization;
+using System.Windows.Data;
 
-namespace DBracket.Common.UI.TestFramework.Protocol
+namespace DBracket.Common.UI.WPF.Converter
 {
-    public class Test : PropertyChangedBase
+    public class ObjectMultiConverter : IMultiValueConverter
     {
         #region "----------------------------- Private Fields ------------------------------"
 
@@ -21,7 +19,20 @@ namespace DBracket.Common.UI.TestFramework.Protocol
 
         #region "--------------------------------- Methods ---------------------------------"
         #region "----------------------------- Public Methods ------------------------------"
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (values[0] is not bool)
+                return values[1];
 
+            var active = (bool)values[0];
+
+            return active ? values[2] : values[1];
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
         #region "----------------------------- Private Methods -----------------------------"
@@ -37,21 +48,7 @@ namespace DBracket.Common.UI.TestFramework.Protocol
 
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
-        public string Name { get => _name; set { _name = value; OnMySelfChanged(); } }
-        private string _name;
 
-        public string Description { get => _description; set { _description = value; OnMySelfChanged(); } }
-        private string _description;
-
-        [JsonIgnore]
-        public TestSequence TestSequence { get => _testSequence; set { _testSequence = value; OnMySelfChanged(); } }
-        private TestSequence _testSequence;
-
-        public ObservableCollection<EventToTest> Events { get => _events; set { _events = value; OnMySelfChanged(); } }
-        private ObservableCollection<EventToTest> _events = new();
-
-        public TestResult Result { get => _result; set { _result = value; OnMySelfChanged(); } }
-        private TestResult _result;
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"

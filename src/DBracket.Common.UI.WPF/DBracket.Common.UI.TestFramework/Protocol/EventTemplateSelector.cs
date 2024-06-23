@@ -1,11 +1,10 @@
 ﻿using DBracket.Common.TestFramework;
-using DBracket.Common.UI.WPF.Bases;
-using Newtonsoft.Json;
-using System.Collections.ObjectModel;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace DBracket.Common.UI.TestFramework.Protocol
 {
-    public class Test : PropertyChangedBase
+    internal class EventTemplateSelector : DataTemplateSelector
     {
         #region "----------------------------- Private Fields ------------------------------"
 
@@ -14,14 +13,29 @@ namespace DBracket.Common.UI.TestFramework.Protocol
 
 
         #region "------------------------------ Constructor --------------------------------"
-
+        public EventTemplateSelector()
+        {
+            
+        }
         #endregion
 
 
 
         #region "--------------------------------- Methods ---------------------------------"
         #region "----------------------------- Public Methods ------------------------------"
+        public override DataTemplate SelectTemplate(object item, DependencyObject container)
+        {
+            if (item is not EventToTest eventToTest)
+                throw new ArgumentException("Wrong type");
 
+            if (eventToTest.Event is UIEvent)
+                return UIEventDataTemplate;
+
+            if (eventToTest.Event is Event)
+                return EventDataTemplate;
+
+            throw new Exception("Unkown event type");
+        }
         #endregion
 
         #region "----------------------------- Private Methods -----------------------------"
@@ -37,21 +51,8 @@ namespace DBracket.Common.UI.TestFramework.Protocol
 
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
-        public string Name { get => _name; set { _name = value; OnMySelfChanged(); } }
-        private string _name;
-
-        public string Description { get => _description; set { _description = value; OnMySelfChanged(); } }
-        private string _description;
-
-        [JsonIgnore]
-        public TestSequence TestSequence { get => _testSequence; set { _testSequence = value; OnMySelfChanged(); } }
-        private TestSequence _testSequence;
-
-        public ObservableCollection<EventToTest> Events { get => _events; set { _events = value; OnMySelfChanged(); } }
-        private ObservableCollection<EventToTest> _events = new();
-
-        public TestResult Result { get => _result; set { _result = value; OnMySelfChanged(); } }
-        private TestResult _result;
+        public DataTemplate UIEventDataTemplate { get; set; }
+        public DataTemplate EventDataTemplate { get; set; }
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"

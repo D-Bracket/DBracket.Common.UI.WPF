@@ -1,11 +1,14 @@
-﻿using DBracket.Common.TestFramework;
-using DBracket.Common.UI.WPF.Bases;
-using Newtonsoft.Json;
-using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 
-namespace DBracket.Common.UI.TestFramework.Protocol
+namespace DBracket.Common.UI.TestFramework
 {
-    public class Test : PropertyChangedBase
+    public class AppSettings
     {
         #region "----------------------------- Private Fields ------------------------------"
 
@@ -14,7 +17,14 @@ namespace DBracket.Common.UI.TestFramework.Protocol
 
 
         #region "------------------------------ Constructor --------------------------------"
-
+        public AppSettings()
+        {
+            var tmp = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            tmp = tmp.Replace(tmp.Split(@"\").Last(),"");
+            ConfigurationPath = $@"{tmp}Configurations\";
+            if (Directory.Exists(ConfigurationPath) == false)
+                Directory.CreateDirectory(ConfigurationPath);
+        }
         #endregion
 
 
@@ -37,21 +47,7 @@ namespace DBracket.Common.UI.TestFramework.Protocol
 
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
-        public string Name { get => _name; set { _name = value; OnMySelfChanged(); } }
-        private string _name;
-
-        public string Description { get => _description; set { _description = value; OnMySelfChanged(); } }
-        private string _description;
-
-        [JsonIgnore]
-        public TestSequence TestSequence { get => _testSequence; set { _testSequence = value; OnMySelfChanged(); } }
-        private TestSequence _testSequence;
-
-        public ObservableCollection<EventToTest> Events { get => _events; set { _events = value; OnMySelfChanged(); } }
-        private ObservableCollection<EventToTest> _events = new();
-
-        public TestResult Result { get => _result; set { _result = value; OnMySelfChanged(); } }
-        private TestResult _result;
+        public string ConfigurationPath { get; set; } 
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"

@@ -16,9 +16,9 @@
 
         #region "--------------------------------- Methods ---------------------------------"
         #region "----------------------------- Public Methods ------------------------------"
-        public static void ReportEvent(string message)
+        public static void ReportEvent(IEvent reportedEvent)
         {
-            MessageReceived?.Invoke(message);
+            EventReported?.Invoke(reportedEvent);
         }
 
         #endregion
@@ -40,9 +40,8 @@
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"
-
-        public static event MessageHandler? MessageReceived;
-        public delegate void MessageHandler(string message);
+        public static event ReportEventHandler? EventReported;
+        public delegate void ReportEventHandler(IEvent reportedEvent);
         #endregion
         #endregion
     }

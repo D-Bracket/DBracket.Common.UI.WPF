@@ -2,6 +2,8 @@
 using DBracket.Common.UI.TestFramework.Controls;
 using DBracket.Common.UI.TestFramework.Events;
 using DBracket.Common.UI.WPF.Bases;
+using Newtonsoft.Json;
+using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace DBracket.Common.UI.TestFramework
@@ -15,9 +17,27 @@ namespace DBracket.Common.UI.TestFramework
 
 
         #region "------------------------------ Constructor --------------------------------"
-        public UIEvent()
+        public UIEvent(DependencyObject control)
         {
+            Control = control;
 
+            var properties = control.GetType().GetProperties();
+            foreach (var property in properties)
+            {
+                var propertyName = property.Name;
+                var value = property.GetValue(control);
+                ControlProperties.Add($"{propertyName}: {value}");
+            }
+        }
+
+        [JsonConstructor]
+        internal UIEvent()
+        {
+            //if (controlProperties.Any(x => x.Contains("Name: ")) == false)
+            //    throw new Exception();
+
+            //var name = controlProperties.Single(x => x.Contains("Name: ")).Replace("Name: ", "");
+            //Control = UIReportCenter.GetControlByName(name);
         }
         #endregion
 
@@ -27,6 +47,14 @@ namespace DBracket.Common.UI.TestFramework
         #region "----------------------------- Public Methods ------------------------------"
         public void ReExecute()
         {
+            if ( Control is null)
+            {
+                if (ControlProperties.Any(x => x.Contains("Name: ")) == false)
+                    throw new Exception();
+
+                var name = ControlProperties.Single(x => x.Contains("Name: ")).Replace("Name: ", "");
+                Control = UIReportCenter.GetControlByName(name);
+            }
             var controlAccess = ControlAccess.GetControlAccess(Control.GetType());
             controlAccess.ExecuteEventType(EventType, Control);
 
@@ -69,11 +97,18 @@ namespace DBracket.Common.UI.TestFramework
         public string Description { get => _description; set { _description = value; OnMySelfChanged(); } }
         private string _description;
 
-        public required DependencyObject Control { get => _control; set { _control = value; OnMySelfChanged(); } }
+        [JsonIgnore]
+        public DependencyObject Control { get => _control; set { _control = value; OnMySelfChanged(); } }
         private DependencyObject _control;
+
+        public ObservableCollection<string> ControlProperties { get => _controlProperties; set { _controlProperties = value; OnMySelfChanged(); } }
+        private ObservableCollection<string> _controlProperties = new();
 
         public required string EventType { get => _eventType; set { _eventType = value; OnMySelfChanged(); } }
         private string _eventType;
+
+        public ObservableCollection<EventDetail> Details { get => _details; set { _details = value; OnMySelfChanged(); } }
+        private ObservableCollection<EventDetail> _details = new();
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"

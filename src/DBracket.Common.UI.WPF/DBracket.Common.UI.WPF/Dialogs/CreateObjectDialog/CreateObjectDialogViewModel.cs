@@ -138,9 +138,13 @@ namespace DBracket.Common.UI.WPF.Dialogs.CreateObjectDialog
                             }
                             propertyToSet.SetValue(_objectToCreate, Enum.Parse(propertyType, valueString));
                         }
-                        else
+                        else if (propertyValue is string)
                         {
                             propertyToSet.SetValue(_objectToCreate, Convert.ChangeType(input, propertyType));
+                        }
+                        else
+                        {
+                            propertyToSet.SetValue(_objectToCreate, input);
                         }
                     }
 

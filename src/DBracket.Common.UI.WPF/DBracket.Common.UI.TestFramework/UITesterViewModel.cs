@@ -1,8 +1,8 @@
-﻿using DBracket.Common.UI.TestFramework.Protocol;
+﻿using DBracket.Common.TestFramework;
+using DBracket.Common.UI.TestFramework.Protocol;
 using DBracket.Common.UI.WPF.Bases;
 using DBracket.Common.UI.WPF.Dialogs.Control;
 using DBracket.Common.UI.WPF.Dialogs.CreateObjectDialog.PropertyInputPresenter;
-using DBracket.Common.UI.WPF.Dialogs.YesNoDialog;
 using System.Collections.ObjectModel;
 using System.Windows;
 
@@ -12,32 +12,33 @@ namespace DBracket.Common.UI.TestFramework
     internal class UITesterViewModel : ViewModelBase
     {
         #region "----------------------------- Private Fields ------------------------------"
-        private ObservableCollection<Window> _windowsToTest;
+        private ObservableCollection<Type> _windowTypesToTest;
         private DialogController _dialogController;
+        private AppSettings _appSettings;
         #endregion
 
 
 
         #region "------------------------------ Constructor --------------------------------"
-        public UITesterViewModel(DialogController dialogController, ObservableCollection<Window> windowsToTest)
+        public UITesterViewModel(DialogController dialogController, ObservableCollection<Type> windowTypesToTest)
         {
             _dialogController = dialogController;
-            _windowsToTest = windowsToTest;
-            if (ConfigurationFilePath is not null)
+            _windowTypesToTest = windowTypesToTest;
+
+            _appSettings = new AppSettings();
+
+            try
             {
-                try
-                {
-                    TestConfigurations = WindowContainer.LoadConfiguration(ConfigurationFilePath);
-                }
-                catch (Exception ex)
-                {
-                    TestConfigurations = new ObservableCollection<WindowContainer>();
-                }
-                // TODO: Check if UITester knows window type, to execute tests
+                TestConfigurations = TestConfiguration.LoadConfigurations(_appSettings.ConfigurationPath);
             }
+            catch (Exception ex)
+            {
+                TestConfigurations = new ObservableCollection<TestConfiguration>();
+            }
+            // TODO: Check if UITester knows window type, to execute tests
 
 
-            UIReportCenter.EventReceived += HandleEventReceived;
+            ReportCenter.EventReported += HandleEventReceived;
         }
         #endregion
 
@@ -49,21 +50,44 @@ namespace DBracket.Common.UI.TestFramework
         #endregion
 
         #region "----------------------------- Private Methods -----------------------------"
-        private void LoadTestConfiguration(WindowContainer? windowContainer)
-        {
-            windowContainer.LoadTestConfiguration(ConfigurationFilePath);
-        }
+        //private void LoadTestConfiguration(WindowContainer? windowContainer)
+        //{
+        //    windowContainer.LoadTestConfiguration(ConfigurationFilePath);
+        //}
         #endregion
 
         #region "------------------------------ Event Handling -----------------------------"
-        private void HandleEventReceived(UIEvent uiEvent)
+        private void HandleEventReceived(IEvent @event)
         {
-            EventLog.Insert(0, uiEvent);
+            EventLog.Insert(0, @event);
         }
 
-        private bool HandleAddTestConfigurationRequest(YesNoDialogResults result, string comment)
+        private void HandleTestEventReceived(IEvent @event)
         {
+            if (SelectedTest is null)
+                return;
+
+            SelectedTest.Events.Add(new EventToTest(@event));
+        }
+
+        private bool HandleCreateConfiguration(bool wasCanceled, object? createdObject)
+        {
+            if (wasCanceled == false)
+            {
+                var configuration = createdObject as TestConfiguration;
+                var windowType = configuration.WindowType;
+                configuration._window = Activator.CreateInstance(windowType) as Window;
+                var filePath = $"{_appSettings.ConfigurationPath}{configuration.Name}.json";
+                TestConfiguration.CreateConfigurationFile(filePath, configuration);
+                TestConfigurations.Add(configuration);
+            }
+
             return true;
+        }
+
+        private Window CreateWindowByType(Type windowType)
+        {
+            return Activator.CreateInstance(windowType) as Window;
         }
         #endregion
 
@@ -72,8 +96,12 @@ namespace DBracket.Common.UI.TestFramework
         {
             switch (command)
             {
+                case "SaveConfiguration":
+                    SelectedConfiguration.SaveConfiguration(SelectedConfiguration);
+                    break;
+
                 case "AddTestSequence":
-                    SelectedWindowToTest.TestSequences.Add(new TestSequence() { Name = "New_TestSequence" });
+                    SelectedConfiguration.TestSequences.Add(new TestSequence() { Name = "New_TestSequence" });
                     break;
 
                 case "AddTest":
@@ -86,36 +114,93 @@ namespace DBracket.Common.UI.TestFramework
                     break;
 
                 case "ExecuteEvent":
-                    if (SelectedEvent is not null)
-                        SelectedEvent.ReExecute();
+                    ExecuteTest();
                     break;
 
                 case "AddTestConfiguration":
-                    var tmp = new ObservableCollection<string>()
-                    {
-                        "Test1",
-                        "Test2",
-                        "Test3",
-                        "Test4",
-                    };
-
                     _dialogController.ShowCreateObjectDialog(
-                        new WindowContainer(new Window()),
+                        new TestConfiguration(),
                         "Test",
                         new ObservableCollection<PropertyInputPresenterBase>()
                         {
-                            new TextBoxInput(nameof(WindowContainer.Name), "Name", 50),
-                            new ComboBoxInput(nameof(WindowContainer.Name), "Name", tmp, "", false),
+                            new TextBoxInput(nameof(TestConfiguration.Name), "Name", 50),
+                            new ComboBoxInput(nameof(TestConfiguration.WindowType), "Type", _windowTypesToTest, "FullName", false),
                         },
-                        HandleTest);
+                        HandleCreateConfiguration);
+                    break;
+
+                case "OpenWindowToTest":
+                    if (SelectedConfiguration is not null)
+                    {
+                        SelectedConfiguration._window = Activator.CreateInstance(SelectedConfiguration.WindowType) as Window;
+                        SelectedConfiguration._window.Show();
+                    }
+                    break;
+
+                case "RecordEvents":
+                    if (IsRecording)
+                    {
+                        IsRecording = false;
+                        ReportCenter.EventReported -= HandleTestEventReceived;
+                    }
+                    else
+                    {
+                        IsRecording = true;
+                        ReportCenter.EventReported += HandleTestEventReceived;
+                    }
+                    break;
+
+                case "AddAssertion":
+                    if (SelectedEvent is null)
+                        return;
+
+                    SelectedEvent.Assertions.Add(new EventAssertion(SelectedEvent.Event));
                     break;
             }
         }
 
-        private bool HandleTest(bool wasCanceled, object? createdObject)
+        private void ExecuteTest()
         {
-            return true;
+            if (SelectedConfiguration is null)
+                return;
+
+            if (SelectedConfiguration._window is not null)
+                SelectedConfiguration._window.Close();
+            SelectedConfiguration._window = CreateWindowByType(SelectedConfiguration.WindowType);
+            SelectedConfiguration._window.Show();
+            ObservableCollection<IEvent> _eventLog = new();
+            ReportCenter.EventReported += HandleExecuteTestEventReceived;
+
+            foreach (var testSequence in SelectedConfiguration.TestSequences)
+            {
+                foreach (var test in testSequence.Tests)
+                {
+                    if (test.Events is null || test.Events.Count == 0)
+                        continue;
+
+                    var startEvent = test.Events.First().Event as UIEvent;
+                    startEvent.ReExecute();
+                }
+            }
+            SelectedConfiguration._window.Close();
+
+            foreach (var @event in _eventLog)
+            {
+
+            }
+
+            //if (SelectedEvent is not null)
+            //    SelectedEvent.ReExecute();
+            //break;
+
+            void HandleExecuteTestEventReceived(IEvent reportedEvent)
+            {
+                _eventLog.Add(reportedEvent);
+            }
         }
+
+
+
         #endregion
         #endregion
 
@@ -123,11 +208,11 @@ namespace DBracket.Common.UI.TestFramework
 
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
-        public ObservableCollection<WindowContainer> TestConfigurations { get => _testConfigurations; set { _testConfigurations = value; OnMySelfChanged(); } }
-        private ObservableCollection<WindowContainer> _testConfigurations;
+        public ObservableCollection<TestConfiguration> TestConfigurations { get => _testConfigurations; set { _testConfigurations = value; OnMySelfChanged(); } }
+        private ObservableCollection<TestConfiguration> _testConfigurations;
 
-        public WindowContainer? SelectedWindowToTest { get => _selectedWindowToTest; set { _selectedWindowToTest = value; LoadTestConfiguration(value); OnMySelfChanged(); } }
-        private WindowContainer? _selectedWindowToTest;
+        public TestConfiguration? SelectedConfiguration { get => _selectedConfiguration; set { _selectedConfiguration = value; OnMySelfChanged(); } }
+        private TestConfiguration? _selectedConfiguration;
 
         public TestSequence? SelectedTestSequence { get => _selectedTestSequence; set { _selectedTestSequence = value; OnMySelfChanged(); } }
         private TestSequence? _selectedTestSequence;
@@ -138,14 +223,14 @@ namespace DBracket.Common.UI.TestFramework
         public Test? SelectedTest { get => _selectedTest; set { _selectedTest = value; OnMySelfChanged(); } }
         private Test? _selectedTest;
 
-        public UIEvent SelectedEvent { get => _selectedEvent; set { _selectedEvent = value; OnMySelfChanged(); } }
-        private UIEvent _selectedEvent;
+        public EventToTest SelectedEvent { get => _selectedEvent; set { _selectedEvent = value; OnMySelfChanged(); } }
+        private EventToTest _selectedEvent;
 
-        public string ConfigurationFilePath { get => _configurationFilePath; set { _configurationFilePath = value; OnMySelfChanged(); } }
-        private string _configurationFilePath = @"C:\Temp\MainWindow.json";
+        public ObservableCollection<IEvent> EventLog { get => _eventLog; set { _eventLog = value; OnMySelfChanged(); } }
+        private ObservableCollection<IEvent> _eventLog = new();
 
-        public ObservableCollection<UIEvent> EventLog { get => _eventLog; set { _eventLog = value; OnMySelfChanged(); } }
-        private ObservableCollection<UIEvent> _eventLog = new();
+        public bool IsRecording { get => _isRecording; set { _isRecording = value; OnMySelfChanged(); } }
+        private bool _isRecording;
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"

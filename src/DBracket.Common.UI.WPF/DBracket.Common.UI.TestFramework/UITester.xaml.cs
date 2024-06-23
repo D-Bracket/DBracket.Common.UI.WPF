@@ -8,22 +8,21 @@ namespace DBracket.Common.UI.TestFramework
     public partial class UITester : Window
     {
         #region "----------------------------- Private Fields ------------------------------"
-        private ObservableCollection<Window> _windowsToTest;
+        private ObservableCollection<Type> _windowTypesToTest;
         private UITesterViewModel _viewModel;
         #endregion
 
 
 
         #region "------------------------------ Constructor --------------------------------"
-        public UITester(ObservableCollection<Window> windowsToTest)
+        public UITester(ObservableCollection<Type> windowTypesToTest)
         {
-            _windowsToTest = windowsToTest;
+            _windowTypesToTest = windowTypesToTest;
 
             InitializeComponent();
 
-            _viewModel = new UITesterViewModel(DialogHost.DialogController, windowsToTest);
+            _viewModel = new UITesterViewModel(DialogHost.DialogController, windowTypesToTest);
             DataContext = _viewModel;
-            windowsToTest.First().Show();
 
             TestTree.SelectedItemChanged += new RoutedPropertyChangedEventHandler<object>((object sender, RoutedPropertyChangedEventArgs<object> args) =>
             {

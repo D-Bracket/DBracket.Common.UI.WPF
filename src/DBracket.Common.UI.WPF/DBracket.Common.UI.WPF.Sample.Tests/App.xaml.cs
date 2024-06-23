@@ -26,9 +26,9 @@ namespace DBracket.Common.UI.WPF.Sample.Tests
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             UITester.Initialize();
-            var windowsToTest = new System.Collections.ObjectModel.ObservableCollection<Window>
+            var windowsToTest = new System.Collections.ObjectModel.ObservableCollection<Type>
             {
-                new MainWindow()
+                typeof(MainWindow)
             };
 
             var tester = new UITester(windowsToTest);

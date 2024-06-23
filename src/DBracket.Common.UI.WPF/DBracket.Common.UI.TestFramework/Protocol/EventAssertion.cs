@@ -1,20 +1,21 @@
 ﻿using DBracket.Common.TestFramework;
 using DBracket.Common.UI.WPF.Bases;
-using Newtonsoft.Json;
-using System.Collections.ObjectModel;
 
 namespace DBracket.Common.UI.TestFramework.Protocol
 {
-    public class Test : PropertyChangedBase
+    public class EventAssertion : PropertyChangedBase
     {
         #region "----------------------------- Private Fields ------------------------------"
-
+        private IEvent _event;
         #endregion
 
 
 
         #region "------------------------------ Constructor --------------------------------"
-
+        public EventAssertion(IEvent @event)
+        {
+            _event = @event;
+        }
         #endregion
 
 
@@ -40,23 +41,27 @@ namespace DBracket.Common.UI.TestFramework.Protocol
         public string Name { get => _name; set { _name = value; OnMySelfChanged(); } }
         private string _name;
 
-        public string Description { get => _description; set { _description = value; OnMySelfChanged(); } }
-        private string _description;
+        public EventAssertionTypes SelectedAssertionType { get => _selectedAssertionType; set { _selectedAssertionType = value; OnMySelfChanged(); } }
+        private EventAssertionTypes _selectedAssertionType;
 
-        [JsonIgnore]
-        public TestSequence TestSequence { get => _testSequence; set { _testSequence = value; OnMySelfChanged(); } }
-        private TestSequence _testSequence;
+        public string LowerLimit { get => _lowerLimit; set { _lowerLimit = value; OnMySelfChanged(); } }
+        private string _lowerLimit;
 
-        public ObservableCollection<EventToTest> Events { get => _events; set { _events = value; OnMySelfChanged(); } }
-        private ObservableCollection<EventToTest> _events = new();
-
-        public TestResult Result { get => _result; set { _result = value; OnMySelfChanged(); } }
-        private TestResult _result;
+        public string UpperLimit { get => _upperLimit; set { _upperLimit = value; OnMySelfChanged(); } }
+        private string _upperLimit;
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"
 
         #endregion
         #endregion
+    }
+
+    public enum EventAssertionTypes
+    {
+        Equals,
+        Contains,
+        InRange,
+        Regex
     }
 }

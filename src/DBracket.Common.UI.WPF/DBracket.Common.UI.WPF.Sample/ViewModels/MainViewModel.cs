@@ -1,4 +1,5 @@
-﻿using DBracket.Common.UI.WPF.Bases;
+﻿using DBracket.Common.TestFramework;
+using DBracket.Common.UI.WPF.Bases;
 using DBracket.Common.UI.WPF.Commands;
 using DBracket.Common.UI.WPF.Sample.PathExamples.ViewModel;
 using DBracket.Common.UI.WPF.Sample.Views.Base;
@@ -104,20 +105,31 @@ namespace DBracket.Common.UI.WPF.Sample.ViewModels
         #region "----------------------------- Command Handling ----------------------------"
         public override void ExecuteCommands(string? command)
         {
-            //switch (command)
-            //{
-            //    case "OpenFlyout":
-            //        IsFlyoutOpened = true;
-            //        break;
+            switch (command)
+            {
+                case "Test1":
+                    var newEvent = new Event()
+                    {
+                        Name = "Logic",
+                        Description = "Logic did something",
+                        EventType= "Logic"
+                    };
+                    ReportCenter.ReportEvent(newEvent);
 
-            //    case "CloseFlyout":
-            //        IsFlyoutOpened = false;
-            //        break;
+                    break;
 
-            //    case "Test":
-            //        LoadImages();
-            //        break;
-            //}
+                //case "OpenFlyout":
+                //    IsFlyoutOpened = true;
+                //    break;
+
+                //case "CloseFlyout":
+                //    IsFlyoutOpened = false;
+                //    break;
+
+                //case "Test":
+                //    LoadImages();
+                //    break;
+            }
         }
 
 

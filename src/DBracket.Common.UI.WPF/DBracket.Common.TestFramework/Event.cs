@@ -1,4 +1,6 @@
-﻿namespace DBracket.Common.TestFramework
+﻿using System.Collections.ObjectModel;
+
+namespace DBracket.Common.TestFramework
 {
     public class Event : IEvent
     {
@@ -34,6 +36,12 @@
         #region "------------------------------- Properties --------------------------------"
         public string Name { get; set; }
         public string Description { get; set; }
+
+        public required string EventType { get => _eventType; set { _eventType = value;  } }
+        private string _eventType;
+
+        public ObservableCollection<EventDetail> Details { get => _details; set { _details = value; } }
+        private ObservableCollection<EventDetail> _details = new();
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"

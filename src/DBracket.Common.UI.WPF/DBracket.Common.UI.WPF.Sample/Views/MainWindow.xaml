@@ -30,8 +30,8 @@
         <SolidColorBrush x:Key="DBracket.Colors.ContentMenu.Background">#26272B</SolidColorBrush>
         <SolidColorBrush x:Key="DBracket.Colors.ContentMenu.Background.IsSelected">#2B2D31</SolidColorBrush>
         <SolidColorBrush x:Key="DBracket.Colors.ContentMenu.Background.MouseOver">#203E50</SolidColorBrush>
-        
-        
+
+
 
         <ControlTemplate x:Key="DBracket.Common.UI.Styles.Button.Base2"
                          TargetType="{x:Type Button}">
@@ -131,17 +131,17 @@
                     Value="Center" />
         </Style>
 
-        
-        
-        
+
+
+
         <Style TargetType="{x:Type commonControls:SideMenuItem}"
                BasedOn="{StaticResource DBracket.Common.UI.WPF.SideMenuItem}">
             <Setter Property="Background"
-                    Value="{DynamicResource ResourceKey=DBracket.Colors.Menu.Background}" />        
+                    Value="{DynamicResource ResourceKey=DBracket.Colors.Menu.Background}" />
             <!--<Setter Property="Background"
                     Value="{DynamicResource ResourceKey=DBracket.Colors.Menu.Background}" />-->
 
-            
+
             <Setter Property="cCS:SideMenuItemSettings.IsSelectedBrush"
                     Value="{DynamicResource DBracket.Colors.ContentMenu.Background.IsSelected}" />
             <Setter Property="cCS:SideMenuItemSettings.MouseOverBrush"
@@ -177,9 +177,9 @@
                                                  Command="{Binding MenuCommand}"
                                                  CommandParameter="DBracket.Common.UI.WPF">
                         <commonControls:SideMenuItem.IconContent>
-                            <commonControls:Icon IconType="Accept_PicolIcons" 
+                            <commonControls:Icon IconType="Accept_PicolIcons"
                                                  Width="15"
-                                                 Height="15"/>
+                                                 Height="15" />
                         </commonControls:SideMenuItem.IconContent>
 
                         <commonControls:SideMenuItem.SubItems>
@@ -208,9 +208,9 @@
                     </commonControls:SideMenuItem>
 
 
-                    
-                    
-                    
+
+
+
 
                     <commonControls:SideMenuItemSeparator Margin="0,20,0,2"
                                                           Foreground="{DynamicResource ResourceKey=DBracket.Colors.ContentMenu.Background.IsSelected}" />
@@ -270,7 +270,7 @@
         </Grid>
 
 
-        
+
         <Border CornerRadius="20"
                 Margin="8,20,8,20"
                 Grid.Column="1"
@@ -289,518 +289,525 @@
 
                     <StackPanel Orientation="Horizontal"
                                 Visibility="Visible">
-                    
-                <StackPanel>
-                    <!--Add enough content to make the scrollbar visible--> 
-                    <TextBlock Text="Scroll content"
-                               Style="{StaticResource DBracket.Text.1}"/>
-                    <TextBlock Text="Scroll content"
-                               Foreground="White"
-                               FontSize="20" />
-                    <Button x:Name="TestButton"
-                            Content="Test" 
-                            testBehaviors:RegisterControl.IsTestControl="True"/>
-                    <TextBlock Text="Scroll content"
-                               FontSize="24" />
-                    <TextBlock Text="Scroll content"
-                               FontSize="24" />
-                    <TextBlock Text="Scroll content"
-                               FontSize="24" />
-                    <TextBlock Text="Scroll content"
-                               FontSize="24" />
-                    <TextBlock Text="Scroll content"
-                               FontSize="24" />
-                    <TextBlock Text="Scroll content"
-                               FontSize="24" />
-                    <TextBlock Text="Scroll content"
-                               FontSize="24" />
-                    <TextBlock Text="Scroll content"
-                               FontSize="24" />
-                    <TextBlock Text="Scroll content"
-                               FontSize="24" />
-                    <TextBlock Text="Scroll content"
-                               FontSize="24" />
-                    <TextBlock Text="Scroll content"
-                               FontSize="24" />
-                    <TextBlock Text="Scroll content"
-                               FontSize="24" />
-                    <TextBlock Text="Scroll content"
-                               FontSize="24" />
-                    <TextBlock Text="Scroll content"
-                               FontSize="24" />
-                    <TextBlock Text="Scroll content"
-                               FontSize="24" />
-                    <TextBlock Text="Scroll content"
-                               FontSize="24" />
-                    <TextBlock Text="Scroll content"
-                               FontSize="24" />
-                    <TextBlock Text="Scroll content"
-                               FontSize="24" />
-                    <TextBlock Text="Scroll content"
-                               FontSize="24" />
-                    <TextBlock Text="Scroll content"
-                               FontSize="24" />
-                    <TextBlock Text="Scroll content"
-                               FontSize="24" />
-                    <TextBlock Text="Scroll content"
-                               FontSize="24" />
-                    <TextBlock Text="Scroll content"
-                               FontSize="24" />
-                    <TextBlock Text="Scroll content"
-                               FontSize="24" />
-                    <TextBlock Text="Scroll content"
-                               FontSize="24" />
-                </StackPanel>
 
-                    <StackPanel>
-                        <!--Add enough content to make the scrollbar visible-->
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <Button Content="Test" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                    </StackPanel>
+                        <StackPanel>
+                            <!--Add enough content to make the scrollbar visible-->
+                            <TextBlock Text="Scroll content"
+                                       Style="{StaticResource DBracket.Text.1}" />
+                            <TextBlock Text="Scroll content"
+                                       Foreground="White"
+                                       FontSize="20" />
+                            <Button x:Name="TestButton"
+                                    Content="Test"
+                                    Command="{Binding Commands}"
+                                    CommandParameter="Test1"
+                                    testBehaviors:RegisterControl.IsTestControl="True" />
+                            <Button x:Name="TestButton2"
+                                    Content="Test"
+                                    Command="{Binding Commands}"
+                                    CommandParameter="Test2"
+                                    testBehaviors:RegisterControl.IsTestControl="True" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                        </StackPanel>
 
-                    <StackPanel>
-                        <!--Add enough content to make the scrollbar visible-->
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <Button Content="Test" />
-                        <!--<TextBox Text="Scroll content"
+                        <StackPanel>
+                            <!--Add enough content to make the scrollbar visible-->
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <Button Content="Test" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                        </StackPanel>
+
+                        <StackPanel>
+                            <!--Add enough content to make the scrollbar visible-->
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <Button Content="Test" />
+                            <!--<TextBox Text="Scroll content"
              FontSize="24">
         <TextBox.Style>
             <Style TargetType="TextBox" />
         </TextBox.Style>
     </TextBox>-->
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                    </StackPanel>
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                        </StackPanel>
 
-                    <StackPanel>
-                        <!--Add enough content to make the scrollbar visible-->
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <Button Content="Test" />
-                        <!--<TextBox Text="Scroll content"
+                        <StackPanel>
+                            <!--Add enough content to make the scrollbar visible-->
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <Button Content="Test" />
+                            <!--<TextBox Text="Scroll content"
              FontSize="24">
         <TextBox.Style>
             <Style TargetType="TextBox" />
         </TextBox.Style>
     </TextBox>-->
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                    </StackPanel>
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                        </StackPanel>
 
-                    <StackPanel>
-                        <!--Add enough content to make the scrollbar visible-->
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <Button Content="Test" />
-                        <!--<TextBox Text="Scroll content"
+                        <StackPanel>
+                            <!--Add enough content to make the scrollbar visible-->
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <Button Content="Test" />
+                            <!--<TextBox Text="Scroll content"
              FontSize="24">
         <TextBox.Style>
             <Style TargetType="TextBox" />
         </TextBox.Style>
     </TextBox>-->
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                    </StackPanel>
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                        </StackPanel>
 
-                    <StackPanel>
-                        <!--Add enough content to make the scrollbar visible-->
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <Button Content="Test" />
-                        <!--<TextBox Text="Scroll content"
+                        <StackPanel>
+                            <!--Add enough content to make the scrollbar visible-->
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <Button Content="Test" />
+                            <!--<TextBox Text="Scroll content"
              FontSize="24">
         <TextBox.Style>
             <Style TargetType="TextBox" />
         </TextBox.Style>
     </TextBox>-->
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                    </StackPanel>
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                        </StackPanel>
 
-                    <StackPanel>
-                        <!--Add enough content to make the scrollbar visible-->
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <Button Content="Test" />
-                        <!--<TextBox Text="Scroll content"
+                        <StackPanel>
+                            <!--Add enough content to make the scrollbar visible-->
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <Button Content="Test" />
+                            <!--<TextBox Text="Scroll content"
              FontSize="24">
         <TextBox.Style>
             <Style TargetType="TextBox" />
         </TextBox.Style>
     </TextBox>-->
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                    </StackPanel>
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                        </StackPanel>
 
-                    <StackPanel>
-                        <!--Add enough content to make the scrollbar visible-->
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <Button Content="Test" />
-                        <!--<TextBox Text="Scroll content"
+                        <StackPanel>
+                            <!--Add enough content to make the scrollbar visible-->
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <Button Content="Test" />
+                            <!--<TextBox Text="Scroll content"
              FontSize="24">
         <TextBox.Style>
             <Style TargetType="TextBox" />
         </TextBox.Style>
     </TextBox>-->
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
-                        <TextBlock Text="Scroll content"
-                                   FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                            <TextBlock Text="Scroll content"
+                                       FontSize="24" />
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
                 </Grid>
 
             </ScrollViewer>
