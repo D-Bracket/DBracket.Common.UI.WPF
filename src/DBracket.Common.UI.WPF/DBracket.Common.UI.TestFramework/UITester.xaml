@@ -25,7 +25,7 @@
         <commonHelper:BindingProxy x:Key="ViewModelProxy"
                                    DataSource="{Binding}" />
 
-        <system:String x:Key="Record">Record</system:String> 
+        <system:String x:Key="Record">Record</system:String>
         <system:String x:Key="StopRecording">Stop Recording</system:String>
 
 
@@ -162,7 +162,7 @@
 
                             <!--Test Menus-->
                             <Grid Grid.Column="0"
-                                  IsEnabled="{Binding SelectedWindowToTest, Converter={StaticResource NullToBoolVis}}">
+                                  IsEnabled="{Binding SelectedConfiguration, Converter={StaticResource NullToBoolVis}}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="300" />
                                     <ColumnDefinition Width="8" />
@@ -253,75 +253,6 @@
                                                      ItemTemplateSelector="{StaticResource EventTemplateSelector}"
                                                      Width="250"
                                                      Grid.Row="1">
-                                                <ListBox.Resources>
-
-                                                    <!--<DataTemplate DataType="{x:Type protocol:EventToTest}"
-                                                                  x:Key="UIEventTemplate">
-                                                        <Grid Margin="0,0,0,1"
-                                                              Width="236"
-                                                              Background="LightYellow">
-                                                            <Grid.RowDefinitions>
-                                                                <RowDefinition Height="Auto" />
-                                                                <RowDefinition Height="0" />
-                                                                <RowDefinition Height="*" />
-                                                                <RowDefinition Height="Auto" />
-                                                            </Grid.RowDefinitions>
-                                                            <TextBlock Text="UI Event"
-                                                                       FontSize="14"
-                                                                       FontStyle="Italic" />
-                                                            <Grid Grid.Row="2">
-                                                                <Grid.ColumnDefinitions>
-                                                                    <ColumnDefinition Width="8" />
-                                                                    <ColumnDefinition Width="Auto" />
-                                                                    <ColumnDefinition Width="8" />
-                                                                    <ColumnDefinition Width="*" />
-                                                                </Grid.ColumnDefinitions>
-                                                                <Grid.RowDefinitions>
-                                                                    <RowDefinition Height="Auto" />
-                                                                    <RowDefinition Height="Auto" />
-                                                                    <RowDefinition Height="Auto" />
-                                                                </Grid.RowDefinitions>
-                                                                <TextBlock Text="Control:"
-                                                                           Grid.ColumnSpan="4" />
-                                                                <TextBlock Text="   Type:"
-                                                                           Grid.Row="1"
-                                                                           Grid.Column="1" />
-                                                                <TextBlock Text="{Binding Event.Control.DependencyObjectType.Name}"
-                                                                           Grid.Row="1"
-                                                                           Grid.Column="3" />
-
-                                                                <TextBlock Text="   Name:"
-                                                                           Grid.Row="2"
-                                                                           Grid.Column="1" />
-                                                                <TextBlock Text="{Binding Event.Name}"
-                                                                           Grid.Row="2"
-                                                                           Grid.Column="3" />
-                                                            </Grid>
-                                                            <StackPanel Orientation="Horizontal"
-                                                                        Grid.Row="3"
-                                                                        Margin="0,8,0,0">
-                                                                <TextBlock Text="EventType:" />
-                                                                <TextBlock Text="{Binding Event.Description}"
-                                                                           Margin="8,0,0,0" />
-                                                            </StackPanel>
-                                                        </Grid>
-                                                    </DataTemplate>
-
-                                                    <DataTemplate DataType="{x:Type protocol:EventToTest}"
-                                                                  x:Key="EvenTemplate">
-                                                        <StackPanel Margin="0,0,0,1"
-                                                                    Background="WhiteSmoke"
-                                                                    Width="236">
-                                                            <TextBlock Text="Event:" />
-                                                            <TextBlock Text="{Binding Event.Name}" />
-                                                            <TextBlock Text="{Binding Event.Description}" />
-                                                        </StackPanel>
-                                                    </DataTemplate>
-
-                                                    <protocol:EventTemplateSelector x:Key="EventTemplateSelector"
-                                                                                    UIEventDataTemplate="{StaticResource UIEventTemplate}"
-                                                                                    EventDataTemplate="{StaticResource EvenTemplate}"/>-->
-                                                </ListBox.Resources>
                                             </ListBox>
 
                                             <StackPanel Orientation="Horizontal"
@@ -347,9 +278,9 @@
                                                       VerticalScrollBarVisibility="Visible">
                                             <Grid>
                                                 <Grid.RowDefinitions>
-                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="400" />
                                                     <RowDefinition Height="8" />
-                                                    <RowDefinition Height="300" />
+                                                    <RowDefinition Height="*" />
                                                 </Grid.RowDefinitions>
 
                                                 <GroupBox Header="Event Info"
@@ -370,12 +301,13 @@
 
                                                             <TextBlock Text="Details" />
 
-                                                            <ListBox ItemsSource="{Binding SelectedEvent.Details}"
+                                                            <ListBox ItemsSource="{Binding SelectedEvent.Event.Details}"
+                                                                     SelectedItem="{Binding SelectedEventDetail}"
                                                                      Grid.Row="1">
                                                                 <ListBox.ItemTemplate>
                                                                     <DataTemplate>
                                                                         <Grid>
-                                                                            <TextBlock Text="{Binding }" />
+                                                                            <TextBlock Text="{Binding Name}" />
                                                                         </Grid>
                                                                     </DataTemplate>
                                                                 </ListBox.ItemTemplate>
@@ -386,25 +318,38 @@
                                                         <!--Detail Parameter-->
                                                         <Grid Grid.Column="2">
                                                             <Grid.RowDefinitions>
+                                                                <RowDefinition Height="Auto" />
                                                                 <RowDefinition Height="*" />
-                                                                <!--<RowDefinition Height="8" />
-                                                                <RowDefinition Height="*" />-->
                                                             </Grid.RowDefinitions>
 
-                                                            <Grid Grid.Row="0">
-                                                                <Grid.RowDefinitions>
-                                                                    <RowDefinition Height="Auto" />
-                                                                    <RowDefinition Height="*" />
-                                                                </Grid.RowDefinitions>
+                                                            <TextBlock Text="Parameter" />
 
-                                                                <TextBlock Text="Parameter" />
+                                                            <ListBox ItemsSource="{Binding SelectedEventDetail.Parameters}"
+                                                                     HorizontalAlignment="Stretch"
+                                                                     SelectionMode="Extended"
+                                                                     Grid.Row="1">
+                                                                <ListBox.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                        <Grid>
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="0" />
+                                                                                <ColumnDefinition Width="*" />
+                                                                                <ColumnDefinition Width="Auto" />
+                                                                                <ColumnDefinition Width="*" />
+                                                                            </Grid.ColumnDefinitions>
 
-                                                                <ListBox ItemsSource="{Binding SelectedEvent.ControlProperties}"
-                                                                         HorizontalAlignment="Stretch"
-                                                                         SelectionMode="Extended"
-                                                                         Grid.Row="1">
-                                                                </ListBox>
-                                                            </Grid>
+                                                                            <!--<TextBlock Text="Name: " />-->
+                                                                            <TextBlock Text="{Binding Name}"
+                                                                                       Grid.Column="1" />
+
+                                                                            <TextBlock Text=": "
+                                                                                       Grid.Column="2" />
+                                                                            <TextBlock Text="{Binding Value}"
+                                                                                       Grid.Column="3" />
+                                                                        </Grid>
+                                                                    </DataTemplate>
+                                                                </ListBox.ItemTemplate>
+                                                            </ListBox>
                                                         </Grid>
                                                     </Grid>
                                                 </GroupBox>
@@ -425,19 +370,85 @@
                                                                 <RowDefinition Height="*" />
                                                             </Grid.RowDefinitions>
 
-                                                            <ItemsControl ItemsSource="{Binding }">
+                                                            <ItemsControl ItemsSource="{Binding SelectedEvent.Assertions}"
+                                                                          Background="LightYellow">
                                                                 <ItemsControl.ItemTemplate>
                                                                     <DataTemplate>
                                                                         <Grid>
+                                                                            <Grid.RowDefinitions>
+                                                                                <RowDefinition Height="Auto" />
+                                                                                <RowDefinition Height="Auto" />
+                                                                            </Grid.RowDefinitions>
+                                                                            
+                                                                        <Grid>
                                                                             <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="Auto" />
                                                                                 <ColumnDefinition Width="*" />
                                                                                 <ColumnDefinition Width="4" />
+                                                                                <ColumnDefinition Width="Auto" />
                                                                                 <ColumnDefinition Width="*" />
                                                                                 <ColumnDefinition Width="4" />
-                                                                                <ColumnDefinition Width="*" />
-                                                                                <ColumnDefinition Width="4" />
-                                                                                <ColumnDefinition Width="*" />
                                                                             </Grid.ColumnDefinitions>
+                                                   
+                                                                            <TextBlock Text="Detail:"
+                                                                                       VerticalAlignment="Center"/>
+                                                                            <ComboBox Grid.Column="1"
+                                                                                      Margin="4,0,0,0"
+                                                                                      ItemsSource="{Binding Source={StaticResource ViewModelProxy}, Path=DataSource.SelectedEvent.Event.Details}"
+                                                                                      SelectedItem="{Binding EventDetail}"
+                                                                                      HorizontalAlignment="Stretch"
+                                                                                      DisplayMemberPath="Name" />
+
+                                                                            <TextBlock Text="Parameter:" 
+                                                                                       VerticalAlignment="Center"
+                                                                                       Grid.Column="3"/>
+                                                                                <ComboBox Grid.Column="4"
+                                                                                          Margin="4,0,0,0"
+                                                                                          IsEditable="True"
+                                                                                          ItemsSource="{Binding EventDetail.Parameters}"
+                                                                                          SelectedItem="{Binding Parameter}"
+                                                                                          DisplayMemberPath="Name" />
+                                                                            </Grid>
+
+                                                                            <Grid Grid.Row="1">
+                                                                                <Grid.ColumnDefinitions>
+                                                                                    <ColumnDefinition Width="Auto" />
+                                                                                    <ColumnDefinition Width="*" />
+                                                                                    <ColumnDefinition Width="4" />
+                                                                                    <ColumnDefinition Width="Auto" />
+                                                                                    <ColumnDefinition Width="*" />
+                                                                                    <ColumnDefinition Width="4" />
+                                                                                    <ColumnDefinition Width="Auto" />
+                                                                                    <ColumnDefinition Width="*" />
+                                                                                    <ColumnDefinition Width="4" />
+                                                                                    <ColumnDefinition Width="Auto" />
+                                                                                    <ColumnDefinition Width="*" />
+                                                                                </Grid.ColumnDefinitions>
+
+                                                                                <TextBlock Text="Comparison Mode:"
+                                                                                           VerticalAlignment="Center" />
+                                                                                <ComboBox Grid.Column="1"
+                                                                                          Margin="4,0,0,0"
+                                                                                          ItemsSource="{Binding Source={commonHelper:EnumBindingSourceExtension {x:Type protocol:EventAssertionTypes}}}"
+                                                                                          SelectedItem="{Binding SelectedAssertionType}"
+                                                                                          HorizontalAlignment="Stretch"/>
+
+                                                                                <TextBlock Text="From:"
+                                                                                           Grid.Column="3"
+                                                                                           VerticalAlignment="Center" />
+                                                                                <TextBox Grid.Column="4"
+                                                                                          Margin="4,0,0,0"
+                                                                                         Text="{Binding LowerLimit}"
+                                                                                          HorizontalAlignment="Stretch"/>
+
+                                                                                <TextBlock Text="To:"
+                                                                                           Grid.Column="6"
+                                                                                           VerticalAlignment="Center" />
+                                                                                <TextBox Grid.Column="7"
+                                                                                         Text="{Binding UpperLimit}"
+                                                                                         Margin="4,0,0,0"
+                                                                                         HorizontalAlignment="Stretch" />
+                                                                            </Grid>
                                                                         </Grid>
                                                                     </DataTemplate>
                                                                 </ItemsControl.ItemTemplate>
@@ -461,8 +472,6 @@
                                                 </GroupBox>
                                             </Grid>
                                         </ScrollViewer>
-
-
                                     </Grid>
                                 </Grid>
                             </Grid>
@@ -506,154 +515,46 @@
                 </TabItem>
 
                 <TabItem Header="Execute Tests">
-                    <Button Content="Execute Tests"
-                            Command="{Binding Commands}"
-                            CommandParameter="ExecuteEvent" />
+                    <TabItem.Content>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            
+                            <Button Content="Execute Tests"
+                                    Command="{Binding Commands}"
+                                    CommandParameter="ExecuteEvent" />
+
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" 
+                                                      MinWidth="300"/>
+                                    <ColumnDefinition Width="8" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <TreeView x:Name="ResultTree"
+                                          ItemsSource="{Binding Results}">
+                                    <TreeView.Resources>
+                                        <HierarchicalDataTemplate DataType="{x:Type protocol:TestConfigurationResult}"
+                                                                  ItemsSource="{Binding TestSequences}">
+                                            <TextBlock Text="{Binding Path=TestConfiguration.Name}" />
+                                        </HierarchicalDataTemplate>
+                                        <HierarchicalDataTemplate DataType="{x:Type protocol:TestSequenceResult}"
+                                                                  ItemsSource="{Binding Tests}">
+                                            <TextBlock Text="{Binding Path=TestSequence.Name}" />
+                                        </HierarchicalDataTemplate>
+                                        <DataTemplate DataType="{x:Type protocol:TestResult}">
+                                            <TextBlock Text="{Binding Path=Test.Name}" />
+                                        </DataTemplate>
+                                    </TreeView.Resources>
+                                </TreeView>
+                            </Grid>
+                        </Grid>
+                    </TabItem.Content>
                 </TabItem>
             </TabControl>
-
-            <Grid Grid.Row="2"
-                  Visibility="Collapsed">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="20" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-
-                <!--Test Menus-->
-                <Grid Grid.Column="0"
-                      IsEnabled="{Binding SelectedWindowToTest, Converter={StaticResource NullToBoolVis}}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="300" />
-                        <ColumnDefinition Width="20" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="20" />
-                        <ColumnDefinition Width="300" />
-                    </Grid.ColumnDefinitions>
-
-                    <!--Test Objects-->
-                    <Grid Grid.Column="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <TextBlock Text="TestSequences" />
-
-                        <TreeView x:Name="TestTree2"
-                                  Grid.Row="1"
-                                  ItemsSource="{Binding SelectedConfiguration.TestSequences}">
-                            <!--<TreeView.ItemContainerStyle>
-                        <Style TargetType="{x:Type TreeViewItem}">
-                            <Setter Property="IsSelected"
-                                    Value="{Binding Source={StaticResource ViewModelProxy}, Path=DataSource.SelectedTestSequence}" />
-                        </Style>
-                    </TreeView.ItemContainerStyle>-->
-
-                            <TreeView.Resources>
-                                <HierarchicalDataTemplate DataType="{x:Type protocol:TestSequence}"
-                                                          ItemsSource="{Binding Tests}">
-                                    <TextBlock Text="{Binding Path=Name}" />
-                                </HierarchicalDataTemplate>
-                                <DataTemplate DataType="{x:Type protocol:Test}">
-                                    <TextBlock Text="{Binding Path=Name}" />
-                                </DataTemplate>
-                                <!--<HierarchicalDataTemplate DataType="{x:Type protocol:Test}"
-                                                  ItemsSource="{Binding Entries}">
-                            <TextBlock Text="{Binding Path=Name}" />
-                        </HierarchicalDataTemplate>-->
-                            </TreeView.Resources>
-                        </TreeView>
-
-                        <StackPanel Orientation="Horizontal"
-                                    Grid.Row="2">
-                            <Button Content="+ Sequence"
-                                    Width="80"
-                                    Height="40"
-                                    ToolTip="Add TestSequence"
-                                    Command="{Binding Commands}"
-                                    CommandParameter="AddTestSequence" />
-
-                            <Button Content="+ Test"
-                                    Width="80"
-                                    Height="40"
-                                    ToolTip="Add Test"
-                                    IsEnabled="{Binding SelectedTestSequence, Converter={StaticResource NullToBoolVis}}"
-                                    Command="{Binding Commands}"
-                                    CommandParameter="AddTest" />
-                        </StackPanel>
-                    </Grid>
-
-                    <GroupBox Header="Settings"
-                              IsEnabled="{Binding SelectedTestSequence, Converter={StaticResource NullToBoolVis}}"
-                              Grid.Column="2">
-                        <StackPanel>
-                            <TextBox Text="{Binding SelectedTestSequence.Name, UpdateSourceTrigger=PropertyChanged}"
-                                     HorizontalAlignment="Left"
-                                     Width="200" />
-                        </StackPanel>
-                    </GroupBox>
-
-                    <!--Test Event Logs-->
-                    <Grid Grid.Column="4">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <TextBlock Text="Test Events" />
-
-                        <ListBox ItemsSource="{Binding SelectedTest.Events}"
-                                 Grid.Row="1">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate DataType="{x:Type testFrameworkUI:UIEvent}">
-                                    <StackPanel Margin="0,0,0,1"
-                                                Background="WhiteSmoke"
-                                                Width="280">
-                                        <TextBlock Text="Event:" />
-                                        <TextBlock Text="{Binding Name}" />
-                                        <TextBlock Text="{Binding Description}" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
-
-                        <StackPanel Orientation="Horizontal"
-                                    Grid.Row="2">
-                            <Button Content="Record Events"
-                                    Width="100"
-                                    Height="40"
-                                    Command="{Binding Commands}"
-                                    CommandParameter="RecordEvents" />
-                        </StackPanel>
-                    </Grid>
-                </Grid>
-
-                <!--Window EventLogs-->
-                <Grid Grid.Column="2">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <TextBlock Text="EventLog" />
-
-                    <ListBox ItemsSource="{Binding EventLog}"
-                             SelectedItem="{Binding SelectedEvent}"
-                             Grid.Row="1">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Margin="0,0,0,1"
-                                            Background="WhiteSmoke"
-                                            Width="280">
-                                    <TextBlock Text="Event:" />
-                                    <TextBlock Text="{Binding Name}" />
-                                    <TextBlock Text="{Binding Description}" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </Grid>
-            </Grid>
         </Grid>
 
 

@@ -1,8 +1,6 @@
-﻿using System.Collections.ObjectModel;
-
-namespace DBracket.Common.TestFramework
+﻿namespace DBracket.Common.TestFramework
 {
-    public class EventDetail
+    public class EventDetailParameter
     {
         #region "----------------------------- Private Fields ------------------------------"
 
@@ -11,9 +9,10 @@ namespace DBracket.Common.TestFramework
 
 
         #region "------------------------------ Constructor --------------------------------"
-        public EventDetail(string name)
+        public EventDetailParameter(string name, string value)
         {
             Name = name;
+            Value = value;
         }
         #endregion
 
@@ -37,11 +36,8 @@ namespace DBracket.Common.TestFramework
 
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
-        public string Name { get => _name; set { _name = value; } }
-        private string _name;
-
-        public ObservableCollection<EventDetailParameter> Parameters { get => _parameters; set { _parameters = value; } }
-        private ObservableCollection<EventDetailParameter> _parameters = new();
+        public string Name { get; }
+        public string Value { get; }
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"

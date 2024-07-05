@@ -13,6 +13,7 @@ namespace DBracket.Common.TestFramework
         public string Name { get; set; }
         public string Description { get; set; }
         public string EventType { get; set; }
+        public DateTime Time { get; set; }
 
         public ObservableCollection<EventDetail> Details { get; set; }
         #endregion

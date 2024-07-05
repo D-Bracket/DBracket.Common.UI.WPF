@@ -1,8 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using DBracket.Common.UI.WPF.Bases;
+using System.Collections.ObjectModel;
 
-namespace DBracket.Common.TestFramework
+namespace DBracket.Common.UI.TestFramework.Protocol
 {
-    public class EventDetail
+    internal class TestConfigurationResult : PropertyChangedBase
     {
         #region "----------------------------- Private Fields ------------------------------"
 
@@ -11,9 +12,9 @@ namespace DBracket.Common.TestFramework
 
 
         #region "------------------------------ Constructor --------------------------------"
-        public EventDetail(string name)
+        public TestConfigurationResult(TestConfiguration testConfiguration)
         {
-            Name = name;
+            TestConfiguration = testConfiguration;
         }
         #endregion
 
@@ -37,16 +38,27 @@ namespace DBracket.Common.TestFramework
 
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
-        public string Name { get => _name; set { _name = value; } }
-        private string _name;
+        public ResultStates Result { get => _result; set { _result = value; OnMySelfChanged(); } }
+        private ResultStates _result = ResultStates.NOTEST;
 
-        public ObservableCollection<EventDetailParameter> Parameters { get => _parameters; set { _parameters = value; } }
-        private ObservableCollection<EventDetailParameter> _parameters = new();
+        public TestConfiguration TestConfiguration { get => _testConfiguration; set { _testConfiguration = value; OnMySelfChanged(); } }
+        private TestConfiguration _testConfiguration;
+
+        public ObservableCollection<TestSequenceResult> TestSequences { get => _testSequences; set { _testSequences = value; OnMySelfChanged(); } }
+        private ObservableCollection<TestSequenceResult> _testSequences = new();
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"
 
         #endregion
         #endregion
+    }
+
+    public enum ResultStates
+    {
+        NOTEST,
+        FAILED,
+        PASSED,
+        WARNING
     }
 }

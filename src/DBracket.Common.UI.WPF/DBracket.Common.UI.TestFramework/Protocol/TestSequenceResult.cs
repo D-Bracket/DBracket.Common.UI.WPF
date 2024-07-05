@@ -1,8 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using DBracket.Common.UI.WPF.Bases;
+using System.Collections.ObjectModel;
 
-namespace DBracket.Common.TestFramework
+namespace DBracket.Common.UI.TestFramework.Protocol
 {
-    public class EventDetail
+    internal class TestSequenceResult : PropertyChangedBase
     {
         #region "----------------------------- Private Fields ------------------------------"
 
@@ -11,9 +12,9 @@ namespace DBracket.Common.TestFramework
 
 
         #region "------------------------------ Constructor --------------------------------"
-        public EventDetail(string name)
+        public TestSequenceResult(TestSequence testSequence)
         {
-            Name = name;
+            TestSequence = testSequence;
         }
         #endregion
 
@@ -37,11 +38,14 @@ namespace DBracket.Common.TestFramework
 
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
-        public string Name { get => _name; set { _name = value; } }
-        private string _name;
+        public ResultStates Result { get => _result; set { _result = value; OnMySelfChanged(); } }
+        private ResultStates _result = ResultStates.NOTEST;
 
-        public ObservableCollection<EventDetailParameter> Parameters { get => _parameters; set { _parameters = value; } }
-        private ObservableCollection<EventDetailParameter> _parameters = new();
+        public TestSequence TestSequence { get => _testSequence; set { _testSequence = value; OnMySelfChanged(); } }
+        private TestSequence _testSequence;
+
+        public ObservableCollection<TestResult> Tests { get => _tests; set { _tests = value; OnMySelfChanged(); } }
+        private ObservableCollection<TestResult> _tests = new();
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"

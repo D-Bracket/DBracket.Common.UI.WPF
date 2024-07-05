@@ -11,7 +11,10 @@ namespace DBracket.Common.UI.TestFramework.Protocol
 
 
         #region "------------------------------ Constructor --------------------------------"
-
+        public TestResult(Test test)
+        {
+            Test = test;
+        }
         #endregion
 
 
@@ -34,7 +37,8 @@ namespace DBracket.Common.UI.TestFramework.Protocol
 
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
-
+        public ResultStates Result { get => _result; set { _result = value; OnMySelfChanged(); } }
+        private ResultStates _result = ResultStates.NOTEST;
 
         public Test Test { get => _test; set { _test = value; OnMySelfChanged(); } }
         private Test _test;

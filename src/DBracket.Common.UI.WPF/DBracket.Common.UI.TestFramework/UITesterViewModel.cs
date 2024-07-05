@@ -171,23 +171,52 @@ namespace DBracket.Common.UI.TestFramework
             ObservableCollection<IEvent> _eventLog = new();
             ReportCenter.EventReported += HandleExecuteTestEventReceived;
 
+            var testConfigurationResult = new TestConfigurationResult(SelectedConfiguration);
+            Results.Add(testConfigurationResult);
+
             foreach (var testSequence in SelectedConfiguration.TestSequences)
             {
+                var testSequenceResult = new TestSequenceResult(testSequence);
+                testConfigurationResult.TestSequences.Add(testSequenceResult);
+
                 foreach (var test in testSequence.Tests)
                 {
+                    var testResult = new TestResult(test);
+                    testSequenceResult.Tests.Add(testResult);
+
                     if (test.Events is null || test.Events.Count == 0)
                         continue;
 
-                    var startEvent = test.Events.First().Event as UIEvent;
-                    startEvent.ReExecute();
+                    foreach (var @event in test.Events)
+                    {
+                        if (@event.Event is not UIEvent uiEvent)
+                            continue;
+
+                        uiEvent.ReExecute();
+                    }
+                    //var startEvent = test.Events.First().Event as UIEvent;
+                    //startEvent.ReExecute();
+
+                    // Check Assertions
+                    for (int i = 0; i < test.Events.Count; i++)
+                    {
+                        if (test.Events[i].Event.Name != _eventLog[i].Name)
+                        {
+                            // fail
+                        }
+                        CheckAssertions(test.Events[i], _eventLog[i]);
+                    }
                 }
             }
             SelectedConfiguration._window.Close();
+
 
             foreach (var @event in _eventLog)
             {
 
             }
+
+
 
             //if (SelectedEvent is not null)
             //    SelectedEvent.ReExecute();
@@ -196,6 +225,30 @@ namespace DBracket.Common.UI.TestFramework
             void HandleExecuteTestEventReceived(IEvent reportedEvent)
             {
                 _eventLog.Add(reportedEvent);
+            }
+
+            bool CheckAssertions(EventToTest assertionEvent, IEvent @event)
+            {
+                foreach (var assertion in assertionEvent.Assertions)
+                {
+                    var detail = @event.Details.FirstOrDefault(x => x.Name == assertion.EventDetail.Name);
+                    if (detail is null)
+                        throw new Exception();
+
+                    var parameter = detail.Parameters.FirstOrDefault(x => x.Name == assertion.Parameter.Name);
+                    if (parameter is null)
+                        throw new Exception();
+
+                    var isDouble = double.TryParse(parameter.Value, out var doubleValue);
+                    if (isDouble)
+                    {
+                        var result = doubleValue <= assertion.UpperLimit && doubleValue >= assertion.LowerLimit;
+                        if (result == false)
+                            return false;
+                    }
+                }
+
+                return true;
             }
         }
 
@@ -226,11 +279,20 @@ namespace DBracket.Common.UI.TestFramework
         public EventToTest SelectedEvent { get => _selectedEvent; set { _selectedEvent = value; OnMySelfChanged(); } }
         private EventToTest _selectedEvent;
 
+        public EventDetail SelectedEventDetail { get => _selectedEventDetail; set { _selectedEventDetail = value; OnMySelfChanged(); } }
+        private EventDetail _selectedEventDetail;
+
         public ObservableCollection<IEvent> EventLog { get => _eventLog; set { _eventLog = value; OnMySelfChanged(); } }
         private ObservableCollection<IEvent> _eventLog = new();
 
         public bool IsRecording { get => _isRecording; set { _isRecording = value; OnMySelfChanged(); } }
         private bool _isRecording;
+
+
+
+
+        public ObservableCollection<TestConfigurationResult> Results { get => _results; set { _results = value; OnMySelfChanged(); } }
+        private ObservableCollection<TestConfigurationResult> _results = new();
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"

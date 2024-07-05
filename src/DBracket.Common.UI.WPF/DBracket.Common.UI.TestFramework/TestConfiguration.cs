@@ -42,38 +42,38 @@ namespace DBracket.Common.UI.TestFramework
         #endregion
 
         #region "----------------------------- Private Methods -----------------------------"
-        internal void LoadTestConfiguration(string configurationFilePath)
-        {
-            // Configuration loaded, do nothing
-            if (_isConfigurationLoaded)
-                return;
+        //internal void LoadTestConfiguration(string configurationFilePath)
+        //{
+        //    // Configuration loaded, do nothing
+        //    if (_isConfigurationLoaded)
+        //        return;
 
-            // Create not existing configuration
-            if (File.Exists(configurationFilePath) == false)
-            {
-                var windowConfiguration = JsonConvert.SerializeObject(this);
-                using (var stream = File.Open(configurationFilePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read))
-                {
-                    using (var writer = new StreamWriter(stream, new UTF8Encoding(encoderShouldEmitUTF8Identifier: false)))
-                    {
-                        writer.Write(windowConfiguration);
-                        writer.Flush();
-                    }
-                }
-                _isConfigurationLoaded = true;
-                return;
-            }
+        //    // Create not existing configuration
+        //    if (File.Exists(configurationFilePath) == false)
+        //    {
+        //        var windowConfiguration = JsonConvert.SerializeObject(this);
+        //        using (var stream = File.Open(configurationFilePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read))
+        //        {
+        //            using (var writer = new StreamWriter(stream, new UTF8Encoding(encoderShouldEmitUTF8Identifier: false)))
+        //            {
+        //                writer.Write(windowConfiguration);
+        //                writer.Flush();
+        //            }
+        //        }
+        //        _isConfigurationLoaded = true;
+        //        return;
+        //    }
 
-            // Load configuration
-            var configurationText = File.ReadAllText(configurationFilePath);
-            var configuration = JsonConvert.DeserializeObject<TestConfiguration>(configurationText);
-            configuration._file = configurationFilePath;
+        //    // Load configuration
+        //    var configurationText = File.ReadAllText(configurationFilePath);
+        //    var configuration = JsonConvert.DeserializeObject<TestConfiguration>(configurationText);
+        //    configuration._file = configurationFilePath;
 
-            if (configuration is null)
-                throw new Exception();
+        //    if (configuration is null)
+        //        throw new Exception();
 
-            _isConfigurationLoaded = true;
-        }
+        //    _isConfigurationLoaded = true;
+        //}
 
         //internal static ObservableCollection<WindowContainer> LoadConfiguration(string configurationFilePath)
         //{
@@ -102,7 +102,8 @@ namespace DBracket.Common.UI.TestFramework
             var settings = new JsonSerializerSettings()
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                TypeNameHandling = TypeNameHandling.Auto
+                TypeNameHandling = TypeNameHandling.Auto,
+                PreserveReferencesHandling = PreserveReferencesHandling.Objects
             };
 
             var files = Directory.GetFiles(configurationDirectory);
@@ -114,6 +115,8 @@ namespace DBracket.Common.UI.TestFramework
                 configuration._file = filePath;
                 configurations.Add(configuration);
             }
+
+            // Set parameter instances to 
 
             return configurations;
         }
@@ -142,8 +145,8 @@ namespace DBracket.Common.UI.TestFramework
                 new JsonSerializerSettings()
                 {
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                    TypeNameHandling = TypeNameHandling.Auto
-                    //PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                    TypeNameHandling = TypeNameHandling.Auto,
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
                 });
             using (var stream = File.Open(_file, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read))
             {

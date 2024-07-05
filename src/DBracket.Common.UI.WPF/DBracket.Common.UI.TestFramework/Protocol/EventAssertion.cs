@@ -38,17 +38,26 @@ namespace DBracket.Common.UI.TestFramework.Protocol
 
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
-        public string Name { get => _name; set { _name = value; OnMySelfChanged(); } }
-        private string _name;
+        public EventDetail EventDetail { get => _eventDetail; set { _eventDetail = value; OnMySelfChanged(); } }
+        private EventDetail _eventDetail;
+
+        public EventDetailParameter Parameter { get => _parameter; set { _parameter = value; OnMySelfChanged(); } }
+        private EventDetailParameter _parameter;
+
+        //public string EventDetail { get => _eventDetail; set { _eventDetail = value; OnMySelfChanged(); } }
+        //private string _eventDetail;
+
+        //public string Parameter { get => _parameter; set { _parameter = value; OnMySelfChanged(); } }
+        //private string _parameter;
 
         public EventAssertionTypes SelectedAssertionType { get => _selectedAssertionType; set { _selectedAssertionType = value; OnMySelfChanged(); } }
         private EventAssertionTypes _selectedAssertionType;
 
-        public string LowerLimit { get => _lowerLimit; set { _lowerLimit = value; OnMySelfChanged(); } }
-        private string _lowerLimit;
+        public double LowerLimit { get => _lowerLimit; set { _lowerLimit = value; OnMySelfChanged(); } }
+        private double _lowerLimit;
 
-        public string UpperLimit { get => _upperLimit; set { _upperLimit = value; OnMySelfChanged(); } }
-        private string _upperLimit;
+        public double UpperLimit { get => _upperLimit; set { _upperLimit = value; OnMySelfChanged(); } }
+        private double _upperLimit;
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"

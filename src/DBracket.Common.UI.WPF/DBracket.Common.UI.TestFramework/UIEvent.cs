@@ -1,6 +1,5 @@
 ﻿using DBracket.Common.TestFramework;
 using DBracket.Common.UI.TestFramework.Controls;
-using DBracket.Common.UI.TestFramework.Events;
 using DBracket.Common.UI.WPF.Bases;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
@@ -22,12 +21,17 @@ namespace DBracket.Common.UI.TestFramework
             Control = control;
 
             var properties = control.GetType().GetProperties();
+            var controlDetail = new EventDetail("Control Properties");
+           
             foreach (var property in properties)
             {
                 var propertyName = property.Name;
                 var value = property.GetValue(control);
-                ControlProperties.Add($"{propertyName}: {value}");
+
+                controlDetail.Parameters.Add(new EventDetailParameter($"{propertyName}", $"{value}"));
             }
+
+            Details.Add(controlDetail);
         }
 
         [JsonConstructor]
@@ -49,10 +53,11 @@ namespace DBracket.Common.UI.TestFramework
         {
             if ( Control is null)
             {
-                if (ControlProperties.Any(x => x.Contains("Name: ")) == false)
+                var controlDetail = Details.FirstOrDefault(x => x.Name == "Control Properties");
+                if (controlDetail.Parameters.Any(x => x.Name == "Name") == false)
                     throw new Exception();
 
-                var name = ControlProperties.Single(x => x.Contains("Name: ")).Replace("Name: ", "");
+                var name = controlDetail.Parameters.Single(x => x.Name == "Name").Value;
                 Control = UIReportCenter.GetControlByName(name);
             }
             var controlAccess = ControlAccess.GetControlAccess(Control.GetType());
@@ -97,12 +102,15 @@ namespace DBracket.Common.UI.TestFramework
         public string Description { get => _description; set { _description = value; OnMySelfChanged(); } }
         private string _description;
 
+        public DateTime Time { get => _time; set { _time = value; OnMySelfChanged(); } }
+        private DateTime _time;
+
         [JsonIgnore]
         public DependencyObject Control { get => _control; set { _control = value; OnMySelfChanged(); } }
         private DependencyObject _control;
 
-        public ObservableCollection<string> ControlProperties { get => _controlProperties; set { _controlProperties = value; OnMySelfChanged(); } }
-        private ObservableCollection<string> _controlProperties = new();
+        //public ObservableCollection<string> ControlProperties { get => _controlProperties; set { _controlProperties = value; OnMySelfChanged(); } }
+        //private ObservableCollection<string> _controlProperties = new();
 
         public required string EventType { get => _eventType; set { _eventType = value; OnMySelfChanged(); } }
         private string _eventType;

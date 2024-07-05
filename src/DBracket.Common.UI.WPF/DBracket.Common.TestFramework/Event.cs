@@ -37,6 +37,8 @@ namespace DBracket.Common.TestFramework
         public string Name { get; set; }
         public string Description { get; set; }
 
+        public DateTime Time { get; set; }
+
         public required string EventType { get => _eventType; set { _eventType = value;  } }
         private string _eventType;
 
