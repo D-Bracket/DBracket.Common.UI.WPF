@@ -17,7 +17,12 @@ namespace DBracket.Common.UI.TestFramework.Controls
         {
             RegisterEventType(EVENT_CLICK, new ClickEvent());
         }
+        #endregion
 
+
+
+        #region "--------------------------------- Methods ---------------------------------"
+        #region "----------------------------- Public Methods ------------------------------"
         public override void RegisterControlEvents(DependencyObject control)
         {
             if (control is not Button button)
@@ -25,16 +30,9 @@ namespace DBracket.Common.UI.TestFramework.Controls
 
             button.Click += (s, e) =>
             {
-                UIReportCenter.ReportEvent(button.Name, "button_Clicked", EVENT_CLICK, button);
+                UIReportCenter.ReportEvent(button.Name, "Button_Clicked", EVENT_CLICK, button);
             };
         }
-        #endregion
-
-
-
-        #region "--------------------------------- Methods ---------------------------------"
-        #region "----------------------------- Public Methods ------------------------------"
-
         #endregion
 
         #region "----------------------------- Private Methods -----------------------------"

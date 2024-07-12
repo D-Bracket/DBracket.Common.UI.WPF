@@ -37,6 +37,15 @@ namespace DBracket.Common.UI.TestFramework
                     _viewModel.SelectedTest = test;
                 }
             });
+
+
+            ResultTree.SelectedItemChanged += new RoutedPropertyChangedEventHandler<object>((object sender, RoutedPropertyChangedEventArgs<object> args) =>
+            {
+                if (args.NewValue is TestResult test)
+                {
+                    _viewModel.SelectedTestResult = test;
+                }
+            });
         }
         #endregion
 

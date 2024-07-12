@@ -1,9 +1,9 @@
-﻿using DBracket.Common.UI.WPF.Bases;
-using System.Collections.ObjectModel;
+﻿using DBracket.Common.TestFramework;
+using DBracket.Common.UI.WPF.Bases;
 
 namespace DBracket.Common.UI.TestFramework.Protocol
 {
-    public class TestResult : PropertyChangedBase
+    public class EventResult : PropertyChangedBase
     {
         #region "----------------------------- Private Fields ------------------------------"
 
@@ -12,9 +12,10 @@ namespace DBracket.Common.UI.TestFramework.Protocol
 
 
         #region "------------------------------ Constructor --------------------------------"
-        public TestResult(Test test)
+        public EventResult(EventToTest referenceEvent, IEvent testResult)
         {
-            Test = test;
+            ReferenceEvent = referenceEvent;
+            TestResult = testResult;
         }
         #endregion
 
@@ -38,19 +39,11 @@ namespace DBracket.Common.UI.TestFramework.Protocol
 
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
-        public bool IsExpanded { get => _isExpanded; set { _isExpanded = value; OnMySelfChanged(); } }
-        private bool _isExpanded;
+        public EventToTest ReferenceEvent { get => _referenceEvent; set { _referenceEvent = value; OnMySelfChanged(); } }
+        private EventToTest _referenceEvent;
 
-
-
-        public ResultStates Result { get => _result; set { _result = value; OnMySelfChanged(); } }
-        private ResultStates _result = ResultStates.NOTEST;
-
-        public Test Test { get => _test; set { _test = value; OnMySelfChanged(); } }
-        private Test _test;
-
-        public ObservableCollection<EventResult> Events { get => _events; set { _events = value; OnMySelfChanged(); } }
-        private ObservableCollection<EventResult> _events = new();
+        public IEvent TestResult { get => _testResult; set { _testResult = value; OnMySelfChanged(); } }
+        private IEvent _testResult;
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"

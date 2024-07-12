@@ -108,7 +108,7 @@ namespace DBracket.Common.UI.WPF.Sample.ViewModels
             switch (command)
             {
                 case "Test1":
-                    var newEvent = new Event()
+                    var newEvent = new Event(new Guid("e9b33e01-53cc-4b1f-b098-419cdf017329"))
                     {
                         Name = "Logic",
                         Description = "Logic did something",

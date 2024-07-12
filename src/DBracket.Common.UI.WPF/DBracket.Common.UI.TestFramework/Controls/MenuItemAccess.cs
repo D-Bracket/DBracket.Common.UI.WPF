@@ -1,20 +1,21 @@
-﻿using DBracket.Common.UI.WPF.Bases;
-using System.Collections.ObjectModel;
+﻿using DBracket.Common.UI.TestFramework.Events.Types;
+using System.Windows;
+using System.Windows.Controls;
 
-namespace DBracket.Common.UI.TestFramework.Protocol
+namespace DBracket.Common.UI.TestFramework.Controls
 {
-    public class TestResult : PropertyChangedBase
+    public class MenuItemAccess : IControlAccess
     {
         #region "----------------------------- Private Fields ------------------------------"
-
+        private const string EVENT_CLICK = "event_Click";
         #endregion
 
 
 
         #region "------------------------------ Constructor --------------------------------"
-        public TestResult(Test test)
+        public MenuItemAccess()
         {
-            Test = test;
+            RegisterEventType(EVENT_CLICK, new ClickEvent());
         }
         #endregion
 
@@ -22,7 +23,16 @@ namespace DBracket.Common.UI.TestFramework.Protocol
 
         #region "--------------------------------- Methods ---------------------------------"
         #region "----------------------------- Public Methods ------------------------------"
+        public override void RegisterControlEvents(DependencyObject control)
+        {
+            if (control is not MenuItem menuItem)
+                throw new ArgumentException("Control must be of Type Button");
 
+            menuItem.Click += (s, e) =>
+            {
+                UIReportCenter.ReportEvent(menuItem.Name, "MenuItem_Clicked", EVENT_CLICK, menuItem);
+            };
+        }
         #endregion
 
         #region "----------------------------- Private Methods -----------------------------"
@@ -38,19 +48,7 @@ namespace DBracket.Common.UI.TestFramework.Protocol
 
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
-        public bool IsExpanded { get => _isExpanded; set { _isExpanded = value; OnMySelfChanged(); } }
-        private bool _isExpanded;
 
-
-
-        public ResultStates Result { get => _result; set { _result = value; OnMySelfChanged(); } }
-        private ResultStates _result = ResultStates.NOTEST;
-
-        public Test Test { get => _test; set { _test = value; OnMySelfChanged(); } }
-        private Test _test;
-
-        public ObservableCollection<EventResult> Events { get => _events; set { _events = value; OnMySelfChanged(); } }
-        private ObservableCollection<EventResult> _events = new();
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"

@@ -156,6 +156,36 @@ namespace DBracket.Common.UI.TestFramework
 
                     SelectedEvent.Assertions.Add(new EventAssertion(SelectedEvent.Event));
                     break;
+
+                case "ExpandAll":
+                    foreach (var result in Results)
+                    {
+                        result.IsExpanded = true;
+                        foreach (var testSequence in result.TestSequences)
+                        {
+                            testSequence.IsExpanded = true;
+                            foreach (var test in testSequence.Tests)
+                            {
+                                test.IsExpanded = true;
+                            }
+                        }
+                    }
+                    break;
+
+                case "CollapseAll":
+                    foreach (var result in Results)
+                    {
+                        result.IsExpanded = false;
+                        foreach (var testSequence in result.TestSequences)
+                        {
+                            testSequence.IsExpanded = false;
+                            foreach (var test in testSequence.Tests)
+                            {
+                                test.IsExpanded = false;
+                            }
+                        }
+                    }
+                    break;
             }
         }
 
@@ -168,7 +198,7 @@ namespace DBracket.Common.UI.TestFramework
                 SelectedConfiguration._window.Close();
             SelectedConfiguration._window = CreateWindowByType(SelectedConfiguration.WindowType);
             SelectedConfiguration._window.Show();
-            ObservableCollection<IEvent> _eventLog = new();
+            ObservableCollection<IEvent> eventLog = new();
             ReportCenter.EventReported += HandleExecuteTestEventReceived;
 
             var testConfigurationResult = new TestConfigurationResult(SelectedConfiguration);
@@ -181,6 +211,7 @@ namespace DBracket.Common.UI.TestFramework
 
                 foreach (var test in testSequence.Tests)
                 {
+                    eventLog.Clear();
                     var testResult = new TestResult(test);
                     testSequenceResult.Tests.Add(testResult);
 
@@ -194,24 +225,59 @@ namespace DBracket.Common.UI.TestFramework
 
                         uiEvent.ReExecute();
                     }
-                    //var startEvent = test.Events.First().Event as UIEvent;
-                    //startEvent.ReExecute();
 
-                    // Check Assertions
+
+                    // Save Results
+                    var index = 0;
                     for (int i = 0; i < test.Events.Count; i++)
                     {
-                        if (test.Events[i].Event.Name != _eventLog[i].Name)
+                        // Get index of the event from the result log
+                        if (test.Events[i].Event is UIEvent uiEvent)
                         {
-                            // fail
+                            index = GetUIEventIndex(eventLog, uiEvent.Name);
                         }
-                        CheckAssertions(test.Events[i], _eventLog[i]);
+                        else if (test.Events[i].Event is Event @event)
+                        {
+                            index = GetEventIndex(eventLog, @event.Id);
+                        }
+
+
+
+                        if (index == -1)
+                        {
+                            // Event not in results
+                            // Add empty event to results
+                            testResult.Events.Add(new EventResult(test.Events[i], null));
+                        }
+                        else if (index != i)
+                        {
+                            // Event is on new position
+                            if (i > index)
+                            {
+                                // Event came before the reference event -> events have been deleted
+                                // Add xxx
+                            }
+                            else
+                            {
+                                // Event came after the reference event -> new events have been added
+                                // Add xxx
+                            }
+                        }
+                        else
+                        {
+                            // The event is on the expected position
+                            testResult.Events.Add(new EventResult(test.Events[i], eventLog[i]));
+                        }
                     }
                 }
             }
             SelectedConfiguration._window.Close();
 
 
-            foreach (var @event in _eventLog)
+
+
+            // Check Assertions
+            foreach (var @event in eventLog)
             {
 
             }
@@ -224,7 +290,7 @@ namespace DBracket.Common.UI.TestFramework
 
             void HandleExecuteTestEventReceived(IEvent reportedEvent)
             {
-                _eventLog.Add(reportedEvent);
+                eventLog.Add(reportedEvent);
             }
 
             bool CheckAssertions(EventToTest assertionEvent, IEvent @event)
@@ -249,6 +315,34 @@ namespace DBracket.Common.UI.TestFramework
                 }
 
                 return true;
+            }
+
+
+            int GetEventIndex(IList<IEvent> events, Guid id)
+            {
+                foreach (var recordedEvent in events)
+                {
+                    if (recordedEvent is Event @event)
+                    {
+                        if (@event.Id == id)
+                            return events.IndexOf(recordedEvent);
+                    }
+                }
+                return -1;
+            }
+
+
+            int GetUIEventIndex(IList<IEvent> events, string name)
+            {
+                foreach (var recordedEvent in events)
+                {
+                    if (recordedEvent is UIEvent uiEvent)
+                    {
+                        if (uiEvent.Name == name)
+                            return events.IndexOf(recordedEvent);
+                    }
+                }
+                return -1;
             }
         }
 
@@ -293,6 +387,9 @@ namespace DBracket.Common.UI.TestFramework
 
         public ObservableCollection<TestConfigurationResult> Results { get => _results; set { _results = value; OnMySelfChanged(); } }
         private ObservableCollection<TestConfigurationResult> _results = new();
+
+        public TestResult? SelectedTestResult { get => _selectedTestResult; set { _selectedTestResult = value; OnMySelfChanged(); } }
+        private TestResult? _selectedTestResult;
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"

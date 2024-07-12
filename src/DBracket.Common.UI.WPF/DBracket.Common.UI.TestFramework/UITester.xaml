@@ -531,25 +531,96 @@
                                     <ColumnDefinition Width="Auto" 
                                                       MinWidth="300"/>
                                     <ColumnDefinition Width="8" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="8" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
-                                <TreeView x:Name="ResultTree"
-                                          ItemsSource="{Binding Results}">
-                                    <TreeView.Resources>
-                                        <HierarchicalDataTemplate DataType="{x:Type protocol:TestConfigurationResult}"
-                                                                  ItemsSource="{Binding TestSequences}">
-                                            <TextBlock Text="{Binding Path=TestConfiguration.Name}" />
-                                        </HierarchicalDataTemplate>
-                                        <HierarchicalDataTemplate DataType="{x:Type protocol:TestSequenceResult}"
-                                                                  ItemsSource="{Binding Tests}">
-                                            <TextBlock Text="{Binding Path=TestSequence.Name}" />
-                                        </HierarchicalDataTemplate>
-                                        <DataTemplate DataType="{x:Type protocol:TestResult}">
-                                            <TextBlock Text="{Binding Path=Test.Name}" />
-                                        </DataTemplate>
-                                    </TreeView.Resources>
-                                </TreeView>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="50" />
+                                    </Grid.RowDefinitions>
+
+                                    <TreeView x:Name="ResultTree"
+                                              ItemsSource="{Binding Results}">
+                                        <TreeView.Resources>
+                                            <HierarchicalDataTemplate DataType="{x:Type protocol:TestConfigurationResult}"
+                                                                      ItemsSource="{Binding TestSequences}">
+                                                <TextBlock Text="{Binding Path=TestConfiguration.Name}" />
+                                            </HierarchicalDataTemplate>
+                                            <HierarchicalDataTemplate DataType="{x:Type protocol:TestSequenceResult}"
+                                                                      ItemsSource="{Binding Tests}">
+                                                <TextBlock Text="{Binding Path=TestSequence.Name}" />
+                                            </HierarchicalDataTemplate>
+                                            <!--<HierarchicalDataTemplate DataType="{x:Type protocol:TestResult}"
+                                                                      ItemsSource="{Binding Events}">
+                                                <TextBlock Text="{Binding Path=Test.Name}" />
+                                            </HierarchicalDataTemplate>-->
+                                            <!--<DataTemplate DataType="{x:Type protocol:EventToTest}">
+                                                <StackPanel Margin="0,0,0,1"
+                                                            Background="WhiteSmoke"
+                                                            Width="236">
+                                                    <TextBlock Text="Event:" />
+                                                    <TextBlock Text="{Binding Event.Name}" />
+                                                    <TextBlock Text="{Binding Event.Description}" />
+                                                </StackPanel>
+                                            </DataTemplate>-->
+                                            <DataTemplate DataType="{x:Type protocol:TestResult}">
+                                                <TextBlock Text="{Binding Path=Test.Name}" />
+                                            </DataTemplate>
+                                        </TreeView.Resources>
+
+                                        <TreeView.ItemContainerStyle>
+                                            <Style TargetType="TreeViewItem">
+                                                <Setter Property="IsExpanded"
+                                                        Value="{Binding IsExpanded, Mode=TwoWay}" />
+                                            </Style>
+                                        </TreeView.ItemContainerStyle>
+                                    </TreeView>
+
+                                    <StackPanel Orientation="Horizontal"
+                                                Grid.Row="1">
+                                        <Button Command="{Binding Commands}"
+                                                CommandParameter="ExpandAll"
+                                                Content="Expand All" />
+                                        <Button Command="{Binding Commands}"
+                                                CommandParameter="CollapseAll"
+                                                Content="Collapse All" />
+                                    </StackPanel>
+                                </Grid>
+
+                                <Grid Grid.Column="2">
+                                    <ListBox ItemsSource="{Binding SelectedTestResult}">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="300" />
+                                                        <ColumnDefinition Width="4" />
+                                                        <ColumnDefinition Width="300" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <StackPanel Margin="0,0,0,1"
+                                                                Background="WhiteSmoke"
+                                                                Width="236">
+                                                        <TextBlock Text="Event:" />
+                                                        <TextBlock Text="{Binding  Event.Name}" />
+                                                        <TextBlock Text="{Binding Event.Description}" />
+                                                    </StackPanel>
+
+                                                    <StackPanel Margin="0,0,0,1"
+                                                                Background="WhiteSmoke"
+                                                                Width="236">
+                                                        <TextBlock Text="Event:" />
+                                                        <TextBlock Text="{Binding +
+                                                            .Name}" />
+                                                        <TextBlock Text="{Binding Event.Description}" />
+                                                    </StackPanel>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </Grid>
                             </Grid>
                         </Grid>
                     </TabItem.Content>

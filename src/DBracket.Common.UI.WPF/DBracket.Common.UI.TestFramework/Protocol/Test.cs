@@ -1,5 +1,4 @@
-﻿using DBracket.Common.TestFramework;
-using DBracket.Common.UI.WPF.Bases;
+﻿using DBracket.Common.UI.WPF.Bases;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 
@@ -49,9 +48,6 @@ namespace DBracket.Common.UI.TestFramework.Protocol
 
         public ObservableCollection<EventToTest> Events { get => _events; set { _events = value; OnMySelfChanged(); } }
         private ObservableCollection<EventToTest> _events = new();
-
-        public TestResult Result { get => _result; set { _result = value; OnMySelfChanged(); } }
-        private TestResult _result;
         #endregion
 
         #region "--------------------------------- Events ----------------------------------"

@@ -11,7 +11,10 @@ namespace DBracket.Common.TestFramework
 
 
         #region "------------------------------ Constructor --------------------------------"
-
+        public Event(Guid id)
+        {
+            Id = id;
+        }
         #endregion
 
 
@@ -36,7 +39,7 @@ namespace DBracket.Common.TestFramework
         #region "------------------------------- Properties --------------------------------"
         public string Name { get; set; }
         public string Description { get; set; }
-
+        public Guid Id { get; set; }
         public DateTime Time { get; set; }
 
         public required string EventType { get => _eventType; set { _eventType = value;  } }

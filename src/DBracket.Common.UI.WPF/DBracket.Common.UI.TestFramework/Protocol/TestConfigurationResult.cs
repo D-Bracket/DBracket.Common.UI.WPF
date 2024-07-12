@@ -38,6 +38,10 @@ namespace DBracket.Common.UI.TestFramework.Protocol
 
         #region "--------------------------- Public Propterties ----------------------------"
         #region "------------------------------- Properties --------------------------------"
+        public bool IsExpanded { get => _isExpanded; set { _isExpanded = value; OnMySelfChanged(); } }
+        private bool _isExpanded;        
+        
+        
         public ResultStates Result { get => _result; set { _result = value; OnMySelfChanged(); } }
         private ResultStates _result = ResultStates.NOTEST;
 
